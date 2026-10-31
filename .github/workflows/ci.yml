@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+  workflow_dispatch:
+  workflow_call:  # release.yml reruns these checks on the tagged commit
+
+jobs:
+  checks:
+    name: Checks and tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.14"]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - uses: astral-sh/setup-uv@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+      - run: uv sync --frozen
+      # The same hooks developers run on commit and on push (see prek.toml).
+      - name: Commit hooks (ruff, cargo fmt, file checks)
+        run: uv run --frozen prek run --all-files --show-diff-on-failure
+      - name: Push hooks (ty, clippy, cargo test, pytest)
+        run: uv run --frozen prek run --all-files --stage pre-push
+
+  binary:
+    name: Standalone binary (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo test --locked -p foliq -p foliq-core -p foliq-cli

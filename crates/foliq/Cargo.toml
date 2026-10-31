@@ -1,0 +1,27 @@
+[package]
+name = "foliq"
+description = "Fast, structure-aware document indexing and search for AI agents"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[dependencies]
+foliq-core = { path = "../foliq-core" }
+blake3 = "1.8"
+calamine = "0.37"
+ignore = "0.4"
+pdf_oxide = "0.3.78"
+pulldown-cmark = { version = "0.13", default-features = false }
+quick-xml = "0.42"
+rayon = "1.12"
+rusqlite = { version = "0.41", features = ["bundled"] }
+scraper = "0.29"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+text-splitter = { version = "0.33", features = ["markdown", "tiktoken-rs"] }
+tiktoken-rs = "0.12"
+zip = { version = "9.2", default-features = false, features = ["deflate"] }
+
+[dev-dependencies]
+tempfile = "3"

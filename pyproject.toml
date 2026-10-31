@@ -1,0 +1,80 @@
+[project]
+name = "foliq"
+dynamic = ["version"]  # from Cargo.toml ([workspace.package] version)
+description = "Search, read and cite your documents (PDF, Word, PowerPoint, Excel, HTML, Markdown) from AI agents. Rust core, Python API."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "daniprol" }]
+keywords = ["rag", "search", "agents", "pdf", "documents", "rust"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Rust",
+    "Topic :: Text Processing :: Indexing",
+    "Typing :: Typed",
+]
+requires-python = ">=3.11"
+dependencies = []
+
+[project.scripts]
+foliq = "foliq._cli:main"
+
+[project.urls]
+Repository = "https://github.com/daniprol/foliq"
+Issues = "https://github.com/daniprol/foliq/issues"
+
+[tool.maturin]
+module-name = "foliq._core"
+python-packages = ["foliq"]
+python-source = "src"
+
+[tool.uv]
+cache-keys = [{ file = "pyproject.toml" }, { file = "src/**/*.rs" }, { file = "crates/**/*.rs" }, { file = "crates/**/*.md" }, { file = "Cargo.toml" }, { file = "Cargo.lock" }]
+
+[dependency-groups]
+dev = [
+    "fpdf2>=2.8",         # tests build PDF fixtures
+    "maturin>=1.9",
+    "openpyxl>=3.1",      # tests build XLSX fixtures
+    "prek>=0.5.7",
+    "pytest>=8",
+    "python-docx>=1.1",   # tests build DOCX fixtures
+    "python-pptx>=1.0",   # tests build PPTX fixtures
+    "ruff>=0.14",
+    "ty>=0.0.1",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E", "W",  # pycodestyle
+    "F",       # pyflakes
+    "I",       # import sorting
+    "N",       # naming
+    "UP",      # modern syntax for Python 3.11+
+    "B",       # likely bugs
+    "A",       # shadowing builtins
+    "C4",      # comprehensions
+    "SIM",     # simplifications
+    "RET",     # return statements
+    "PIE",     # misc. clean-ups
+    "PTH",     # pathlib over os.path
+    "PT",      # pytest style
+    "RUF",     # ruff-specific
+]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["--strict-markers", "--strict-config"]
+
+[build-system]
+requires = ["maturin>=1.9.4,<2.0"]  # 1.9.4 writes the PEP 639 license metadata
+build-backend = "maturin"

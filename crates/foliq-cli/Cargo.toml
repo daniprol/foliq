@@ -1,0 +1,17 @@
+[package]
+name = "foliq-cli"
+description = "The `foliq` command: index documents and let AI agents search, read and cite them"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "foliq"
+path = "src/main.rs"
+
+[dependencies]
+foliq = { path = "../foliq" }
+clap = { version = "4.6", features = ["derive", "env"] }
+serde = "1.0"
+serde_json = "1.0"
