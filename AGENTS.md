@@ -57,6 +57,7 @@ the core does little, does it fast, and every part can be replaced.
 | `src/*.rs`            | The Python extension `foliq._core` (PyO3)                       |
 | `src/foliq`           | The Python package: tools for agents, plugin protocols, CLI entry |
 | `tests`               | Python tests, with generated DOCX/PPTX/XLSX/PDF fixtures         |
+| `docs`                | The documentation site (Zensical, `zensical.toml`)              |
 
 ## Key ideas
 
@@ -80,4 +81,7 @@ the core does little, does it fast, and every part can be replaced.
   `scripts/cargo-test.sh --workspace` runs the Rust tests.
 - Tests use real files in temporary folders, built by `tests/fixtures.py`.
   Avoid mocks.
+- Docs: `uv run --only-group docs zensical serve`. Update them with every
+  user-facing change. Code examples live in files and are included with
+  `--8<--`, so they are compiled and tested.
 - The version lives in one place: `[workspace.package]` in `Cargo.toml`.

@@ -1,5 +1,7 @@
 # foliq
 
+[Documentation](https://daniprol.github.io/foliq/)
+
 **Search, read and cite your documents from AI agents.** PDF, Word,
 PowerPoint, Excel, HTML and Markdown, in one local index. Rust core, CLI and
 Python API. No server, no API key.
@@ -126,6 +128,7 @@ uv sync                           # installs tools and builds the extension
 uv run pytest                     # Python tests
 scripts/cargo-test.sh --workspace # Rust tests
 uv run prek install               # git hooks: ruff, ty, cargo fmt, clippy, tests
+uv run --only-group docs zensical serve   # docs on http://localhost:8000
 ```
 
 See [AGENTS.md](AGENTS.md) for the design and code style.
