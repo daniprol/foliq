@@ -88,6 +88,8 @@ the core does little, does it fast, and every part can be replaced.
 - The version lives in one place: `[workspace.package]` in `Cargo.toml`.
 - Releases (`.github/workflows/release.yml`): every push to main publishes a
   development build to TestPyPI (`0.1.0a1.dev42`, stamped by
-  `scripts/stamp-dev-version.py`). To publish to PyPI, set the version in
-  `Cargo.toml` in SemVer form (`0.1.0-alpha.1`), merge to main, then push the
-  tag in Python form (`git tag v0.1.0a1 && git push origin v0.1.0a1`).
+  `scripts/stamp-dev-version.py`). To publish to PyPI, bump the version with
+  `cargo set-version --bump alpha` (or `beta`, `rc`, `release`, `patch`...;
+  from `cargo install cargo-edit`), which updates Cargo.toml and Cargo.lock in
+  SemVer form (`0.1.0-alpha.2`). Merge to main, then push the tag in Python
+  form (`git tag v0.1.0a2 && git push origin v0.1.0a2`).
