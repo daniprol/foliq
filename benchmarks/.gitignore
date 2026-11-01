@@ -1,2 +1,5 @@
 /data/
 /.venv/
+/tools/node/node_modules/
+/tools/rust/target/
+/tools/go/foliq-bench-go

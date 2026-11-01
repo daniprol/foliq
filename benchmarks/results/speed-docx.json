@@ -4,39 +4,74 @@
   "megabytes": 7.9,
   "libraries": [
     {
-      "name": "foliq",
-      "seconds": 2.068,
+      "name": "foliq (Rust)",
+      "seconds": 1.707,
       "failed": 16,
-      "files_per_second": 62.88,
-      "megabytes_per_second": 3.83
+      "files_per_second": 76.16,
+      "megabytes_per_second": 4.65
     },
     {
-      "name": "foliq (4 threads)",
-      "seconds": 1.855,
+      "name": "foliq (Rust, 4 threads)",
+      "seconds": 1.713,
       "failed": 16,
-      "files_per_second": 70.06,
-      "megabytes_per_second": 4.27
+      "files_per_second": 75.89,
+      "megabytes_per_second": 4.63
     },
     {
-      "name": "python-docx",
-      "seconds": 4.234,
+      "name": "python-docx (Python)",
+      "seconds": 3.746,
       "failed": 17,
-      "files_per_second": 30.71,
-      "megabytes_per_second": 1.87
+      "files_per_second": 34.71,
+      "megabytes_per_second": 2.12
     },
     {
-      "name": "markitdown",
-      "seconds": 56.664,
+      "name": "markitdown (Python)",
+      "seconds": 63.491,
       "failed": 18,
-      "files_per_second": 2.29,
-      "megabytes_per_second": 0.14
+      "files_per_second": 2.05,
+      "megabytes_per_second": 0.12
     },
     {
-      "name": "kreuzberg",
-      "seconds": 0.955,
+      "name": "kreuzberg (Rust)",
+      "seconds": 1.007,
       "failed": 16,
-      "files_per_second": 136.08,
-      "megabytes_per_second": 8.3
+      "files_per_second": 129.07,
+      "megabytes_per_second": 7.87
+    },
+    {
+      "name": "extractous (Rust)",
+      "seconds": 29.655,
+      "failed": 60,
+      "files_per_second": 4.38,
+      "megabytes_per_second": 0.27
+    },
+    {
+      "name": "pandoc (Haskell)",
+      "seconds": 41.866,
+      "failed": 18,
+      "files_per_second": 3.11,
+      "megabytes_per_second": 0.19
+    },
+    {
+      "name": "officeparser (JS)",
+      "seconds": 14.334,
+      "failed": 13,
+      "files_per_second": 9.07,
+      "megabytes_per_second": 0.55
+    },
+    {
+      "name": "mammoth (JS)",
+      "seconds": 9.227,
+      "failed": 17,
+      "files_per_second": 14.09,
+      "megabytes_per_second": 0.86
+    },
+    {
+      "name": "Apache Tika (Java)",
+      "seconds": 8.227,
+      "failed": 7,
+      "files_per_second": 15.8,
+      "megabytes_per_second": 0.96
     }
   ]
 }

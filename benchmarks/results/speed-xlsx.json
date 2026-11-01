@@ -4,46 +4,81 @@
   "megabytes": 20.0,
   "libraries": [
     {
-      "name": "foliq",
-      "seconds": 105.056,
+      "name": "foliq (Rust)",
+      "seconds": 97.778,
       "failed": 26,
-      "files_per_second": 3.36,
-      "megabytes_per_second": 0.19
+      "files_per_second": 3.61,
+      "megabytes_per_second": 0.2
     },
     {
-      "name": "foliq (4 threads)",
-      "seconds": 87.282,
+      "name": "foliq (Rust, 4 threads)",
+      "seconds": 80.954,
       "failed": 26,
-      "files_per_second": 4.04,
-      "megabytes_per_second": 0.23
+      "files_per_second": 4.36,
+      "megabytes_per_second": 0.25
     },
     {
-      "name": "openpyxl",
-      "seconds": 11.506,
+      "name": "openpyxl (Python)",
+      "seconds": 10.961,
       "failed": 28,
-      "files_per_second": 30.68,
-      "megabytes_per_second": 1.73
+      "files_per_second": 32.2,
+      "megabytes_per_second": 1.82
     },
     {
-      "name": "python-calamine",
-      "seconds": 1.149,
+      "name": "python-calamine (Rust)",
+      "seconds": 1.215,
       "failed": 26,
-      "files_per_second": 307.19,
-      "megabytes_per_second": 17.36
+      "files_per_second": 290.44,
+      "megabytes_per_second": 16.42
     },
     {
-      "name": "markitdown",
-      "seconds": 149.974,
+      "name": "markitdown (Python)",
+      "seconds": 157.532,
       "failed": 34,
-      "files_per_second": 2.35,
+      "files_per_second": 2.24,
       "megabytes_per_second": 0.13
     },
     {
-      "name": "kreuzberg",
-      "seconds": 4.07,
+      "name": "kreuzberg (Rust)",
+      "seconds": 4.444,
       "failed": 23,
-      "files_per_second": 86.74,
-      "megabytes_per_second": 4.9
+      "files_per_second": 79.43,
+      "megabytes_per_second": 4.49
+    },
+    {
+      "name": "extractous (Rust)",
+      "seconds": 19.628,
+      "failed": 110,
+      "files_per_second": 17.98,
+      "megabytes_per_second": 1.02
+    },
+    {
+      "name": "excelize (Go)",
+      "seconds": 41.102,
+      "failed": 22,
+      "files_per_second": 8.59,
+      "megabytes_per_second": 0.49
+    },
+    {
+      "name": "officeparser (JS)",
+      "seconds": 22.424,
+      "failed": 15,
+      "files_per_second": 15.74,
+      "megabytes_per_second": 0.89
+    },
+    {
+      "name": "SheetJS (JS)",
+      "seconds": 43.901,
+      "failed": 17,
+      "files_per_second": 8.04,
+      "megabytes_per_second": 0.45
+    },
+    {
+      "name": "Apache Tika (Java)",
+      "seconds": 20.114,
+      "failed": 19,
+      "files_per_second": 17.55,
+      "megabytes_per_second": 0.99
     }
   ]
 }

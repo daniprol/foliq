@@ -4,74 +4,137 @@
   "megabytes": 155.9,
   "libraries": [
     {
-      "name": "foliq",
-      "seconds": 18.1,
+      "name": "foliq (Rust)",
+      "seconds": 18.661,
       "failed": 11,
-      "files_per_second": 59.5,
-      "megabytes_per_second": 8.61
+      "files_per_second": 57.71,
+      "megabytes_per_second": 8.36
     },
     {
-      "name": "foliq (4 threads)",
-      "seconds": 6.0,
+      "name": "foliq (Rust, 4 threads)",
+      "seconds": 6.736,
       "failed": 11,
-      "files_per_second": 179.5,
-      "megabytes_per_second": 25.98
+      "files_per_second": 159.89,
+      "megabytes_per_second": 23.15
     },
     {
-      "name": "pymupdf",
-      "seconds": 10.542,
+      "name": "pymupdf (C)",
+      "seconds": 9.53,
       "failed": 14,
-      "files_per_second": 102.17,
-      "megabytes_per_second": 14.79
+      "files_per_second": 113.01,
+      "megabytes_per_second": 16.36
     },
     {
-      "name": "pymupdf4llm",
-      "seconds": 660.861,
+      "name": "pymupdf4llm (C)",
+      "seconds": 604.346,
       "failed": 44,
-      "files_per_second": 1.63,
-      "megabytes_per_second": 0.24
+      "files_per_second": 1.78,
+      "megabytes_per_second": 0.26
     },
     {
-      "name": "pypdfium2",
-      "seconds": 4.475,
+      "name": "pypdfium2 (C++)",
+      "seconds": 3.69,
       "failed": 24,
-      "files_per_second": 240.64,
-      "megabytes_per_second": 34.85
+      "files_per_second": 291.85,
+      "megabytes_per_second": 42.26
     },
     {
-      "name": "pypdf",
-      "seconds": 55.97,
+      "name": "pypdf (Python)",
+      "seconds": 51.282,
       "failed": 34,
-      "files_per_second": 19.24,
-      "megabytes_per_second": 2.79
+      "files_per_second": 21.0,
+      "megabytes_per_second": 3.04
     },
     {
-      "name": "pdfplumber",
-      "seconds": 138.685,
+      "name": "pdfplumber (Python)",
+      "seconds": 130.689,
       "failed": 32,
-      "files_per_second": 7.77,
+      "files_per_second": 8.24,
+      "megabytes_per_second": 1.19
+    },
+    {
+      "name": "pdfminer.six (Python)",
+      "seconds": 113.967,
+      "failed": 32,
+      "files_per_second": 9.45,
+      "megabytes_per_second": 1.37
+    },
+    {
+      "name": "markitdown (Python)",
+      "seconds": 244.699,
+      "failed": 32,
+      "files_per_second": 4.4,
+      "megabytes_per_second": 0.64
+    },
+    {
+      "name": "kreuzberg (Rust)",
+      "seconds": 26.615,
+      "failed": 18,
+      "files_per_second": 40.47,
+      "megabytes_per_second": 5.86
+    },
+    {
+      "name": "extractous (Rust)",
+      "seconds": 42.74,
+      "failed": 34,
+      "files_per_second": 25.2,
+      "megabytes_per_second": 3.65
+    },
+    {
+      "name": "mutool (C)",
+      "seconds": 100.133,
+      "failed": 42,
+      "files_per_second": 10.76,
+      "megabytes_per_second": 1.56
+    },
+    {
+      "name": "pdftotext (C++)",
+      "seconds": 49.175,
+      "failed": 23,
+      "files_per_second": 21.9,
+      "megabytes_per_second": 3.17
+    },
+    {
+      "name": "pdf-extract (Rust)",
+      "seconds": 14.177,
+      "failed": 101,
+      "files_per_second": 75.97,
+      "megabytes_per_second": 11.0
+    },
+    {
+      "name": "lopdf (Rust)",
+      "seconds": 7.311,
+      "failed": 22,
+      "files_per_second": 147.32,
+      "megabytes_per_second": 21.33
+    },
+    {
+      "name": "ledongthuc/pdf (Go)",
+      "seconds": 69.446,
+      "failed": 103,
+      "files_per_second": 15.51,
+      "megabytes_per_second": 2.25
+    },
+    {
+      "name": "pdf.js (JS)",
+      "seconds": 53.309,
+      "failed": 21,
+      "files_per_second": 20.2,
+      "megabytes_per_second": 2.93
+    },
+    {
+      "name": "officeparser (JS)",
+      "seconds": 138.784,
+      "failed": 15,
+      "files_per_second": 7.76,
       "megabytes_per_second": 1.12
     },
     {
-      "name": "pdfminer.six",
-      "seconds": 120.641,
-      "failed": 32,
-      "files_per_second": 8.93,
-      "megabytes_per_second": 1.29
-    },
-    {
-      "name": "markitdown",
-      "seconds": 259.393,
-      "failed": 32,
-      "files_per_second": 4.15,
-      "megabytes_per_second": 0.6
-    },
-    {
-      "name": "kreuzberg",
-      "seconds": 30.929,
-      "failed": 18,
-      "files_per_second": 34.82,
-      "megabytes_per_second": 5.04
+      "name": "Apache Tika (Java)",
+      "seconds": 54.602,
+      "failed": 17,
+      "files_per_second": 19.72,
+      "megabytes_per_second": 2.86
     }
   ]
 }

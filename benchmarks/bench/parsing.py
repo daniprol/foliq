@@ -23,6 +23,7 @@ RESULTS = Path(__file__).resolve().parent.parent / "results"
 WORK = datasets.DATA / "work"
 TIME_LIMIT_SECONDS = 30
 FOLIQ_TIME_LIMIT_SECONDS = 3600
+FOLIQ = "foliq (Rust)"
 
 
 def prepare_folder(name: str, files: list[Path]) -> Path:
@@ -113,16 +114,16 @@ def speed(file_format: str) -> dict:
     megabytes = sum(file.stat().st_size for file in files) / 1e6
     print(f"speed {file_format}: {len(files)} files, {megabytes:.0f} MB")
     rows = []
-    for threads, label in [(1, "foliq"), (None, f"foliq ({os.cpu_count()} threads)")]:
+    for threads, label in [(1, FOLIQ), (None, f"foliq (Rust, {os.cpu_count()} threads)")]:
         result = run_foliq(documents, WORK / f"speed-{file_format}" / label, threads)
         rows.append(summary(label, result["seconds"], len(result["failed"]), len(files), megabytes))
         print(f"  {label}: {result['seconds']:.1f}s, {len(result['failed'])} failed")
     for library in libraries_for(file_format):
-        results = run_library(library.name, files, WORK / f"speed-{file_format}" / library.name)
+        results = run_library(library.name, files, WORK / f"speed-{file_format}" / library.folder)
         seconds = sum(result["seconds"] for result in results.values())
         failed = sum(1 for result in results.values() if result["error"])
-        rows.append(summary(library.name, seconds, failed, len(files), megabytes))
-        print(f"  {library.name}: {seconds:.1f}s, {failed} failed")
+        rows.append(summary(library.label, seconds, failed, len(files), megabytes))
+        print(f"  {library.label}: {seconds:.1f}s, {failed} failed")
     report = {"format": file_format, "files": len(files), "megabytes": round(megabytes, 1), "libraries": rows}
     write_result(f"speed-{file_format}.json", report)
     return report
@@ -138,11 +139,11 @@ def quality(file_format: str) -> dict:
     outputs: dict[str, Path] = {}
     foliq_output = WORK / f"quality-{file_format}" / "foliq"
     run_foliq(documents, foliq_output, threads=None)
-    outputs["foliq"] = foliq_output
+    outputs[FOLIQ] = foliq_output
     for library in libraries_for(file_format):
-        library_output = WORK / f"quality-{file_format}" / library.name
+        library_output = WORK / f"quality-{file_format}" / library.folder
         run_library(library.name, files, library_output)
-        outputs[library.name] = library_output
+        outputs[library.label] = library_output
     rows = []
     for name, output in outputs.items():
         per_document = {}
