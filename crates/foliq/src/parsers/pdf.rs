@@ -26,7 +26,9 @@ impl Parser for PdfParser {
         let document = PdfDocument::from_bytes(bytes.to_vec()).map_err(fail)?;
         let options = ConversionOptions {
             detect_headings: true,
-            strip_running_headers_footers: true,
+            // Not `strip_running_headers_footers`: pdf_oxide 0.3 rescans every
+            // page for each page it converts, so a 350-page book took minutes
+            // instead of about a second (see benchmarks/).
             ..ConversionOptions::default()
         };
 

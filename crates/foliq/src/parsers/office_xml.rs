@@ -97,6 +97,11 @@ impl XmlNode {
     }
 }
 
+/// How deep elements may nest. Real documents stay far below this; a file
+/// that goes deeper (some test files nest 15,000 tables) would otherwise
+/// overflow the stack in the recursive code that walks the tree.
+const MAX_DEPTH: usize = 1000;
+
 /// Reads an XML document into a tree. Returns the root element.
 pub fn parse_xml(xml: &str) -> Result<XmlNode, String> {
     let mut reader = Reader::from_str(xml);
@@ -105,7 +110,12 @@ pub fn parse_xml(xml: &str) -> Result<XmlNode, String> {
 
     loop {
         match reader.read_event().map_err(|error| error.to_string())? {
-            Event::Start(start) => open.push(node_from_tag(&start)?),
+            Event::Start(start) => {
+                if open.len() > MAX_DEPTH {
+                    return Err(format!("XML elements nested deeper than {MAX_DEPTH} levels"));
+                }
+                open.push(node_from_tag(&start)?);
+            }
             Event::Empty(empty) => {
                 let node = node_from_tag(&empty)?;
                 open.last_mut()
@@ -268,6 +278,12 @@ mod tests {
             Some("Heading1")
         );
         assert_eq!(paragraph.office_text(), "Fish & chips!");
+    }
+
+    #[test]
+    fn refuses_xml_nested_too_deeply() {
+        let xml = format!("{}{}", "<a>".repeat(MAX_DEPTH + 5), "</a>".repeat(MAX_DEPTH + 5));
+        assert!(parse_xml(&xml).unwrap_err().contains("nested deeper"));
     }
 
     #[test]
