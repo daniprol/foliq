@@ -14,6 +14,9 @@ import matplotlib
 matplotlib.use("svg")
 import matplotlib.pyplot as plt  # the backend must be chosen before this import
 
+# Same SVG ids on every run, so a re-run only changes the charts whose numbers changed.
+matplotlib.rcParams["svg.hashsalt"] = "foliq"
+
 RESULTS = Path(__file__).resolve().parent.parent / "results"
 
 THEMES = {
@@ -70,8 +73,12 @@ def draw_panels(
                 if label.get_text().startswith("foliq"):
                     label.set_fontweight("bold")
         figure.tight_layout(w_pad=2.5)
-        figure.savefig(RESULTS / f"{name}-{theme_name}.svg", transparent=True, metadata={"Date": None})
+        path = RESULTS / f"{name}-{theme_name}.svg"
+        figure.savefig(path, transparent=True, metadata={"Date": None})
         plt.close(figure)
+        # matplotlib ends some lines with a space; the trailing-whitespace hook rejects them.
+        lines = path.read_text().splitlines()
+        path.write_text("\n".join(line.rstrip() for line in lines) + "\n")
 
 
 def draw_all() -> None:
