@@ -57,8 +57,10 @@ BM25 on BEIR SciFact: 5,183 abstracts, 300 queries. One thread for everyone.
 - ✅ **Office files are fast**: DOCX and PPTX at 60–200 files/s, 2x
   python-docx and python-pptx, 10–30x MarkItDown. Kreuzberg is faster still.
 - ✅ **Fewest failures on broken PDFs** (11 of 1,077, PyMuPDF 14, pypdf 34).
-- ⚠️ **PDF text with formulas**: 75% on the GeoTopo book vs 96% for PyMuPDF;
-  some math and boxed text is dropped or reordered.
+- ⚠️ **PDF text order**: 86% on 14 PDFs (13 arXiv papers, one book) vs 95% for PyMuPDF and
+  PDFium. foliq finds almost all the words (word F1 95% vs 96%), but puts
+  figure labels and the arXiv margin stamp in the text flow, keeps
+  hyphenated line ends (`num-bers`) and drops some math.
 - ⚠️ **Single-PDF speed** is behind PDFium and MuPDF (C/C++). foliq makes up
   for it on many cores (180 files/s on 4).
 - ⚠️ **Large spreadsheets are slow**: one 5,000-row sheet takes most of the
@@ -76,8 +78,8 @@ BM25 on BEIR SciFact: 5,183 abstracts, 300 queries. One thread for everyone.
 | Office speed | [Apache POI](https://github.com/apache/poi) test files: 130 DOCX, 95 PPTX, 353 XLSX | same as Office quality | files/s, failures |
 | Search | [BEIR SciFact](https://github.com/allenai/scifact) | bm25s, tantivy, rank-bm25, SQLite FTS5 | nDCG@10, Recall@100, ms/query |
 
-¹ The PDFs come from arXiv. Where arXiv can't be reached, only the one
-GitHub-hosted PDF is scored (the charts above show how many were used).
+¹ 13 arXiv papers and one LaTeX book. Where arXiv can't be reached, only
+the book is scored (the chart shows how many were used).
 ² docling made these references, so docling itself is left out; it also
 needs PyTorch, which is too heavy for a quick benchmark.
 

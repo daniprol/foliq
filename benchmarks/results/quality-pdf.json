@@ -1,12 +1,64 @@
 {
   "format": "pdf",
-  "documents": 1,
+  "documents": 14,
   "libraries": [
     {
       "name": "foliq",
-      "similarity": 0.748,
-      "word_f1": 0.9378,
+      "similarity": 0.8606,
+      "word_f1": 0.9505,
       "documents": {
+        "1601.03642.pdf": {
+          "similarity": 0.8551,
+          "word_f1": 0.9834
+        },
+        "1602.06541.pdf": {
+          "similarity": 0.9083,
+          "word_f1": 0.9619
+        },
+        "1707.09725.pdf": {
+          "similarity": 0.8606,
+          "word_f1": 0.9821
+        },
+        "2201.00021.pdf": {
+          "similarity": 0.903,
+          "word_f1": 0.9544
+        },
+        "2201.00022.pdf": {
+          "similarity": 0.6229,
+          "word_f1": 0.834
+        },
+        "2201.00029.pdf": {
+          "similarity": 0.9196,
+          "word_f1": 0.9965
+        },
+        "2201.00037.pdf": {
+          "similarity": 0.8799,
+          "word_f1": 0.9246
+        },
+        "2201.00069.pdf": {
+          "similarity": 0.9382,
+          "word_f1": 0.9723
+        },
+        "2201.00151.pdf": {
+          "similarity": 0.7393,
+          "word_f1": 0.9015
+        },
+        "2201.00178.pdf": {
+          "similarity": 0.8489,
+          "word_f1": 0.9489
+        },
+        "2201.00200.pdf": {
+          "similarity": 0.9492,
+          "word_f1": 0.9515
+        },
+        "2201.00201.pdf": {
+          "similarity": 0.9512,
+          "word_f1": 0.9649
+        },
+        "2201.00214.pdf": {
+          "similarity": 0.9245,
+          "word_f1": 0.9938
+        },
         "GeoTopo-book.pdf": {
           "similarity": 0.748,
           "word_f1": 0.9378
@@ -15,9 +67,61 @@
     },
     {
       "name": "pymupdf",
-      "similarity": 0.9614,
-      "word_f1": 0.979,
+      "similarity": 0.9483,
+      "word_f1": 0.9631,
       "documents": {
+        "1601.03642.pdf": {
+          "similarity": 0.997,
+          "word_f1": 0.9936
+        },
+        "1602.06541.pdf": {
+          "similarity": 0.9944,
+          "word_f1": 0.9928
+        },
+        "1707.09725.pdf": {
+          "similarity": 0.9838,
+          "word_f1": 0.9903
+        },
+        "2201.00021.pdf": {
+          "similarity": 0.9708,
+          "word_f1": 0.9632
+        },
+        "2201.00022.pdf": {
+          "similarity": 0.633,
+          "word_f1": 0.8493
+        },
+        "2201.00029.pdf": {
+          "similarity": 0.9978,
+          "word_f1": 0.9949
+        },
+        "2201.00037.pdf": {
+          "similarity": 0.9449,
+          "word_f1": 0.9418
+        },
+        "2201.00069.pdf": {
+          "similarity": 0.9905,
+          "word_f1": 0.9833
+        },
+        "2201.00151.pdf": {
+          "similarity": 0.895,
+          "word_f1": 0.9187
+        },
+        "2201.00178.pdf": {
+          "similarity": 0.967,
+          "word_f1": 0.933
+        },
+        "2201.00200.pdf": {
+          "similarity": 0.9725,
+          "word_f1": 0.9699
+        },
+        "2201.00201.pdf": {
+          "similarity": 0.9808,
+          "word_f1": 0.9785
+        },
+        "2201.00214.pdf": {
+          "similarity": 0.9866,
+          "word_f1": 0.995
+        },
         "GeoTopo-book.pdf": {
           "similarity": 0.9614,
           "word_f1": 0.979
@@ -26,9 +130,61 @@
     },
     {
       "name": "pymupdf4llm",
-      "similarity": 0.8021,
-      "word_f1": 0.8212,
+      "similarity": 0.7244,
+      "word_f1": 0.7928,
       "documents": {
+        "1601.03642.pdf": {
+          "similarity": 0.9022,
+          "word_f1": 0.9713
+        },
+        "1602.06541.pdf": {
+          "similarity": 0.7227,
+          "word_f1": 0.9039
+        },
+        "1707.09725.pdf": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
+        "2201.00021.pdf": {
+          "similarity": 0.8093,
+          "word_f1": 0.9464
+        },
+        "2201.00022.pdf": {
+          "similarity": 0.6233,
+          "word_f1": 0.8352
+        },
+        "2201.00029.pdf": {
+          "similarity": 0.98,
+          "word_f1": 0.9872
+        },
+        "2201.00037.pdf": {
+          "similarity": 0.8899,
+          "word_f1": 0.9162
+        },
+        "2201.00069.pdf": {
+          "similarity": 0.9042,
+          "word_f1": 0.9481
+        },
+        "2201.00151.pdf": {
+          "similarity": 0.7661,
+          "word_f1": 0.8854
+        },
+        "2201.00178.pdf": {
+          "similarity": 0.9067,
+          "word_f1": 0.9308
+        },
+        "2201.00200.pdf": {
+          "similarity": 0.8979,
+          "word_f1": 0.9694
+        },
+        "2201.00201.pdf": {
+          "similarity": 0.9365,
+          "word_f1": 0.9844
+        },
+        "2201.00214.pdf": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
         "GeoTopo-book.pdf": {
           "similarity": 0.8021,
           "word_f1": 0.8212
@@ -37,9 +193,61 @@
     },
     {
       "name": "pypdfium2",
-      "similarity": 0.9671,
-      "word_f1": 0.9493,
+      "similarity": 0.9472,
+      "word_f1": 0.9522,
       "documents": {
+        "1601.03642.pdf": {
+          "similarity": 0.9965,
+          "word_f1": 0.9902
+        },
+        "1602.06541.pdf": {
+          "similarity": 0.9935,
+          "word_f1": 0.9854
+        },
+        "1707.09725.pdf": {
+          "similarity": 0.984,
+          "word_f1": 0.9886
+        },
+        "2201.00021.pdf": {
+          "similarity": 0.9644,
+          "word_f1": 0.9442
+        },
+        "2201.00022.pdf": {
+          "similarity": 0.6313,
+          "word_f1": 0.8368
+        },
+        "2201.00029.pdf": {
+          "similarity": 0.9978,
+          "word_f1": 0.9981
+        },
+        "2201.00037.pdf": {
+          "similarity": 0.9444,
+          "word_f1": 0.9348
+        },
+        "2201.00069.pdf": {
+          "similarity": 0.9869,
+          "word_f1": 0.9667
+        },
+        "2201.00151.pdf": {
+          "similarity": 0.8953,
+          "word_f1": 0.902
+        },
+        "2201.00178.pdf": {
+          "similarity": 0.9659,
+          "word_f1": 0.9364
+        },
+        "2201.00200.pdf": {
+          "similarity": 0.969,
+          "word_f1": 0.9459
+        },
+        "2201.00201.pdf": {
+          "similarity": 0.9784,
+          "word_f1": 0.9599
+        },
+        "2201.00214.pdf": {
+          "similarity": 0.9859,
+          "word_f1": 0.9921
+        },
         "GeoTopo-book.pdf": {
           "similarity": 0.9671,
           "word_f1": 0.9493
@@ -48,9 +256,61 @@
     },
     {
       "name": "pypdf",
-      "similarity": 0.9259,
-      "word_f1": 0.9041,
+      "similarity": 0.9403,
+      "word_f1": 0.9354,
       "documents": {
+        "1601.03642.pdf": {
+          "similarity": 0.9962,
+          "word_f1": 0.9917
+        },
+        "1602.06541.pdf": {
+          "similarity": 0.9912,
+          "word_f1": 0.9904
+        },
+        "1707.09725.pdf": {
+          "similarity": 0.9782,
+          "word_f1": 0.9603
+        },
+        "2201.00021.pdf": {
+          "similarity": 0.9695,
+          "word_f1": 0.9729
+        },
+        "2201.00022.pdf": {
+          "similarity": 0.6327,
+          "word_f1": 0.8509
+        },
+        "2201.00029.pdf": {
+          "similarity": 0.9973,
+          "word_f1": 0.9927
+        },
+        "2201.00037.pdf": {
+          "similarity": 0.9429,
+          "word_f1": 0.9379
+        },
+        "2201.00069.pdf": {
+          "similarity": 0.9518,
+          "word_f1": 0.8452
+        },
+        "2201.00151.pdf": {
+          "similarity": 0.888,
+          "word_f1": 0.8645
+        },
+        "2201.00178.pdf": {
+          "similarity": 0.9643,
+          "word_f1": 0.9214
+        },
+        "2201.00200.pdf": {
+          "similarity": 0.971,
+          "word_f1": 0.9602
+        },
+        "2201.00201.pdf": {
+          "similarity": 0.98,
+          "word_f1": 0.9745
+        },
+        "2201.00214.pdf": {
+          "similarity": 0.9756,
+          "word_f1": 0.9291
+        },
         "GeoTopo-book.pdf": {
           "similarity": 0.9259,
           "word_f1": 0.9041
@@ -59,9 +319,61 @@
     },
     {
       "name": "pdfplumber",
-      "similarity": 0.7582,
-      "word_f1": 0.8182,
+      "similarity": 0.5365,
+      "word_f1": 0.728,
       "documents": {
+        "1601.03642.pdf": {
+          "similarity": 0.4537,
+          "word_f1": 0.9233
+        },
+        "1602.06541.pdf": {
+          "similarity": 0.3181,
+          "word_f1": 0.881
+        },
+        "1707.09725.pdf": {
+          "similarity": 0.9492,
+          "word_f1": 0.9504
+        },
+        "2201.00021.pdf": {
+          "similarity": 0.3538,
+          "word_f1": 0.7167
+        },
+        "2201.00022.pdf": {
+          "similarity": 0.3831,
+          "word_f1": 0.8341
+        },
+        "2201.00029.pdf": {
+          "similarity": 0.9821,
+          "word_f1": 0.9894
+        },
+        "2201.00037.pdf": {
+          "similarity": 0.8999,
+          "word_f1": 0.9003
+        },
+        "2201.00069.pdf": {
+          "similarity": 0.3826,
+          "word_f1": 0.5267
+        },
+        "2201.00151.pdf": {
+          "similarity": 0.4591,
+          "word_f1": 0.5161
+        },
+        "2201.00178.pdf": {
+          "similarity": 0.8038,
+          "word_f1": 0.8807
+        },
+        "2201.00200.pdf": {
+          "similarity": 0.4623,
+          "word_f1": 0.6432
+        },
+        "2201.00201.pdf": {
+          "similarity": 0.3048,
+          "word_f1": 0.6119
+        },
+        "2201.00214.pdf": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
         "GeoTopo-book.pdf": {
           "similarity": 0.7582,
           "word_f1": 0.8182
@@ -70,9 +382,61 @@
     },
     {
       "name": "pdfminer.six",
-      "similarity": 0.7235,
-      "word_f1": 0.9255,
+      "similarity": 0.841,
+      "word_f1": 0.9519,
       "documents": {
+        "1601.03642.pdf": {
+          "similarity": 0.7441,
+          "word_f1": 0.9894
+        },
+        "1602.06541.pdf": {
+          "similarity": 0.8738,
+          "word_f1": 0.9875
+        },
+        "1707.09725.pdf": {
+          "similarity": 0.8962,
+          "word_f1": 0.9851
+        },
+        "2201.00021.pdf": {
+          "similarity": 0.7822,
+          "word_f1": 0.9466
+        },
+        "2201.00022.pdf": {
+          "similarity": 0.5538,
+          "word_f1": 0.8402
+        },
+        "2201.00029.pdf": {
+          "similarity": 0.9982,
+          "word_f1": 0.9981
+        },
+        "2201.00037.pdf": {
+          "similarity": 0.9043,
+          "word_f1": 0.9344
+        },
+        "2201.00069.pdf": {
+          "similarity": 0.9382,
+          "word_f1": 0.9726
+        },
+        "2201.00151.pdf": {
+          "similarity": 0.786,
+          "word_f1": 0.9106
+        },
+        "2201.00178.pdf": {
+          "similarity": 0.8786,
+          "word_f1": 0.9102
+        },
+        "2201.00200.pdf": {
+          "similarity": 0.891,
+          "word_f1": 0.9695
+        },
+        "2201.00201.pdf": {
+          "similarity": 0.8532,
+          "word_f1": 0.9765
+        },
+        "2201.00214.pdf": {
+          "similarity": 0.9502,
+          "word_f1": 0.9797
+        },
         "GeoTopo-book.pdf": {
           "similarity": 0.7235,
           "word_f1": 0.9255
@@ -81,9 +445,61 @@
     },
     {
       "name": "markitdown",
-      "similarity": 0.7431,
-      "word_f1": 0.8174,
+      "similarity": 0.525,
+      "word_f1": 0.7277,
       "documents": {
+        "1601.03642.pdf": {
+          "similarity": 0.454,
+          "word_f1": 0.9233
+        },
+        "1602.06541.pdf": {
+          "similarity": 0.3183,
+          "word_f1": 0.8813
+        },
+        "1707.09725.pdf": {
+          "similarity": 0.9288,
+          "word_f1": 0.9502
+        },
+        "2201.00021.pdf": {
+          "similarity": 0.3458,
+          "word_f1": 0.7171
+        },
+        "2201.00022.pdf": {
+          "similarity": 0.383,
+          "word_f1": 0.8333
+        },
+        "2201.00029.pdf": {
+          "similarity": 0.9821,
+          "word_f1": 0.9894
+        },
+        "2201.00037.pdf": {
+          "similarity": 0.8953,
+          "word_f1": 0.8995
+        },
+        "2201.00069.pdf": {
+          "similarity": 0.3791,
+          "word_f1": 0.5276
+        },
+        "2201.00151.pdf": {
+          "similarity": 0.3551,
+          "word_f1": 0.513
+        },
+        "2201.00178.pdf": {
+          "similarity": 0.8019,
+          "word_f1": 0.881
+        },
+        "2201.00200.pdf": {
+          "similarity": 0.4584,
+          "word_f1": 0.643
+        },
+        "2201.00201.pdf": {
+          "similarity": 0.3049,
+          "word_f1": 0.612
+        },
+        "2201.00214.pdf": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
         "GeoTopo-book.pdf": {
           "similarity": 0.7431,
           "word_f1": 0.8174
@@ -92,9 +508,61 @@
     },
     {
       "name": "kreuzberg",
-      "similarity": 0.9337,
-      "word_f1": 0.9485,
+      "similarity": 0.931,
+      "word_f1": 0.9533,
       "documents": {
+        "1601.03642.pdf": {
+          "similarity": 0.8431,
+          "word_f1": 0.9139
+        },
+        "1602.06541.pdf": {
+          "similarity": 0.9883,
+          "word_f1": 0.9907
+        },
+        "1707.09725.pdf": {
+          "similarity": 0.9681,
+          "word_f1": 0.9854
+        },
+        "2201.00021.pdf": {
+          "similarity": 0.9707,
+          "word_f1": 0.9561
+        },
+        "2201.00022.pdf": {
+          "similarity": 0.6299,
+          "word_f1": 0.8479
+        },
+        "2201.00029.pdf": {
+          "similarity": 0.9991,
+          "word_f1": 0.9963
+        },
+        "2201.00037.pdf": {
+          "similarity": 0.96,
+          "word_f1": 0.955
+        },
+        "2201.00069.pdf": {
+          "similarity": 0.9465,
+          "word_f1": 0.9584
+        },
+        "2201.00151.pdf": {
+          "similarity": 0.9072,
+          "word_f1": 0.9259
+        },
+        "2201.00178.pdf": {
+          "similarity": 0.9361,
+          "word_f1": 0.9193
+        },
+        "2201.00200.pdf": {
+          "similarity": 0.9842,
+          "word_f1": 0.9779
+        },
+        "2201.00201.pdf": {
+          "similarity": 0.9885,
+          "word_f1": 0.9823
+        },
+        "2201.00214.pdf": {
+          "similarity": 0.9782,
+          "word_f1": 0.9883
+        },
         "GeoTopo-book.pdf": {
           "similarity": 0.9337,
           "word_f1": 0.9485
