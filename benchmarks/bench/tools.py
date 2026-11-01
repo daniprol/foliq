@@ -1,26 +1,21 @@
-"""Competitors that are not Python libraries: command-line tools and libraries in
-C, Go, Rust, Java and JavaScript.
+"""Competitors that are not Python packages: pdftotext, pandoc and Apache Tika.
 
 Each one is called from `libraries.py` like any other library, so `worker.py`
-times it file by file in the same way. How each kind is run:
+times it file by file in the same way.
 
-| Kind              | How it runs                                        | Examples                 |
-|-------------------|----------------------------------------------------|--------------------------|
-| Installed command | one process per file (start-up is milliseconds)     | mutool, pdftotext, pandoc |
-| Our Go/Rust tools | one process per file, built by `install()`          | `tools/go`, `tools/rust` |
-| Node              | one long-lived `node` process per worker            | pdf.js, SheetJS, mammoth |
-| Apache Tika       | one Tika server per worker, files sent over HTTP   | Tika (PDFBox, POI)       |
+| Competitor          | How it runs                                              |
+|---------------------|----------------------------------------------------------|
+| pdftotext, pandoc   | one process per file (start-up is a few milliseconds)    |
+| Apache Tika (Java)  | one local Tika server per worker, one HTTP request per file |
 
-Node and Java take a second or more to start, which would swamp the time of a
-small file, so they stay alive and are started during the worker's warm-up,
-which is not timed. They are stopped with the worker that started them.
+Java takes seconds to start, which would swamp the time of a small file, so
+the Tika server starts during the worker's untimed warm-up and stops with it.
 
-`uv run python -m bench tools` installs everything that can be installed
-without root; mutool, pdftotext and pandoc come from the system package manager.
+`uv run python -m bench tools` downloads Tika; pdftotext and pandoc come from
+the system package manager.
 """
 
 import ctypes
-import json
 import shutil
 import signal
 import subprocess
@@ -30,9 +25,6 @@ from pathlib import Path
 
 from bench import datasets
 
-TOOLS = Path(__file__).resolve().parent.parent / "tools"
-GO_BINARY = TOOLS / "go" / "foliq-bench-go"
-RUST_BINARY = TOOLS / "rust" / "target" / "release" / "foliq-bench-rust"
 TIKA_VERSION = "3.3.3"
 TIKA_JAR = datasets.DATA / "tools" / f"tika-server-standard-{TIKA_VERSION}.jar"
 TIKA_URL = (
@@ -45,35 +37,20 @@ LOCAL = urllib.request.build_opener(urllib.request.ProxyHandler({}))
 
 
 def install() -> None:
-    """Build the Go and Rust tools, install the Node packages and fetch Tika."""
-    steps = [
-        (["npm", "ci", "--no-audit", "--no-fund"], TOOLS / "node"),
-        (["go", "build", "-o", GO_BINARY.name, "."], TOOLS / "go"),
-        (["cargo", "build", "--release"], TOOLS / "rust"),
-    ]
-    for command, folder in steps:
-        if shutil.which(command[0]) is None:
-            print(f"  skipped {folder.name}: `{command[0]}` is not installed")
-            continue
-        print(f"  {' '.join(command)} (in tools/{folder.name})")
-        subprocess.run(command, cwd=folder, check=True)
+    """Download Apache Tika and say which system tools are missing."""
     if shutil.which("java") and not TIKA_JAR.exists():
         print(f"  downloading Apache Tika {TIKA_VERSION}")
         TIKA_JAR.parent.mkdir(parents=True, exist_ok=True)
         urllib.request.urlretrieve(TIKA_URL, TIKA_JAR)
-    for command in ["mutool", "pdftotext", "pandoc"]:
+    for command in ["java", "pdftotext", "pandoc"]:
         if shutil.which(command) is None:
             print(f"  missing `{command}`: install it with your package manager (apt, brew)")
 
 
 def is_installed(command: str) -> bool:
-    """True when a tool can run: an installed command or a built binary."""
-    if command == "node":
-        return shutil.which("node") is not None and (TOOLS / "node" / "node_modules").exists()
+    """True when a tool can run."""
     if command == "tika":
         return shutil.which("java") is not None and TIKA_JAR.exists()
-    if "/" in command:
-        return Path(command).exists()
     return shutil.which(command) is not None
 
 
@@ -97,39 +74,12 @@ def die_with_parent() -> None:
         prctl(set_death_signal, signal.SIGKILL)
 
 
-_node: subprocess.Popen | None = None
-
-
-def node(tool: str, path: Path) -> str:
-    """Ask the long-lived Node process (`tools/node/extract.mjs`) for one file."""
-    global _node  # one process per worker, like a module-level cache in any Python program
-    if _node is None or _node.poll() is not None:
-        _node = subprocess.Popen(
-            ["node", "extract.mjs"],
-            cwd=TOOLS / "node",
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.DEVNULL,
-            text=True,
-            preexec_fn=die_with_parent,
-        )
-    _node.stdin.write(json.dumps({"tool": tool, "path": str(path)}) + "\n")
-    _node.stdin.flush()
-    line = _node.stdout.readline()
-    if not line:
-        raise RuntimeError("node exited")
-    answer = json.loads(line)
-    if "error" in answer:
-        raise RuntimeError(answer["error"])
-    return answer["text"]
-
-
 _tika: subprocess.Popen | None = None
 
 
 def tika(path: Path) -> str:
     """Send one file to a local Tika server and return its plain text."""
-    global _tika
+    global _tika  # one server per worker, like a module-level cache in any Python program
     if _tika is None or _tika.poll() is not None:
         _tika = subprocess.Popen(
             ["java", "-jar", str(TIKA_JAR), "--port", str(TIKA_PORT)],

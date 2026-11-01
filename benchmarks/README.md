@@ -8,14 +8,13 @@ Every number below comes from the commands in the quickstart.
 ```console
 $ cd benchmarks
 $ uv run python -m bench download   # public corpora at pinned commits, ~400 MB
-$ uv run python -m bench tools      # builds the Go/Rust/Node competitors, fetches Apache Tika
+$ uv run python -m bench tools      # fetches Apache Tika (needs Java)
 $ uv run python -m bench all        # ~45 min on 4 cores; writes results/ and the charts
 ```
 
-Competitors from other languages are optional: any whose tool is missing is
-skipped with a note. They need Node, Go, Rust and Java for `bench tools`, plus
-`mutool`, `pdftotext` and `pandoc` from your package manager
-(`apt install mupdf-tools poppler-utils pandoc`).
+Competitors that are not Python packages are optional: any whose tool is
+missing is skipped with a note. They need Java (for Tika), and `pdftotext` and
+`pandoc` from your package manager (`apt install poppler-utils pandoc`).
 
 One benchmark at a time: `uv run python -m bench quality pdf docx`,
 `... speed xlsx`, `... search`, `... charts`. The first `uv run` builds foliq
@@ -64,14 +63,13 @@ BM25 on BEIR SciFact: 5,183 abstracts, 300 queries. One thread for everyone.
   python-docx and python-pptx, 10–30x MarkItDown. Kreuzberg is faster still.
 - ✅ **Fewest failures on broken PDFs** (11 of 1,077, PyMuPDF 14, pypdf 34).
 - ⚠️ **PDF text order**: 86% on 14 PDFs (13 arXiv papers, one book) vs 95% for
-  PyMuPDF, mutool, PDFium, pdf.js and the pure-Rust pdf-extract (which,
-  however, fails on 101 of the 1,077 broken test PDFs). foliq finds almost all the words (word F1 95% vs 96%), but puts
+  PyMuPDF and PDFium. foliq finds almost all the words (word F1 95% vs 96%), but puts
   figure labels and the arXiv margin stamp in the text flow, keeps
   hyphenated line ends (`num-bers`) and drops some math.
 - ⚠️ **Single-PDF speed** is behind PDFium and PyMuPDF (C/C++), about half
   PyMuPDF's rate on one thread even though foliq's time includes indexing.
   foliq makes up for it on many cores (160 files/s on 4). It is faster than
-  the CLIs (mutool, pdftotext), Tika and pdf.js, which pay a per-file cost.
+  pdftotext and Tika, which pay a per-file cost.
 - ⚠️ **Large spreadsheets are slow**: one 5,000-row sheet takes most of the
   XLSX time, in the splitter; foliq is the slowest XLSX reader here except
   MarkItDown. Next to fix.
@@ -82,8 +80,8 @@ BM25 on BEIR SciFact: 5,183 abstracts, 300 queries. One thread for everyone.
 
 | Benchmark | Data | Compared with | Metric |
 |---|---|---|---|
-| PDF quality | [py-pdf/benchmarks](https://github.com/py-pdf/benchmarks): 14 PDFs with hand-checked text¹ | PyMuPDF, pymupdf4llm, pypdfium2, pypdf, pdfplumber, pdfminer.six, MarkItDown, Kreuzberg, extractous; mutool, pdftotext, pdf.js, officeparser, Apache Tika, pdf-extract, lopdf, ledongthuc/pdf | edit similarity |
-| DOCX, PPTX, XLSX, HTML quality | [docling](https://github.com/docling-project/docling) test files with their reviewed Markdown² | python-docx, python-pptx, openpyxl, python-calamine, html2text, trafilatura, BeautifulSoup, MarkItDown, Kreuzberg, extractous; pandoc, mammoth, officeparser, SheetJS, excelize, Apache Tika | edit similarity |
+| PDF quality | [py-pdf/benchmarks](https://github.com/py-pdf/benchmarks): 14 PDFs with hand-checked text¹ | PyMuPDF, pypdfium2, pypdf, pdfplumber, pdftotext, MarkItDown, Kreuzberg, Apache Tika | edit similarity |
+| DOCX, PPTX, XLSX, HTML quality | [docling](https://github.com/docling-project/docling) test files with their reviewed Markdown² | per format, see [below](#how-competitors-are-picked) | edit similarity |
 | PDF speed | [pdf.js](https://github.com/mozilla/pdf.js) test suite: 1,077 PDFs | same as PDF quality | files/s, failures |
 | Office speed | [Apache POI](https://github.com/apache/poi) test files: 130 DOCX, 95 PPTX, 353 XLSX | same as Office quality | files/s, failures |
 | Search | [BEIR SciFact](https://github.com/allenai/scifact) | bm25s, tantivy, rank-bm25, SQLite FTS5 | nDCG@10, Recall@100, ms/query |
@@ -92,27 +90,30 @@ BM25 on BEIR SciFact: 5,183 abstracts, 300 queries. One thread for everyone.
 the book is scored (the chart shows how many were used).
 ² docling made these references, so docling itself is left out; it also
 needs PyTorch, which is too heavy for a quick benchmark. Unstructured is left
-out for the same reason (its PDF parsing is pdfminer, already here).
+out for the same reason (its PDF parsing is pdfminer, which pdfplumber also uses).
 
-### Competitors from other languages
+### How competitors are picked
 
-Each name in the charts says what does the work: `pymupdf (C)` is a Python
-package whose engine, MuPDF, is written in C.
+For each format: the libraries most people know, and the fastest ones, so the
+speed comparison is fair. Each name in the charts says what does the work:
+`pymupdf (C)` is a Python package whose engine, MuPDF, is written in C.
 
-| Competitor | Language | Formats | How it runs |
-|---|---|---|---|
-| [mutool](https://mupdf.com/) (MuPDF) | C | PDF | `mutool draw -F txt`, one process per file |
-| [pdftotext](https://poppler.freedesktop.org/) (Poppler) | C++ | PDF | one process per file |
-| [pandoc](https://pandoc.org/) | Haskell | DOCX, HTML | `pandoc --to gfm-raw_html`, one process per file |
-| [pdf-extract](https://crates.io/crates/pdf-extract), [lopdf](https://crates.io/crates/lopdf) | Rust | PDF | [`tools/rust`](tools/rust), one process per file |
-| [ledongthuc/pdf](https://github.com/ledongthuc/pdf), [excelize](https://github.com/qax-os/excelize) | Go | PDF, XLSX | [`tools/go`](tools/go), one process per file |
-| [pdf.js](https://github.com/mozilla/pdf.js), [officeparser](https://github.com/harshankur/officeParser), [mammoth](https://github.com/mwilliamson/mammoth.js), [SheetJS](https://sheetjs.com/) | JavaScript | PDF, Office | [`tools/node`](tools/node), one long-lived Node process |
-| [Apache Tika](https://tika.apache.org/) (PDFBox, POI) | Java | all | local Tika server, one HTTP request per file |
-| [extractous](https://github.com/yobix-ai/extractous) | Rust | all | Python package |
+| Format | Most known | Fastest |
+|---|---|---|
+| PDF | PyMuPDF, pypdf, pdfplumber, pdftotext (Poppler), MarkItDown, Apache Tika | pypdfium2 (PDFium), PyMuPDF, Kreuzberg |
+| DOCX, PPTX | python-docx, python-pptx, pandoc, MarkItDown, Apache Tika | Kreuzberg |
+| XLSX | openpyxl, MarkItDown, Apache Tika | python-calamine, Kreuzberg |
+| HTML | BeautifulSoup, html2text, trafilatura, pandoc, MarkItDown | Kreuzberg |
 
-Command-line tools pay their process start-up on every file (a few
-milliseconds), as they do when you use them. Node and Java start once, during
-the untimed warm-up.
+pdftotext and pandoc run as commands, one process per file (a few
+milliseconds of start-up), as they do when you use them. Tika runs as a local
+server started during the untimed warm-up, one HTTP request per file.
+
+Tried and left out to keep the charts readable: pymupdf4llm, pdfminer.six,
+mutool (same engine as PyMuPDF), pdf.js, pdf-extract, lopdf, ledongthuc/pdf,
+mammoth, SheetJS, excelize, officeparser and extractous. Of these, only the
+pure-Rust pdf-extract stood out: 95% on PDF quality, but it failed on 101 of
+the 1,077 test PDFs.
 
 ## Fair play
 
@@ -124,10 +125,8 @@ the untimed warm-up.
 - Raw numbers (and per-document quality scores) are in [`results/`](results/).
 
 Run on a 4-core Intel Xeon (2.8 GHz) cloud VM, Linux, Python 3.13. Versions:
-PyMuPDF 2.0, pymupdf4llm 2.0, pypdfium2 5.14, pypdf 6.21, pdfplumber 0.11,
-pdfminer.six 20260107, MarkItDown 0.1.9, Kreuzberg 4.10, python-docx 1.2,
+PyMuPDF 2.0, pypdfium2 5.14, pypdf 6.21, pdfplumber 0.11, MarkItDown 0.1.9, Kreuzberg 4.10, python-docx 1.2,
 python-pptx 1.0, openpyxl 3.1, python-calamine 0.9, html2text 2025.4,
-trafilatura 2.3, BeautifulSoup 4.15, extractous 0.3, bm25s 0.3, rank-bm25 0.2,
-tantivy 0.27 (pinned in `uv.lock`). Other languages: mutool 1.23, pdftotext
-(Poppler) 24.02, pandoc 3.1, Apache Tika 3.3.3 on Java 21, Node 22, Go 1.25,
-Rust stable (versions pinned in `tools/`).
+trafilatura 2.3, BeautifulSoup 4.15, bm25s 0.3, rank-bm25 0.2, tantivy 0.27
+(pinned in `uv.lock`); pdftotext (Poppler) 24.02, pandoc 3.1, Apache Tika 3.3.3
+on Java 21.

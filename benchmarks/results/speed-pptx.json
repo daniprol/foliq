@@ -39,20 +39,6 @@
       "megabytes_per_second": 65.49
     },
     {
-      "name": "extractous (Rust)",
-      "seconds": 10.175,
-      "failed": 38,
-      "files_per_second": 9.34,
-      "megabytes_per_second": 2.27
-    },
-    {
-      "name": "officeparser (JS)",
-      "seconds": 6.833,
-      "failed": 8,
-      "files_per_second": 13.9,
-      "megabytes_per_second": 3.38
-    },
-    {
       "name": "Apache Tika (Java)",
       "seconds": 9.42,
       "failed": 2,

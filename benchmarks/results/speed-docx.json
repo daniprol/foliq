@@ -39,32 +39,11 @@
       "megabytes_per_second": 7.87
     },
     {
-      "name": "extractous (Rust)",
-      "seconds": 29.655,
-      "failed": 60,
-      "files_per_second": 4.38,
-      "megabytes_per_second": 0.27
-    },
-    {
       "name": "pandoc (Haskell)",
       "seconds": 41.866,
       "failed": 18,
       "files_per_second": 3.11,
       "megabytes_per_second": 0.19
-    },
-    {
-      "name": "officeparser (JS)",
-      "seconds": 14.334,
-      "failed": 13,
-      "files_per_second": 9.07,
-      "megabytes_per_second": 0.55
-    },
-    {
-      "name": "mammoth (JS)",
-      "seconds": 9.227,
-      "failed": 17,
-      "files_per_second": 14.09,
-      "megabytes_per_second": 0.86
     },
     {
       "name": "Apache Tika (Java)",

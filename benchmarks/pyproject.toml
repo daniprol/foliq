@@ -5,13 +5,13 @@ requires-python = ">=3.11"
 dependencies = [
     "foliq",
     # PDF
-    "pymupdf", "pymupdf4llm", "pypdfium2", "pypdf", "pdfplumber", "pdfminer.six",
+    "pymupdf", "pypdfium2", "pypdf", "pdfplumber",
     # Office
     "python-docx", "python-pptx", "openpyxl", "python-calamine",
     # HTML
     "html2text", "trafilatura", "beautifulsoup4",
     # Many formats
-    "markitdown[pdf,docx,pptx,xlsx]", "kreuzberg", "extractous",
+    "markitdown[pdf,docx,pptx,xlsx]", "kreuzberg",
     # Search
     "bm25s[core]", "PyStemmer", "rank-bm25", "tantivy",
     # Scoring and charts
