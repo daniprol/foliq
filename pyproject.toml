@@ -44,6 +44,7 @@ dev = [
     "ruff>=0.14",
     "ty>=0.0.1",
 ]
+docs = ["zensical>=0.0.72"]  # uv run --only-group docs zensical serve
 
 [tool.ruff]
 line-length = 120
