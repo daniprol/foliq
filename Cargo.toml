@@ -22,7 +22,7 @@ members = [".", "crates/foliq-core", "crates/foliq", "crates/foliq-cli"]
 
 # The single source of the version: the crates and the Python package (see `dynamic` in pyproject.toml).
 [workspace.package]
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 edition = "2024"
 license = "MIT"
 repository = "https://github.com/daniprol/foliq"

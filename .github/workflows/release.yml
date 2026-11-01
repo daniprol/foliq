@@ -1,14 +1,22 @@
 name: Release
 
-# Push a tag like `v0.1.3` to publish that version to PyPI (after you approve the `pypi` environment).
-# Run it by hand (Actions > Release > Run workflow) to publish the current version to TestPyPI instead.
+# Every push to main publishes a development build to TestPyPI, like `0.1.0a1.dev42`
+# (the version in Cargo.toml plus `.dev<run number>`, since an index never takes a version twice).
+# Push a tag like `v0.1.0a1` (the Python form of the Cargo.toml version) to publish that version
+# to PyPI and create a GitHub release.
 on:
   push:
+    branches: [main]
     tags: ["v*"]
-  workflow_dispatch:
+  workflow_dispatch:  # the same as a push to main: a development build to TestPyPI
 
 permissions:
   contents: read
+
+# A newer push to main replaces a development build still in progress; releases always finish.
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref_type != 'tag' }}
 
 jobs:
   ci:
@@ -22,12 +30,17 @@ jobs:
       - uses: actions/checkout@v5
         with:
           fetch-depth: 0  # to check that the tag is on main
+      - uses: astral-sh/setup-uv@v7
       - name: Check the tag matches the version and is on main
         if: github.ref_type == 'tag'
         run: |
-          version=$(python3 -c 'import tomllib; print(tomllib.load(open("Cargo.toml", "rb"))["workspace"]["package"]["version"])')
+          # Cargo.toml says `0.1.0-alpha.1`; the tag uses the Python form, `v0.1.0a1`.
+          version=$(uv run --no-project --with packaging python -c 'import tomllib; from packaging.version import Version; print(Version(tomllib.load(open("Cargo.toml", "rb"))["workspace"]["package"]["version"]))')
           [ "$GITHUB_REF_NAME" = "v$version" ] || { echo "::error::Tag $GITHUB_REF_NAME but Cargo.toml says $version"; exit 1; }
           git merge-base --is-ancestor "$GITHUB_SHA" origin/main || { echo "::error::$GITHUB_REF_NAME is not on main"; exit 1; }
+      - name: Stamp a development version
+        if: github.ref_type != 'tag'
+        run: uv run --no-project --python 3.12 scripts/stamp-dev-version.py ${{ github.run_number }}
       - uses: PyO3/maturin-action@v1
         with:
           command: sdist
@@ -53,14 +66,16 @@ jobs:
           - { runner: windows-latest, target: x64, smoke: true }
     steps:
       - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v7
+      - name: Stamp a development version
+        if: github.ref_type != 'tag'
+        run: uv run --no-project --python 3.12 scripts/stamp-dev-version.py ${{ github.run_number }}
       - uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.target }}
           manylinux: ${{ matrix.manylinux }}
           args: --release --locked --strip --out dist
       # Install the wheel on the oldest supported Python, import it and run the CLI.
-      - uses: astral-sh/setup-uv@v7
-        if: matrix.smoke
       - name: Smoke test
         if: matrix.smoke
         shell: bash
@@ -92,7 +107,7 @@ jobs:
 
   testpypi:
     name: Publish to TestPyPI
-    if: github.event_name == 'workflow_dispatch'
+    if: github.ref_type != 'tag'
     needs: [ci, sdist, wheels]
     runs-on: ubuntu-latest
     environment:
@@ -109,7 +124,6 @@ jobs:
       - uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: https://test.pypi.org/legacy/
-          skip-existing: true  # a second dry run of the same version is not an error
 
   github-release:
     name: GitHub release
