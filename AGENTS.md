@@ -86,3 +86,8 @@ the core does little, does it fast, and every part can be replaced.
   user-facing change. Code examples live in files and are included with
   `--8<--`, so they are compiled and tested.
 - The version lives in one place: `[workspace.package]` in `Cargo.toml`.
+- Releases (`.github/workflows/release.yml`): every push to main publishes a
+  development build to TestPyPI (`0.1.0a1.dev42`, stamped by
+  `scripts/stamp-dev-version.py`). To publish to PyPI, set the version in
+  `Cargo.toml` in SemVer form (`0.1.0-alpha.1`), merge to main, then push the
+  tag in Python form (`git tag v0.1.0a1 && git push origin v0.1.0a1`).

@@ -808,7 +808,7 @@ checksum = "77ce24cb58228fbb8aa041425bb1050850ac19177686ea6e0f41a70416f56fdb"
 
 [[package]]
 name = "foliq"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "blake3",
  "calamine",
@@ -830,7 +830,7 @@ dependencies = [
 
 [[package]]
 name = "foliq-cli"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "clap",
  "foliq",
@@ -840,7 +840,7 @@ dependencies = [
 
 [[package]]
 name = "foliq-core"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "serde",
  "serde_json",
@@ -849,7 +849,7 @@ dependencies = [
 
 [[package]]
 name = "foliq_python"
-version = "0.1.0"
+version = "0.1.0-alpha.1"
 dependencies = [
  "foliq",
  "foliq-cli",
