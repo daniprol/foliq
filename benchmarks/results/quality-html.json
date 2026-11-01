@@ -1,0 +1,816 @@
+{
+  "format": "html",
+  "documents": 32,
+  "libraries": [
+    {
+      "name": "foliq",
+      "similarity": 0.8959,
+      "word_f1": 0.931,
+      "documents": {
+        "example_01.html": {
+          "similarity": 0.9271,
+          "word_f1": 0.9412
+        },
+        "example_02.html": {
+          "similarity": 0.9826,
+          "word_f1": 0.9714
+        },
+        "example_03.html": {
+          "similarity": 0.9714,
+          "word_f1": 0.9792
+        },
+        "example_04.html": {
+          "similarity": 0.6914,
+          "word_f1": 0.8462
+        },
+        "example_05.html": {
+          "similarity": 0.6808,
+          "word_f1": 0.8431
+        },
+        "example_06.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "example_07.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "example_08.html": {
+          "similarity": 0.81,
+          "word_f1": 0.9011
+        },
+        "formatting.html": {
+          "similarity": 0.9804,
+          "word_f1": 0.9319
+        },
+        "html_code_snippets.html": {
+          "similarity": 0.9794,
+          "word_f1": 0.9893
+        },
+        "html_description_list.html": {
+          "similarity": 0.9178,
+          "word_f1": 1.0
+        },
+        "html_heading_in_p.html": {
+          "similarity": 0.931,
+          "word_f1": 1.0
+        },
+        "html_inline_group_in_table_cell.html": {
+          "similarity": 0.9837,
+          "word_f1": 1.0
+        },
+        "html_nested_block_in_list_item.html": {
+          "similarity": 0.8468,
+          "word_f1": 0.8765
+        },
+        "html_rich_table_cells.html": {
+          "similarity": 0.7517,
+          "word_f1": 0.8636
+        },
+        "hyperlink_01.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_02.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_03.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_04.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_05.html": {
+          "similarity": 0.8218,
+          "word_f1": 0.9412
+        },
+        "hyperlink_06.html": {
+          "similarity": 0.9808,
+          "word_f1": 1.0
+        },
+        "kvp_data_example.html": {
+          "similarity": 0.9852,
+          "word_f1": 1.0
+        },
+        "table_01.html": {
+          "similarity": 0.9385,
+          "word_f1": 1.0
+        },
+        "table_02.html": {
+          "similarity": 0.9362,
+          "word_f1": 0.8125
+        },
+        "table_03.html": {
+          "similarity": 0.88,
+          "word_f1": 0.8125
+        },
+        "table_04.html": {
+          "similarity": 0.9016,
+          "word_f1": 0.85
+        },
+        "table_05.html": {
+          "similarity": 0.717,
+          "word_f1": 0.8095
+        },
+        "table_06.html": {
+          "similarity": 0.3214,
+          "word_f1": 0.4821
+        },
+        "table_with_heading_01.html": {
+          "similarity": 0.92,
+          "word_f1": 1.0
+        },
+        "table_with_heading_02.html": {
+          "similarity": 0.95,
+          "word_f1": 1.0
+        },
+        "unit_test_01.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "wiki_duck.html": {
+          "similarity": 0.8609,
+          "word_f1": 0.9417
+        }
+      }
+    },
+    {
+      "name": "html2text",
+      "similarity": 0.9226,
+      "word_f1": 0.9794,
+      "documents": {
+        "example_01.html": {
+          "similarity": 0.9453,
+          "word_f1": 0.9811
+        },
+        "example_02.html": {
+          "similarity": 0.9826,
+          "word_f1": 1.0
+        },
+        "example_03.html": {
+          "similarity": 0.9714,
+          "word_f1": 1.0
+        },
+        "example_04.html": {
+          "similarity": 0.6914,
+          "word_f1": 0.8462
+        },
+        "example_05.html": {
+          "similarity": 0.6808,
+          "word_f1": 0.8431
+        },
+        "example_06.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "example_07.html": {
+          "similarity": 0.776,
+          "word_f1": 1.0
+        },
+        "example_08.html": {
+          "similarity": 0.81,
+          "word_f1": 0.9011
+        },
+        "formatting.html": {
+          "similarity": 0.9873,
+          "word_f1": 0.9319
+        },
+        "html_code_snippets.html": {
+          "similarity": 0.9754,
+          "word_f1": 0.9929
+        },
+        "html_description_list.html": {
+          "similarity": 0.9178,
+          "word_f1": 1.0
+        },
+        "html_heading_in_p.html": {
+          "similarity": 0.931,
+          "word_f1": 1.0
+        },
+        "html_inline_group_in_table_cell.html": {
+          "similarity": 0.9837,
+          "word_f1": 1.0
+        },
+        "html_nested_block_in_list_item.html": {
+          "similarity": 0.9646,
+          "word_f1": 1.0
+        },
+        "html_rich_table_cells.html": {
+          "similarity": 0.9213,
+          "word_f1": 0.9665
+        },
+        "hyperlink_01.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_02.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_03.html": {
+          "similarity": 0.8974,
+          "word_f1": 1.0
+        },
+        "hyperlink_04.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_05.html": {
+          "similarity": 0.8218,
+          "word_f1": 0.9412
+        },
+        "hyperlink_06.html": {
+          "similarity": 0.9808,
+          "word_f1": 1.0
+        },
+        "kvp_data_example.html": {
+          "similarity": 0.9852,
+          "word_f1": 1.0
+        },
+        "table_01.html": {
+          "similarity": 0.9385,
+          "word_f1": 1.0
+        },
+        "table_02.html": {
+          "similarity": 0.9574,
+          "word_f1": 1.0
+        },
+        "table_03.html": {
+          "similarity": 0.9,
+          "word_f1": 1.0
+        },
+        "table_04.html": {
+          "similarity": 0.918,
+          "word_f1": 1.0
+        },
+        "table_05.html": {
+          "similarity": 0.9487,
+          "word_f1": 1.0
+        },
+        "table_06.html": {
+          "similarity": 0.9636,
+          "word_f1": 1.0
+        },
+        "table_with_heading_01.html": {
+          "similarity": 0.92,
+          "word_f1": 1.0
+        },
+        "table_with_heading_02.html": {
+          "similarity": 0.95,
+          "word_f1": 1.0
+        },
+        "unit_test_01.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "wiki_duck.html": {
+          "similarity": 0.8041,
+          "word_f1": 0.9358
+        }
+      }
+    },
+    {
+      "name": "trafilatura",
+      "similarity": 0.8684,
+      "word_f1": 0.9518,
+      "documents": {
+        "example_01.html": {
+          "similarity": 0.9453,
+          "word_f1": 0.9434
+        },
+        "example_02.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "example_03.html": {
+          "similarity": 0.9878,
+          "word_f1": 1.0
+        },
+        "example_04.html": {
+          "similarity": 0.6914,
+          "word_f1": 0.8462
+        },
+        "example_05.html": {
+          "similarity": 0.5769,
+          "word_f1": 0.7835
+        },
+        "example_06.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "example_07.html": {
+          "similarity": 0.776,
+          "word_f1": 1.0
+        },
+        "example_08.html": {
+          "similarity": 0.81,
+          "word_f1": 0.9011
+        },
+        "formatting.html": {
+          "similarity": 0.874,
+          "word_f1": 0.9205
+        },
+        "html_code_snippets.html": {
+          "similarity": 0.7304,
+          "word_f1": 0.8583
+        },
+        "html_description_list.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "html_heading_in_p.html": {
+          "similarity": 0.8736,
+          "word_f1": 0.9583
+        },
+        "html_inline_group_in_table_cell.html": {
+          "similarity": 0.9837,
+          "word_f1": 1.0
+        },
+        "html_nested_block_in_list_item.html": {
+          "similarity": 0.831,
+          "word_f1": 0.9091
+        },
+        "html_rich_table_cells.html": {
+          "similarity": 0.7944,
+          "word_f1": 0.888
+        },
+        "hyperlink_01.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_02.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_03.html": {
+          "similarity": 0.8974,
+          "word_f1": 1.0
+        },
+        "hyperlink_04.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_05.html": {
+          "similarity": 0.8218,
+          "word_f1": 0.9412
+        },
+        "hyperlink_06.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "kvp_data_example.html": {
+          "similarity": 0.9261,
+          "word_f1": 0.9774
+        },
+        "table_01.html": {
+          "similarity": 0.9385,
+          "word_f1": 1.0
+        },
+        "table_02.html": {
+          "similarity": 0.9574,
+          "word_f1": 1.0
+        },
+        "table_03.html": {
+          "similarity": 0.9,
+          "word_f1": 1.0
+        },
+        "table_04.html": {
+          "similarity": 0.918,
+          "word_f1": 1.0
+        },
+        "table_05.html": {
+          "similarity": 0.641,
+          "word_f1": 0.9032
+        },
+        "table_06.html": {
+          "similarity": 0.6364,
+          "word_f1": 0.9412
+        },
+        "table_with_heading_01.html": {
+          "similarity": 0.6,
+          "word_f1": 0.8235
+        },
+        "table_with_heading_02.html": {
+          "similarity": 0.95,
+          "word_f1": 1.0
+        },
+        "unit_test_01.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "wiki_duck.html": {
+          "similarity": 0.7268,
+          "word_f1": 0.8636
+        }
+      }
+    },
+    {
+      "name": "beautifulsoup4",
+      "similarity": 0.8972,
+      "word_f1": 0.9654,
+      "documents": {
+        "example_01.html": {
+          "similarity": 0.9027,
+          "word_f1": 0.9412
+        },
+        "example_02.html": {
+          "similarity": 0.9565,
+          "word_f1": 0.9714
+        },
+        "example_03.html": {
+          "similarity": 0.9469,
+          "word_f1": 0.9792
+        },
+        "example_04.html": {
+          "similarity": 0.6914,
+          "word_f1": 0.8462
+        },
+        "example_05.html": {
+          "similarity": 0.6808,
+          "word_f1": 0.8431
+        },
+        "example_06.html": {
+          "similarity": 0.932,
+          "word_f1": 0.9677
+        },
+        "example_07.html": {
+          "similarity": 0.776,
+          "word_f1": 1.0
+        },
+        "example_08.html": {
+          "similarity": 0.81,
+          "word_f1": 0.9011
+        },
+        "formatting.html": {
+          "similarity": 0.9709,
+          "word_f1": 0.9862
+        },
+        "html_code_snippets.html": {
+          "similarity": 0.9577,
+          "word_f1": 0.979
+        },
+        "html_description_list.html": {
+          "similarity": 0.8877,
+          "word_f1": 0.987
+        },
+        "html_heading_in_p.html": {
+          "similarity": 0.6724,
+          "word_f1": 0.9091
+        },
+        "html_inline_group_in_table_cell.html": {
+          "similarity": 0.8876,
+          "word_f1": 0.9565
+        },
+        "html_nested_block_in_list_item.html": {
+          "similarity": 0.9057,
+          "word_f1": 0.9412
+        },
+        "html_rich_table_cells.html": {
+          "similarity": 0.8888,
+          "word_f1": 0.9562
+        },
+        "hyperlink_01.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_02.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_03.html": {
+          "similarity": 0.8974,
+          "word_f1": 1.0
+        },
+        "hyperlink_04.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_05.html": {
+          "similarity": 0.8067,
+          "word_f1": 0.8718
+        },
+        "hyperlink_06.html": {
+          "similarity": 0.8525,
+          "word_f1": 0.9302
+        },
+        "kvp_data_example.html": {
+          "similarity": 0.9292,
+          "word_f1": 0.9784
+        },
+        "table_01.html": {
+          "similarity": 0.9385,
+          "word_f1": 1.0
+        },
+        "table_02.html": {
+          "similarity": 0.9574,
+          "word_f1": 1.0
+        },
+        "table_03.html": {
+          "similarity": 0.9,
+          "word_f1": 1.0
+        },
+        "table_04.html": {
+          "similarity": 0.918,
+          "word_f1": 1.0
+        },
+        "table_05.html": {
+          "similarity": 0.9487,
+          "word_f1": 1.0
+        },
+        "table_06.html": {
+          "similarity": 0.9636,
+          "word_f1": 1.0
+        },
+        "table_with_heading_01.html": {
+          "similarity": 0.92,
+          "word_f1": 1.0
+        },
+        "table_with_heading_02.html": {
+          "similarity": 0.95,
+          "word_f1": 1.0
+        },
+        "unit_test_01.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "wiki_duck.html": {
+          "similarity": 0.8602,
+          "word_f1": 0.9475
+        }
+      }
+    },
+    {
+      "name": "markitdown",
+      "similarity": 0.9247,
+      "word_f1": 0.9797,
+      "documents": {
+        "example_01.html": {
+          "similarity": 0.9453,
+          "word_f1": 0.9811
+        },
+        "example_02.html": {
+          "similarity": 0.9826,
+          "word_f1": 1.0
+        },
+        "example_03.html": {
+          "similarity": 0.9755,
+          "word_f1": 1.0
+        },
+        "example_04.html": {
+          "similarity": 0.6914,
+          "word_f1": 0.8462
+        },
+        "example_05.html": {
+          "similarity": 0.6808,
+          "word_f1": 0.8431
+        },
+        "example_06.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "example_07.html": {
+          "similarity": 0.864,
+          "word_f1": 1.0
+        },
+        "example_08.html": {
+          "similarity": 0.81,
+          "word_f1": 0.9011
+        },
+        "formatting.html": {
+          "similarity": 0.9681,
+          "word_f1": 0.9123
+        },
+        "html_code_snippets.html": {
+          "similarity": 0.9764,
+          "word_f1": 0.9929
+        },
+        "html_description_list.html": {
+          "similarity": 0.9411,
+          "word_f1": 1.0
+        },
+        "html_heading_in_p.html": {
+          "similarity": 0.931,
+          "word_f1": 1.0
+        },
+        "html_inline_group_in_table_cell.html": {
+          "similarity": 0.9837,
+          "word_f1": 1.0
+        },
+        "html_nested_block_in_list_item.html": {
+          "similarity": 0.9725,
+          "word_f1": 1.0
+        },
+        "html_rich_table_cells.html": {
+          "similarity": 0.8989,
+          "word_f1": 0.9524
+        },
+        "hyperlink_01.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_02.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_03.html": {
+          "similarity": 0.9423,
+          "word_f1": 1.0
+        },
+        "hyperlink_04.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_05.html": {
+          "similarity": 0.8218,
+          "word_f1": 0.9412
+        },
+        "hyperlink_06.html": {
+          "similarity": 0.9808,
+          "word_f1": 1.0
+        },
+        "kvp_data_example.html": {
+          "similarity": 0.9852,
+          "word_f1": 1.0
+        },
+        "table_01.html": {
+          "similarity": 0.9385,
+          "word_f1": 1.0
+        },
+        "table_02.html": {
+          "similarity": 0.9574,
+          "word_f1": 1.0
+        },
+        "table_03.html": {
+          "similarity": 0.9,
+          "word_f1": 1.0
+        },
+        "table_04.html": {
+          "similarity": 0.918,
+          "word_f1": 1.0
+        },
+        "table_05.html": {
+          "similarity": 0.907,
+          "word_f1": 1.0
+        },
+        "table_06.html": {
+          "similarity": 0.8209,
+          "word_f1": 1.0
+        },
+        "table_with_heading_01.html": {
+          "similarity": 0.92,
+          "word_f1": 1.0
+        },
+        "table_with_heading_02.html": {
+          "similarity": 0.95,
+          "word_f1": 1.0
+        },
+        "unit_test_01.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "wiki_duck.html": {
+          "similarity": 0.9271,
+          "word_f1": 0.9814
+        }
+      }
+    },
+    {
+      "name": "kreuzberg",
+      "similarity": 0.8713,
+      "word_f1": 0.9627,
+      "documents": {
+        "example_01.html": {
+          "similarity": 0.9574,
+          "word_f1": 0.9811
+        },
+        "example_02.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "example_03.html": {
+          "similarity": 0.9796,
+          "word_f1": 1.0
+        },
+        "example_04.html": {
+          "similarity": 0.6914,
+          "word_f1": 0.8462
+        },
+        "example_05.html": {
+          "similarity": 0.6808,
+          "word_f1": 0.8431
+        },
+        "example_06.html": {
+          "similarity": 0.9066,
+          "word_f1": 0.9574
+        },
+        "example_07.html": {
+          "similarity": 0.856,
+          "word_f1": 1.0
+        },
+        "example_08.html": {
+          "similarity": 0.81,
+          "word_f1": 0.9011
+        },
+        "formatting.html": {
+          "similarity": 0.9443,
+          "word_f1": 0.9155
+        },
+        "html_code_snippets.html": {
+          "similarity": 0.9721,
+          "word_f1": 0.9825
+        },
+        "html_description_list.html": {
+          "similarity": 0.8781,
+          "word_f1": 0.9828
+        },
+        "html_heading_in_p.html": {
+          "similarity": 0.6341,
+          "word_f1": 0.8929
+        },
+        "html_inline_group_in_table_cell.html": {
+          "similarity": 0.865,
+          "word_f1": 0.9462
+        },
+        "html_nested_block_in_list_item.html": {
+          "similarity": 0.9764,
+          "word_f1": 1.0
+        },
+        "html_rich_table_cells.html": {
+          "similarity": 0.8302,
+          "word_f1": 0.9377
+        },
+        "hyperlink_01.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_02.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_03.html": {
+          "similarity": 0.9679,
+          "word_f1": 1.0
+        },
+        "hyperlink_04.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "hyperlink_05.html": {
+          "similarity": 0.7619,
+          "word_f1": 0.85
+        },
+        "hyperlink_06.html": {
+          "similarity": 0.7874,
+          "word_f1": 0.9091
+        },
+        "kvp_data_example.html": {
+          "similarity": 0.814,
+          "word_f1": 0.9128
+        },
+        "table_01.html": {
+          "similarity": 0.9385,
+          "word_f1": 1.0
+        },
+        "table_02.html": {
+          "similarity": 0.9574,
+          "word_f1": 1.0
+        },
+        "table_03.html": {
+          "similarity": 0.9,
+          "word_f1": 1.0
+        },
+        "table_04.html": {
+          "similarity": 0.918,
+          "word_f1": 1.0
+        },
+        "table_05.html": {
+          "similarity": 0.6636,
+          "word_f1": 1.0
+        },
+        "table_06.html": {
+          "similarity": 0.4412,
+          "word_f1": 1.0
+        },
+        "table_with_heading_01.html": {
+          "similarity": 0.92,
+          "word_f1": 1.0
+        },
+        "table_with_heading_02.html": {
+          "similarity": 0.95,
+          "word_f1": 1.0
+        },
+        "unit_test_01.html": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "wiki_duck.html": {
+          "similarity": 0.8803,
+          "word_f1": 0.9496
+        }
+      }
+    }
+  ]
+}

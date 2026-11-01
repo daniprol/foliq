@@ -1,0 +1,77 @@
+{
+  "format": "pdf",
+  "files": 1077,
+  "megabytes": 155.9,
+  "libraries": [
+    {
+      "name": "foliq",
+      "seconds": 18.1,
+      "failed": 11,
+      "files_per_second": 59.5,
+      "megabytes_per_second": 8.61
+    },
+    {
+      "name": "foliq (4 threads)",
+      "seconds": 6.0,
+      "failed": 11,
+      "files_per_second": 179.5,
+      "megabytes_per_second": 25.98
+    },
+    {
+      "name": "pymupdf",
+      "seconds": 10.542,
+      "failed": 14,
+      "files_per_second": 102.17,
+      "megabytes_per_second": 14.79
+    },
+    {
+      "name": "pymupdf4llm",
+      "seconds": 660.861,
+      "failed": 44,
+      "files_per_second": 1.63,
+      "megabytes_per_second": 0.24
+    },
+    {
+      "name": "pypdfium2",
+      "seconds": 4.475,
+      "failed": 24,
+      "files_per_second": 240.64,
+      "megabytes_per_second": 34.85
+    },
+    {
+      "name": "pypdf",
+      "seconds": 55.97,
+      "failed": 34,
+      "files_per_second": 19.24,
+      "megabytes_per_second": 2.79
+    },
+    {
+      "name": "pdfplumber",
+      "seconds": 138.685,
+      "failed": 32,
+      "files_per_second": 7.77,
+      "megabytes_per_second": 1.12
+    },
+    {
+      "name": "pdfminer.six",
+      "seconds": 120.641,
+      "failed": 32,
+      "files_per_second": 8.93,
+      "megabytes_per_second": 1.29
+    },
+    {
+      "name": "markitdown",
+      "seconds": 259.393,
+      "failed": 32,
+      "files_per_second": 4.15,
+      "megabytes_per_second": 0.6
+    },
+    {
+      "name": "kreuzberg",
+      "seconds": 30.929,
+      "failed": 18,
+      "files_per_second": 34.82,
+      "megabytes_per_second": 5.04
+    }
+  ]
+}

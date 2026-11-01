@@ -1,0 +1,105 @@
+{
+  "format": "pdf",
+  "documents": 1,
+  "libraries": [
+    {
+      "name": "foliq",
+      "similarity": 0.748,
+      "word_f1": 0.9378,
+      "documents": {
+        "GeoTopo-book.pdf": {
+          "similarity": 0.748,
+          "word_f1": 0.9378
+        }
+      }
+    },
+    {
+      "name": "pymupdf",
+      "similarity": 0.9614,
+      "word_f1": 0.979,
+      "documents": {
+        "GeoTopo-book.pdf": {
+          "similarity": 0.9614,
+          "word_f1": 0.979
+        }
+      }
+    },
+    {
+      "name": "pymupdf4llm",
+      "similarity": 0.8021,
+      "word_f1": 0.8212,
+      "documents": {
+        "GeoTopo-book.pdf": {
+          "similarity": 0.8021,
+          "word_f1": 0.8212
+        }
+      }
+    },
+    {
+      "name": "pypdfium2",
+      "similarity": 0.9671,
+      "word_f1": 0.9493,
+      "documents": {
+        "GeoTopo-book.pdf": {
+          "similarity": 0.9671,
+          "word_f1": 0.9493
+        }
+      }
+    },
+    {
+      "name": "pypdf",
+      "similarity": 0.9259,
+      "word_f1": 0.9041,
+      "documents": {
+        "GeoTopo-book.pdf": {
+          "similarity": 0.9259,
+          "word_f1": 0.9041
+        }
+      }
+    },
+    {
+      "name": "pdfplumber",
+      "similarity": 0.7582,
+      "word_f1": 0.8182,
+      "documents": {
+        "GeoTopo-book.pdf": {
+          "similarity": 0.7582,
+          "word_f1": 0.8182
+        }
+      }
+    },
+    {
+      "name": "pdfminer.six",
+      "similarity": 0.7235,
+      "word_f1": 0.9255,
+      "documents": {
+        "GeoTopo-book.pdf": {
+          "similarity": 0.7235,
+          "word_f1": 0.9255
+        }
+      }
+    },
+    {
+      "name": "markitdown",
+      "similarity": 0.7431,
+      "word_f1": 0.8174,
+      "documents": {
+        "GeoTopo-book.pdf": {
+          "similarity": 0.7431,
+          "word_f1": 0.8174
+        }
+      }
+    },
+    {
+      "name": "kreuzberg",
+      "similarity": 0.9337,
+      "word_f1": 0.9485,
+      "documents": {
+        "GeoTopo-book.pdf": {
+          "similarity": 0.9337,
+          "word_f1": 0.9485
+        }
+      }
+    }
+  ]
+}

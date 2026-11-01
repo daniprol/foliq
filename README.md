@@ -119,6 +119,11 @@ rules, the CLI and the Python API. Next: embeddings and hybrid search, an MCP
 server, cloud sources (S3, Azure), Postgres, and Rust plugins packaged as
 Python wheels.
 
+## Benchmarks
+
+Speed and quality against PyMuPDF, pypdf, MarkItDown, Kreuzberg, bm25s,
+tantivy and others, on public documents: see [benchmarks/](benchmarks/README.md).
+
 ## Development
 
 ```console

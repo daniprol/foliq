@@ -1,0 +1,610 @@
+{
+  "format": "docx",
+  "documents": 36,
+  "libraries": [
+    {
+      "name": "foliq",
+      "similarity": 0.902,
+      "word_f1": 0.9207,
+      "documents": {
+        "Strict.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "Transitional.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "content_control_with_picture.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "docx_checkboxes.docx": {
+          "similarity": 0.8545,
+          "word_f1": 0.9355
+        },
+        "docx_code_blocks.docx": {
+          "similarity": 0.9977,
+          "word_f1": 1.0
+        },
+        "docx_comments.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "docx_external_image.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "docx_grouped_images.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "docx_list_blank_spacer.docx": {
+          "similarity": 0.8947,
+          "word_f1": 0.8696
+        },
+        "docx_list_east_asian_num_fmt.docx": {
+          "similarity": 0.9043,
+          "word_f1": 0.8571
+        },
+        "docx_list_resumed_after_table.docx": {
+          "similarity": 0.9502,
+          "word_f1": 0.9487
+        },
+        "docx_list_resumed_numbering.docx": {
+          "similarity": 0.9589,
+          "word_f1": 0.9333
+        },
+        "docx_lists.docx": {
+          "similarity": 0.9472,
+          "word_f1": 0.9403
+        },
+        "docx_page_header_footer_first_page.docx": {
+          "similarity": 0.9863,
+          "word_f1": 1.0
+        },
+        "docx_rich_cells.docx": {
+          "similarity": 0.9293,
+          "word_f1": 0.9782
+        },
+        "docx_rich_tables_01.docx": {
+          "similarity": 0.999,
+          "word_f1": 1.0
+        },
+        "docx_sdt_table_cells.docx": {
+          "similarity": 0.6044,
+          "word_f1": 0.8148
+        },
+        "docx_vml_images.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "drawingml.docx": {
+          "similarity": 0.4253,
+          "word_f1": 0.3438
+        },
+        "equations.docx": {
+          "similarity": 0.6994,
+          "word_f1": 0.7607
+        },
+        "list_after_num_headers.docx": {
+          "similarity": 0.9542,
+          "word_f1": 0.96
+        },
+        "lorem_ipsum.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "omml_frac_superscript.docx": {
+          "similarity": 0.9173,
+          "word_f1": 0.9479
+        },
+        "omml_func_log.docx": {
+          "similarity": 0.8971,
+          "word_f1": 0.9231
+        },
+        "omml_multi_equation_paragraph.docx": {
+          "similarity": 0.8886,
+          "word_f1": 0.8846
+        },
+        "omml_text_escapes_in_math.docx": {
+          "similarity": 0.941,
+          "word_f1": 0.9697
+        },
+        "table_with_equations.docx": {
+          "similarity": 0.6721,
+          "word_f1": 0.6977
+        },
+        "tablecell.docx": {
+          "similarity": 0.8876,
+          "word_f1": 1.0
+        },
+        "test_emf_docx.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "textbox.docx": {
+          "similarity": 0.5316,
+          "word_f1": 0.6748
+        },
+        "unit_test_formatting.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "unit_test_headers.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "unit_test_headers_numbered.docx": {
+          "similarity": 0.8555,
+          "word_f1": 0.8274
+        },
+        "word_image_anchors.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "word_sample.docx": {
+          "similarity": 0.9696,
+          "word_f1": 0.9773
+        },
+        "word_tables.docx": {
+          "similarity": 0.8078,
+          "word_f1": 0.9013
+        }
+      }
+    },
+    {
+      "name": "python-docx",
+      "similarity": 0.7263,
+      "word_f1": 0.8261,
+      "documents": {
+        "Strict.docx": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
+        "Transitional.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "content_control_with_picture.docx": {
+          "similarity": 0.4773,
+          "word_f1": 0.6667
+        },
+        "docx_checkboxes.docx": {
+          "similarity": 0.2793,
+          "word_f1": 0.9355
+        },
+        "docx_code_blocks.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "docx_comments.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "docx_external_image.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "docx_grouped_images.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "docx_list_blank_spacer.docx": {
+          "similarity": 0.8496,
+          "word_f1": 0.8696
+        },
+        "docx_list_east_asian_num_fmt.docx": {
+          "similarity": 0.8473,
+          "word_f1": 0.8571
+        },
+        "docx_list_resumed_after_table.docx": {
+          "similarity": 0.7842,
+          "word_f1": 0.9487
+        },
+        "docx_list_resumed_numbering.docx": {
+          "similarity": 0.911,
+          "word_f1": 0.9333
+        },
+        "docx_lists.docx": {
+          "similarity": 0.8899,
+          "word_f1": 0.9403
+        },
+        "docx_page_header_footer_first_page.docx": {
+          "similarity": 0.9863,
+          "word_f1": 1.0
+        },
+        "docx_rich_cells.docx": {
+          "similarity": 0.3961,
+          "word_f1": 0.9364
+        },
+        "docx_rich_tables_01.docx": {
+          "similarity": 0.0828,
+          "word_f1": 0.1682
+        },
+        "docx_sdt_table_cells.docx": {
+          "similarity": 0.5385,
+          "word_f1": 0.8148
+        },
+        "docx_vml_images.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "drawingml.docx": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
+        "equations.docx": {
+          "similarity": 0.5815,
+          "word_f1": 0.7303
+        },
+        "list_after_num_headers.docx": {
+          "similarity": 0.9104,
+          "word_f1": 0.96
+        },
+        "lorem_ipsum.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "omml_frac_superscript.docx": {
+          "similarity": 0.9016,
+          "word_f1": 0.9418
+        },
+        "omml_func_log.docx": {
+          "similarity": 0.8714,
+          "word_f1": 0.9217
+        },
+        "omml_multi_equation_paragraph.docx": {
+          "similarity": 0.8592,
+          "word_f1": 0.88
+        },
+        "omml_text_escapes_in_math.docx": {
+          "similarity": 0.9213,
+          "word_f1": 0.9457
+        },
+        "table_with_equations.docx": {
+          "similarity": 0.5246,
+          "word_f1": 0.6486
+        },
+        "tablecell.docx": {
+          "similarity": 0.2921,
+          "word_f1": 0.6667
+        },
+        "test_emf_docx.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "textbox.docx": {
+          "similarity": 0.1095,
+          "word_f1": 0.1709
+        },
+        "unit_test_formatting.docx": {
+          "similarity": 0.9774,
+          "word_f1": 1.0
+        },
+        "unit_test_headers.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "unit_test_headers_numbered.docx": {
+          "similarity": 0.8253,
+          "word_f1": 0.8274
+        },
+        "word_image_anchors.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "word_sample.docx": {
+          "similarity": 0.7928,
+          "word_f1": 0.9773
+        },
+        "word_tables.docx": {
+          "similarity": 0.5375,
+          "word_f1": 1.0
+        }
+      }
+    },
+    {
+      "name": "markitdown",
+      "similarity": 0.8949,
+      "word_f1": 0.9192,
+      "documents": {
+        "Strict.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "Transitional.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "content_control_with_picture.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "docx_checkboxes.docx": {
+          "similarity": 0.939,
+          "word_f1": 1.0
+        },
+        "docx_code_blocks.docx": {
+          "similarity": 0.9953,
+          "word_f1": 1.0
+        },
+        "docx_comments.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "docx_external_image.docx": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
+        "docx_grouped_images.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "docx_list_blank_spacer.docx": {
+          "similarity": 0.9323,
+          "word_f1": 0.96
+        },
+        "docx_list_east_asian_num_fmt.docx": {
+          "similarity": 0.888,
+          "word_f1": 0.75
+        },
+        "docx_list_resumed_after_table.docx": {
+          "similarity": 0.9751,
+          "word_f1": 0.9512
+        },
+        "docx_list_resumed_numbering.docx": {
+          "similarity": 0.9658,
+          "word_f1": 0.9583
+        },
+        "docx_lists.docx": {
+          "similarity": 0.9394,
+          "word_f1": 0.9762
+        },
+        "docx_page_header_footer_first_page.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "docx_rich_cells.docx": {
+          "similarity": 0.9022,
+          "word_f1": 0.968
+        },
+        "docx_rich_tables_01.docx": {
+          "similarity": 0.9684,
+          "word_f1": 0.969
+        },
+        "docx_sdt_table_cells.docx": {
+          "similarity": 0.9341,
+          "word_f1": 1.0
+        },
+        "docx_vml_images.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "drawingml.docx": {
+          "similarity": 0.2989,
+          "word_f1": 0.3571
+        },
+        "equations.docx": {
+          "similarity": 0.5815,
+          "word_f1": 0.7303
+        },
+        "list_after_num_headers.docx": {
+          "similarity": 0.9402,
+          "word_f1": 0.9609
+        },
+        "lorem_ipsum.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "omml_frac_superscript.docx": {
+          "similarity": 0.9449,
+          "word_f1": 0.9691
+        },
+        "omml_func_log.docx": {
+          "similarity": 0.9486,
+          "word_f1": 0.9667
+        },
+        "omml_multi_equation_paragraph.docx": {
+          "similarity": 0.9062,
+          "word_f1": 0.9434
+        },
+        "omml_text_escapes_in_math.docx": {
+          "similarity": 0.9438,
+          "word_f1": 0.9697
+        },
+        "table_with_equations.docx": {
+          "similarity": 0.8934,
+          "word_f1": 0.9388
+        },
+        "tablecell.docx": {
+          "similarity": 0.7582,
+          "word_f1": 1.0
+        },
+        "test_emf_docx.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "textbox.docx": {
+          "similarity": 0.9673,
+          "word_f1": 1.0
+        },
+        "unit_test_formatting.docx": {
+          "similarity": 0.9389,
+          "word_f1": 0.9481
+        },
+        "unit_test_headers.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "unit_test_headers_numbered.docx": {
+          "similarity": 0.8623,
+          "word_f1": 0.8718
+        },
+        "word_image_anchors.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "word_sample.docx": {
+          "similarity": 0.9834,
+          "word_f1": 1.0
+        },
+        "word_tables.docx": {
+          "similarity": 0.8078,
+          "word_f1": 0.9013
+        }
+      }
+    },
+    {
+      "name": "kreuzberg",
+      "similarity": 0.9355,
+      "word_f1": 0.9581,
+      "documents": {
+        "Strict.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "Transitional.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "content_control_with_picture.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "docx_checkboxes.docx": {
+          "similarity": 0.8451,
+          "word_f1": 0.9355
+        },
+        "docx_code_blocks.docx": {
+          "similarity": 0.9977,
+          "word_f1": 1.0
+        },
+        "docx_comments.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "docx_external_image.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "docx_grouped_images.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "docx_list_blank_spacer.docx": {
+          "similarity": 0.9323,
+          "word_f1": 0.96
+        },
+        "docx_list_east_asian_num_fmt.docx": {
+          "similarity": 0.9043,
+          "word_f1": 0.8571
+        },
+        "docx_list_resumed_after_table.docx": {
+          "similarity": 0.9336,
+          "word_f1": 0.9487
+        },
+        "docx_list_resumed_numbering.docx": {
+          "similarity": 0.9932,
+          "word_f1": 0.9583
+        },
+        "docx_lists.docx": {
+          "similarity": 0.9533,
+          "word_f1": 0.9666
+        },
+        "docx_page_header_footer_first_page.docx": {
+          "similarity": 0.9863,
+          "word_f1": 1.0
+        },
+        "docx_rich_cells.docx": {
+          "similarity": 0.8618,
+          "word_f1": 0.9655
+        },
+        "docx_rich_tables_01.docx": {
+          "similarity": 0.949,
+          "word_f1": 0.969
+        },
+        "docx_sdt_table_cells.docx": {
+          "similarity": 0.9341,
+          "word_f1": 1.0
+        },
+        "docx_vml_images.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "drawingml.docx": {
+          "similarity": 0.2989,
+          "word_f1": 0.3571
+        },
+        "equations.docx": {
+          "similarity": 0.8081,
+          "word_f1": 0.9548
+        },
+        "list_after_num_headers.docx": {
+          "similarity": 0.9641,
+          "word_f1": 0.9609
+        },
+        "lorem_ipsum.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "omml_frac_superscript.docx": {
+          "similarity": 0.935,
+          "word_f1": 0.9691
+        },
+        "omml_func_log.docx": {
+          "similarity": 0.9429,
+          "word_f1": 0.9667
+        },
+        "omml_multi_equation_paragraph.docx": {
+          "similarity": 0.9296,
+          "word_f1": 0.9434
+        },
+        "omml_text_escapes_in_math.docx": {
+          "similarity": 0.941,
+          "word_f1": 0.9466
+        },
+        "table_with_equations.docx": {
+          "similarity": 0.9113,
+          "word_f1": 1.0
+        },
+        "tablecell.docx": {
+          "similarity": 0.8876,
+          "word_f1": 1.0
+        },
+        "test_emf_docx.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "textbox.docx": {
+          "similarity": 0.9812,
+          "word_f1": 0.993
+        },
+        "unit_test_formatting.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "unit_test_headers.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "unit_test_headers_numbered.docx": {
+          "similarity": 0.8667,
+          "word_f1": 0.8571
+        },
+        "word_image_anchors.docx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "word_sample.docx": {
+          "similarity": 0.9661,
+          "word_f1": 0.9926
+        },
+        "word_tables.docx": {
+          "similarity": 0.9539,
+          "word_f1": 0.9895
+        }
+      }
+    }
+  ]
+}

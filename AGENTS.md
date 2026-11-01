@@ -57,6 +57,7 @@ the core does little, does it fast, and every part can be replaced.
 | `src/*.rs`            | The Python extension `foliq._core` (PyO3)                       |
 | `src/foliq`           | The Python package: tools for agents, plugin protocols, CLI entry |
 | `tests`               | Python tests, with generated DOCX/PPTX/XLSX/PDF fixtures         |
+| `benchmarks`          | Speed and quality against other libraries, on public corpora (own uv project) |
 
 ## Key ideas
 

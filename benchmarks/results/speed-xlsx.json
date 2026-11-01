@@ -1,0 +1,49 @@
+{
+  "format": "xlsx",
+  "files": 353,
+  "megabytes": 20.0,
+  "libraries": [
+    {
+      "name": "foliq",
+      "seconds": 105.056,
+      "failed": 26,
+      "files_per_second": 3.36,
+      "megabytes_per_second": 0.19
+    },
+    {
+      "name": "foliq (4 threads)",
+      "seconds": 87.282,
+      "failed": 26,
+      "files_per_second": 4.04,
+      "megabytes_per_second": 0.23
+    },
+    {
+      "name": "openpyxl",
+      "seconds": 11.506,
+      "failed": 28,
+      "files_per_second": 30.68,
+      "megabytes_per_second": 1.73
+    },
+    {
+      "name": "python-calamine",
+      "seconds": 1.149,
+      "failed": 26,
+      "files_per_second": 307.19,
+      "megabytes_per_second": 17.36
+    },
+    {
+      "name": "markitdown",
+      "seconds": 149.974,
+      "failed": 34,
+      "files_per_second": 2.35,
+      "megabytes_per_second": 0.13
+    },
+    {
+      "name": "kreuzberg",
+      "seconds": 4.07,
+      "failed": 23,
+      "files_per_second": 86.74,
+      "megabytes_per_second": 4.9
+    }
+  ]
+}

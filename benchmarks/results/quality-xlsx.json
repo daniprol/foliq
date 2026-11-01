@@ -1,0 +1,281 @@
+{
+  "format": "xlsx",
+  "documents": 12,
+  "libraries": [
+    {
+      "name": "foliq",
+      "similarity": 0.6837,
+      "word_f1": 0.8297,
+      "documents": {
+        "xlsx_01.xlsx": {
+          "similarity": 0.5166,
+          "word_f1": 0.7701
+        },
+        "xlsx_02_sample_sales_data.xlsm": {
+          "similarity": 0.5641,
+          "word_f1": 0.5484
+        },
+        "xlsx_03_chartsheet.xlsx": {
+          "similarity": 0.5134,
+          "word_f1": 0.6939
+        },
+        "xlsx_04_inflated.xlsx": {
+          "similarity": 0.5166,
+          "word_f1": 0.7701
+        },
+        "xlsx_05_table_with_title.xlsx": {
+          "similarity": 0.9556,
+          "word_f1": 1.0
+        },
+        "xlsx_06_edge_cases_.xlsx": {
+          "similarity": 0.9712,
+          "word_f1": 1.0
+        },
+        "xlsx_07_gap_tolerance_.xlsx": {
+          "similarity": 0.4131,
+          "word_f1": 0.8991
+        },
+        "xlsx_08_one_cell_anchor.xlsx": {
+          "similarity": 0.92,
+          "word_f1": 1.0
+        },
+        "xlsx_09_section_label_header.xlsx": {
+          "similarity": 0.9447,
+          "word_f1": 1.0
+        },
+        "xlsx_10_place_in_cell.xlsx": {
+          "similarity": 0.6162,
+          "word_f1": 0.7429
+        },
+        "xlsx_comments.xlsx": {
+          "similarity": 0.3282,
+          "word_f1": 0.5324
+        },
+        "xlsx_emf.xlsx": {
+          "similarity": 0.945,
+          "word_f1": 1.0
+        }
+      }
+    },
+    {
+      "name": "openpyxl",
+      "similarity": 0.717,
+      "word_f1": 0.8592,
+      "documents": {
+        "xlsx_01.xlsx": {
+          "similarity": 0.5166,
+          "word_f1": 0.7701
+        },
+        "xlsx_02_sample_sales_data.xlsm": {
+          "similarity": 0.9636,
+          "word_f1": 0.9024
+        },
+        "xlsx_03_chartsheet.xlsx": {
+          "similarity": 0.5134,
+          "word_f1": 0.6939
+        },
+        "xlsx_04_inflated.xlsx": {
+          "similarity": 0.5166,
+          "word_f1": 0.7701
+        },
+        "xlsx_05_table_with_title.xlsx": {
+          "similarity": 0.9556,
+          "word_f1": 1.0
+        },
+        "xlsx_06_edge_cases_.xlsx": {
+          "similarity": 0.9712,
+          "word_f1": 1.0
+        },
+        "xlsx_07_gap_tolerance_.xlsx": {
+          "similarity": 0.4131,
+          "word_f1": 0.8991
+        },
+        "xlsx_08_one_cell_anchor.xlsx": {
+          "similarity": 0.92,
+          "word_f1": 1.0
+        },
+        "xlsx_09_section_label_header.xlsx": {
+          "similarity": 0.9447,
+          "word_f1": 1.0
+        },
+        "xlsx_10_place_in_cell.xlsx": {
+          "similarity": 0.6162,
+          "word_f1": 0.7429
+        },
+        "xlsx_comments.xlsx": {
+          "similarity": 0.3282,
+          "word_f1": 0.5324
+        },
+        "xlsx_emf.xlsx": {
+          "similarity": 0.945,
+          "word_f1": 1.0
+        }
+      }
+    },
+    {
+      "name": "python-calamine",
+      "similarity": 0.645,
+      "word_f1": 0.7803,
+      "documents": {
+        "xlsx_01.xlsx": {
+          "similarity": 0.3822,
+          "word_f1": 0.6022
+        },
+        "xlsx_02_sample_sales_data.xlsm": {
+          "similarity": 0.7345,
+          "word_f1": 0.8462
+        },
+        "xlsx_03_chartsheet.xlsx": {
+          "similarity": 0.4239,
+          "word_f1": 0.5574
+        },
+        "xlsx_04_inflated.xlsx": {
+          "similarity": 0.3822,
+          "word_f1": 0.6022
+        },
+        "xlsx_05_table_with_title.xlsx": {
+          "similarity": 0.8039,
+          "word_f1": 0.7931
+        },
+        "xlsx_06_edge_cases_.xlsx": {
+          "similarity": 0.9712,
+          "word_f1": 1.0
+        },
+        "xlsx_07_gap_tolerance_.xlsx": {
+          "similarity": 0.3996,
+          "word_f1": 0.8424
+        },
+        "xlsx_08_one_cell_anchor.xlsx": {
+          "similarity": 0.92,
+          "word_f1": 1.0
+        },
+        "xlsx_09_section_label_header.xlsx": {
+          "similarity": 0.9447,
+          "word_f1": 1.0
+        },
+        "xlsx_10_place_in_cell.xlsx": {
+          "similarity": 0.5455,
+          "word_f1": 0.6667
+        },
+        "xlsx_comments.xlsx": {
+          "similarity": 0.2874,
+          "word_f1": 0.454
+        },
+        "xlsx_emf.xlsx": {
+          "similarity": 0.945,
+          "word_f1": 1.0
+        }
+      }
+    },
+    {
+      "name": "markitdown",
+      "similarity": 0.554,
+      "word_f1": 0.6747,
+      "documents": {
+        "xlsx_01.xlsx": {
+          "similarity": 0.3606,
+          "word_f1": 0.5346
+        },
+        "xlsx_02_sample_sales_data.xlsm": {
+          "similarity": 0.7781,
+          "word_f1": 0.8286
+        },
+        "xlsx_03_chartsheet.xlsx": {
+          "similarity": 0.5134,
+          "word_f1": 0.6939
+        },
+        "xlsx_04_inflated.xlsx": {
+          "similarity": 0.3606,
+          "word_f1": 0.5346
+        },
+        "xlsx_05_table_with_title.xlsx": {
+          "similarity": 0.6238,
+          "word_f1": 0.7188
+        },
+        "xlsx_06_edge_cases_.xlsx": {
+          "similarity": 0.8535,
+          "word_f1": 0.9075
+        },
+        "xlsx_07_gap_tolerance_.xlsx": {
+          "similarity": 0.3483,
+          "word_f1": 0.6049
+        },
+        "xlsx_08_one_cell_anchor.xlsx": {
+          "similarity": 0.92,
+          "word_f1": 1.0
+        },
+        "xlsx_09_section_label_header.xlsx": {
+          "similarity": 0.7377,
+          "word_f1": 0.8667
+        },
+        "xlsx_10_place_in_cell.xlsx": {
+          "similarity": 0.6162,
+          "word_f1": 0.6286
+        },
+        "xlsx_comments.xlsx": {
+          "similarity": 0.233,
+          "word_f1": 0.3719
+        },
+        "xlsx_emf.xlsx": {
+          "similarity": 0.3033,
+          "word_f1": 0.4062
+        }
+      }
+    },
+    {
+      "name": "kreuzberg",
+      "similarity": 0.7087,
+      "word_f1": 0.8433,
+      "documents": {
+        "xlsx_01.xlsx": {
+          "similarity": 0.5166,
+          "word_f1": 0.7701
+        },
+        "xlsx_02_sample_sales_data.xlsm": {
+          "similarity": 0.9636,
+          "word_f1": 0.9024
+        },
+        "xlsx_03_chartsheet.xlsx": {
+          "similarity": 0.4806,
+          "word_f1": 0.6667
+        },
+        "xlsx_04_inflated.xlsx": {
+          "similarity": 0.5166,
+          "word_f1": 0.7701
+        },
+        "xlsx_05_table_with_title.xlsx": {
+          "similarity": 0.9556,
+          "word_f1": 1.0
+        },
+        "xlsx_06_edge_cases_.xlsx": {
+          "similarity": 0.9712,
+          "word_f1": 1.0
+        },
+        "xlsx_07_gap_tolerance_.xlsx": {
+          "similarity": 0.4131,
+          "word_f1": 0.8991
+        },
+        "xlsx_08_one_cell_anchor.xlsx": {
+          "similarity": 0.92,
+          "word_f1": 1.0
+        },
+        "xlsx_09_section_label_header.xlsx": {
+          "similarity": 0.9368,
+          "word_f1": 1.0
+        },
+        "xlsx_10_place_in_cell.xlsx": {
+          "similarity": 0.5566,
+          "word_f1": 0.5789
+        },
+        "xlsx_comments.xlsx": {
+          "similarity": 0.3282,
+          "word_f1": 0.5324
+        },
+        "xlsx_emf.xlsx": {
+          "similarity": 0.945,
+          "word_f1": 1.0
+        }
+      }
+    }
+  ]
+}

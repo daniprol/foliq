@@ -1,0 +1,42 @@
+{
+  "format": "docx",
+  "files": 130,
+  "megabytes": 7.9,
+  "libraries": [
+    {
+      "name": "foliq",
+      "seconds": 2.068,
+      "failed": 16,
+      "files_per_second": 62.88,
+      "megabytes_per_second": 3.83
+    },
+    {
+      "name": "foliq (4 threads)",
+      "seconds": 1.855,
+      "failed": 16,
+      "files_per_second": 70.06,
+      "megabytes_per_second": 4.27
+    },
+    {
+      "name": "python-docx",
+      "seconds": 4.234,
+      "failed": 17,
+      "files_per_second": 30.71,
+      "megabytes_per_second": 1.87
+    },
+    {
+      "name": "markitdown",
+      "seconds": 56.664,
+      "failed": 18,
+      "files_per_second": 2.29,
+      "megabytes_per_second": 0.14
+    },
+    {
+      "name": "kreuzberg",
+      "seconds": 0.955,
+      "failed": 16,
+      "files_per_second": 136.08,
+      "megabytes_per_second": 8.3
+    }
+  ]
+}
