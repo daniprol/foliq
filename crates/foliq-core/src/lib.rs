@@ -28,7 +28,7 @@ mod splitter;
 mod store;
 
 pub use chunk::Chunk;
-pub use document::{Document, Element, ElementKind, Section};
+pub use document::{Document, Element, ElementKind, Positions, Section};
 pub use embedder::Embedder;
 pub use error::{Error, Result};
 pub use parser::{Parsed, Parser};

@@ -5,17 +5,17 @@
   "libraries": [
     {
       "name": "foliq (Rust)",
-      "seconds": 97.778,
-      "failed": 26,
-      "files_per_second": 3.61,
-      "megabytes_per_second": 0.2
+      "seconds": 13.218,
+      "failed": 18,
+      "files_per_second": 26.71,
+      "megabytes_per_second": 1.51
     },
     {
       "name": "foliq (Rust, 4 threads)",
-      "seconds": 80.954,
-      "failed": 26,
-      "files_per_second": 4.36,
-      "megabytes_per_second": 0.25
+      "seconds": 8.438,
+      "failed": 18,
+      "files_per_second": 41.84,
+      "megabytes_per_second": 2.36
     },
     {
       "name": "openpyxl (Python)",

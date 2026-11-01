@@ -76,13 +76,14 @@ impl Index {
     /// The outline of a document: its sections with their numbers and sizes.
     pub fn outline(&self, reference: &str, principals: Option<&[String]>) -> Result<Outline> {
         let (document, _) = self.resolve(reference, principals)?;
+        let positions = document.positions();
         let sections = document
             .sections()
             .into_iter()
             .map(|section| OutlineSection {
                 token_count: count_tokens(&document.text[section.start..section.end]),
-                page: document.page_at(section.start),
-                line: document.line_at(section.start),
+                page: positions.page_at(section.start),
+                line: positions.line_at(section.start),
                 number: section.number,
                 title: section.title,
                 level: section.level,

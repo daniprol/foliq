@@ -41,7 +41,10 @@ def make_pptx(path: Path) -> None:
 
 
 def make_xlsx(path: Path) -> None:
+    import datetime
+
     import openpyxl
+    from openpyxl.comments import Comment
 
     workbook = openpyxl.Workbook()
     sheet = workbook.active
@@ -49,6 +52,11 @@ def make_xlsx(path: Path) -> None:
     sheet.append(["Product", "Price"])
     sheet.append(["Basic plan", 10])
     sheet.append(["Pro plan", 25.5])
+    sheet.append(["Total", "=SUM(B2:B3)"])
+    sheet["A3"].comment = Comment("Most customers pick this one.", "Ana")
+    # A second table, apart from the first, with a date.
+    sheet["D1"] = "Launch"
+    sheet["D2"] = datetime.date(2024, 3, 15)
     workbook.save(str(path))
 
 

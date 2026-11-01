@@ -177,6 +177,9 @@ impl Splitter for PythonSplitter {
             own_end: document.text.len(),
         };
         let mut chunks = Vec::new();
+        // Built once for all pieces: per piece, they would cost a pass over the document each.
+        let sections = document.sections();
+        let positions = document.positions();
         let mut cursor = 0;
         for piece in pieces.iter().filter(|piece| !piece.trim().is_empty()) {
             // Look after the previous piece first, then anywhere (pieces may overlap).
@@ -195,11 +198,29 @@ impl Splitter for PythonSplitter {
             // Leave out the whitespace around the piece, like the built-in splitter.
             let start = start + (piece.len() - piece.trim_start().len());
             let end = start + piece.trim().len();
-            let section = document.section_at(start).unwrap_or_else(|| whole_document.clone());
-            chunks.push(make_chunk(document, chunks.len(), start, end, &section));
+            let section = innermost_section(&sections, start).unwrap_or_else(|| whole_document.clone());
+            chunks.push(make_chunk(
+                document,
+                &positions,
+                chunks.len(),
+                start,
+                end,
+                &section,
+                None,
+            ));
         }
         Ok(chunks)
     }
+}
+
+/// The innermost section that contains the byte position `offset`, like
+/// `Document::section_at`, but on sections computed once.
+fn innermost_section(sections: &[Section], offset: usize) -> Option<Section> {
+    sections
+        .iter()
+        .rev() // the innermost section is the last one that contains the offset
+        .find(|section| section.start <= offset && offset < section.own_end.max(section.start + 1))
+        .cloned()
 }
 
 /// A Python object used as a [`Sink`]. It gets each change as a dict.

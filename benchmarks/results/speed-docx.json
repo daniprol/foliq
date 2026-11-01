@@ -5,17 +5,17 @@
   "libraries": [
     {
       "name": "foliq (Rust)",
-      "seconds": 1.707,
+      "seconds": 1.005,
       "failed": 16,
-      "files_per_second": 76.16,
-      "megabytes_per_second": 4.65
+      "files_per_second": 129.41,
+      "megabytes_per_second": 7.89
     },
     {
       "name": "foliq (Rust, 4 threads)",
-      "seconds": 1.713,
+      "seconds": 0.872,
       "failed": 16,
-      "files_per_second": 75.89,
-      "megabytes_per_second": 4.63
+      "files_per_second": 149.05,
+      "megabytes_per_second": 9.09
     },
     {
       "name": "python-docx (Python)",
