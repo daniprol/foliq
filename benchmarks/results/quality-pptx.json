@@ -1,0 +1,162 @@
+{
+  "format": "pptx",
+  "documents": 8,
+  "libraries": [
+    {
+      "name": "foliq",
+      "similarity": 0.756,
+      "word_f1": 0.825,
+      "documents": {
+        "powerpoint_bad_text.pptx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "powerpoint_comments.pptx": {
+          "similarity": 0.6438,
+          "word_f1": 0.7325
+        },
+        "powerpoint_issue_2663.pptx": {
+          "similarity": 0.9968,
+          "word_f1": 1.0
+        },
+        "powerpoint_malformed_pictures.pptx": {
+          "similarity": 0.7297,
+          "word_f1": 0.8125
+        },
+        "powerpoint_sample.pptx": {
+          "similarity": 0.5712,
+          "word_f1": 0.8357
+        },
+        "powerpoint_unrecognized_shape.pptx": {
+          "similarity": 0.9529,
+          "word_f1": 0.9815
+        },
+        "powerpoint_with_image.pptx": {
+          "similarity": 0.9542,
+          "word_f1": 1.0
+        },
+        "pptx_chart.pptx": {
+          "similarity": 0.199,
+          "word_f1": 0.2381
+        }
+      }
+    },
+    {
+      "name": "python-pptx",
+      "similarity": 0.7909,
+      "word_f1": 0.8516,
+      "documents": {
+        "powerpoint_bad_text.pptx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "powerpoint_comments.pptx": {
+          "similarity": 0.6375,
+          "word_f1": 0.7325
+        },
+        "powerpoint_issue_2663.pptx": {
+          "similarity": 0.9777,
+          "word_f1": 1.0
+        },
+        "powerpoint_malformed_pictures.pptx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "powerpoint_sample.pptx": {
+          "similarity": 0.5502,
+          "word_f1": 0.8421
+        },
+        "powerpoint_unrecognized_shape.pptx": {
+          "similarity": 0.963,
+          "word_f1": 1.0
+        },
+        "powerpoint_with_image.pptx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "pptx_chart.pptx": {
+          "similarity": 0.199,
+          "word_f1": 0.2381
+        }
+      }
+    },
+    {
+      "name": "markitdown",
+      "similarity": 0.7469,
+      "word_f1": 0.7892,
+      "documents": {
+        "powerpoint_bad_text.pptx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "powerpoint_comments.pptx": {
+          "similarity": 0.6375,
+          "word_f1": 0.7325
+        },
+        "powerpoint_issue_2663.pptx": {
+          "similarity": 0.9777,
+          "word_f1": 1.0
+        },
+        "powerpoint_malformed_pictures.pptx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "powerpoint_sample.pptx": {
+          "similarity": 0.6524,
+          "word_f1": 0.8341
+        },
+        "powerpoint_unrecognized_shape.pptx": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
+        "powerpoint_with_image.pptx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "pptx_chart.pptx": {
+          "similarity": 0.7073,
+          "word_f1": 0.7467
+        }
+      }
+    },
+    {
+      "name": "kreuzberg",
+      "similarity": 0.5398,
+      "word_f1": 0.6072,
+      "documents": {
+        "powerpoint_bad_text.pptx": {
+          "similarity": 0.9365,
+          "word_f1": 1.0
+        },
+        "powerpoint_comments.pptx": {
+          "similarity": 0.6375,
+          "word_f1": 0.7325
+        },
+        "powerpoint_issue_2663.pptx": {
+          "similarity": 0.9667,
+          "word_f1": 1.0
+        },
+        "powerpoint_malformed_pictures.pptx": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
+        "powerpoint_sample.pptx": {
+          "similarity": 0.8011,
+          "word_f1": 0.8867
+        },
+        "powerpoint_unrecognized_shape.pptx": {
+          "similarity": 0.7778,
+          "word_f1": 1.0
+        },
+        "powerpoint_with_image.pptx": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
+        "pptx_chart.pptx": {
+          "similarity": 0.199,
+          "word_f1": 0.2381
+        }
+      }
+    }
+  ]
+}

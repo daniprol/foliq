@@ -79,3 +79,7 @@ addopts = ["--strict-markers", "--strict-config"]
 [build-system]
 requires = ["maturin>=1.9.4,<2.0"]  # 1.9.4 writes the PEP 639 license metadata
 build-backend = "maturin"
+
+[tool.ty.src]
+# benchmarks/ is its own uv project with its own dependencies; it is not type-checked here.
+exclude = ["benchmarks"]

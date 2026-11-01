@@ -1,0 +1,25 @@
+[project]
+name = "foliq-benchmarks"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "foliq",
+    # PDF
+    "pymupdf", "pymupdf4llm", "pypdfium2", "pypdf", "pdfplumber", "pdfminer.six",
+    # Office
+    "python-docx", "python-pptx", "openpyxl", "python-calamine",
+    # HTML
+    "html2text", "trafilatura", "beautifulsoup4",
+    # Many formats
+    "markitdown[pdf,docx,pptx,xlsx]", "kreuzberg",
+    # Search
+    "bm25s[core]", "PyStemmer", "rank-bm25", "tantivy",
+    # Scoring and charts
+    "rapidfuzz", "matplotlib",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+foliq = { path = "..", editable = false }
