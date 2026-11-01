@@ -11,7 +11,7 @@ dependencies = [
     # HTML
     "html2text", "trafilatura", "beautifulsoup4",
     # Many formats
-    "markitdown[pdf,docx,pptx,xlsx]", "kreuzberg",
+    "markitdown[pdf,docx,pptx,xlsx]", "kreuzberg", "extractous",
     # Search
     "bm25s[core]", "PyStemmer", "rank-bm25", "tantivy",
     # Scoring and charts

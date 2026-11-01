@@ -1,6 +1,7 @@
 """The benchmark command line.
 
 uv run python -m bench download          # fetch the corpora (about 400 MB)
+uv run python -m bench tools             # build the Go/Rust/Node tools, fetch Apache Tika
 uv run python -m bench all               # run everything, then draw the charts
 uv run python -m bench quality [pdf ...] # one benchmark, some formats
 uv run python -m bench speed [pdf ...]
@@ -22,10 +23,12 @@ def main() -> None:
     if command in ("search", "all"):
         os.environ.setdefault("RAYON_NUM_THREADS", "1")
 
-    from bench import charts, datasets, parsing, search
+    from bench import charts, datasets, parsing, search, tools
 
     if command == "download":
         datasets.download_all()
+    elif command == "tools":
+        tools.install()
     elif command == "quality":
         for file_format in formats or QUALITY_FORMATS:
             parsing.quality(file_format)

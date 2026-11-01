@@ -3,7 +3,7 @@
   "documents": 12,
   "libraries": [
     {
-      "name": "foliq",
+      "name": "foliq (Rust)",
       "similarity": 0.6837,
       "word_f1": 0.8297,
       "documents": {
@@ -58,7 +58,7 @@
       }
     },
     {
-      "name": "openpyxl",
+      "name": "openpyxl (Python)",
       "similarity": 0.717,
       "word_f1": 0.8592,
       "documents": {
@@ -113,7 +113,7 @@
       }
     },
     {
-      "name": "python-calamine",
+      "name": "python-calamine (Rust)",
       "similarity": 0.645,
       "word_f1": 0.7803,
       "documents": {
@@ -168,7 +168,7 @@
       }
     },
     {
-      "name": "markitdown",
+      "name": "markitdown (Python)",
       "similarity": 0.554,
       "word_f1": 0.6747,
       "documents": {
@@ -223,7 +223,7 @@
       }
     },
     {
-      "name": "kreuzberg",
+      "name": "kreuzberg (Rust)",
       "similarity": 0.7087,
       "word_f1": 0.8433,
       "documents": {
@@ -274,6 +274,281 @@
         "xlsx_emf.xlsx": {
           "similarity": 0.945,
           "word_f1": 1.0
+        }
+      }
+    },
+    {
+      "name": "extractous (Rust)",
+      "similarity": 0.4678,
+      "word_f1": 0.5332,
+      "documents": {
+        "xlsx_01.xlsx": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
+        "xlsx_02_sample_sales_data.xlsm": {
+          "similarity": 0.9894,
+          "word_f1": 1.0
+        },
+        "xlsx_03_chartsheet.xlsx": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
+        "xlsx_04_inflated.xlsx": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
+        "xlsx_05_table_with_title.xlsx": {
+          "similarity": 0.9556,
+          "word_f1": 1.0
+        },
+        "xlsx_06_edge_cases_.xlsx": {
+          "similarity": 0.9712,
+          "word_f1": 1.0
+        },
+        "xlsx_07_gap_tolerance_.xlsx": {
+          "similarity": 0.4041,
+          "word_f1": 0.8035
+        },
+        "xlsx_08_one_cell_anchor.xlsx": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
+        "xlsx_09_section_label_header.xlsx": {
+          "similarity": 0.9447,
+          "word_f1": 1.0
+        },
+        "xlsx_10_place_in_cell.xlsx": {
+          "similarity": 0.5364,
+          "word_f1": 0.6667
+        },
+        "xlsx_comments.xlsx": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
+        "xlsx_emf.xlsx": {
+          "similarity": 0.8117,
+          "word_f1": 0.9286
+        }
+      }
+    },
+    {
+      "name": "excelize (Go)",
+      "similarity": 0.7184,
+      "word_f1": 0.8604,
+      "documents": {
+        "xlsx_01.xlsx": {
+          "similarity": 0.5166,
+          "word_f1": 0.7701
+        },
+        "xlsx_02_sample_sales_data.xlsm": {
+          "similarity": 0.9894,
+          "word_f1": 1.0
+        },
+        "xlsx_03_chartsheet.xlsx": {
+          "similarity": 0.5134,
+          "word_f1": 0.6939
+        },
+        "xlsx_04_inflated.xlsx": {
+          "similarity": 0.5166,
+          "word_f1": 0.7701
+        },
+        "xlsx_05_table_with_title.xlsx": {
+          "similarity": 0.9556,
+          "word_f1": 1.0
+        },
+        "xlsx_06_edge_cases_.xlsx": {
+          "similarity": 0.9712,
+          "word_f1": 1.0
+        },
+        "xlsx_07_gap_tolerance_.xlsx": {
+          "similarity": 0.4041,
+          "word_f1": 0.8152
+        },
+        "xlsx_08_one_cell_anchor.xlsx": {
+          "similarity": 0.92,
+          "word_f1": 1.0
+        },
+        "xlsx_09_section_label_header.xlsx": {
+          "similarity": 0.9447,
+          "word_f1": 1.0
+        },
+        "xlsx_10_place_in_cell.xlsx": {
+          "similarity": 0.6162,
+          "word_f1": 0.7429
+        },
+        "xlsx_comments.xlsx": {
+          "similarity": 0.3282,
+          "word_f1": 0.5324
+        },
+        "xlsx_emf.xlsx": {
+          "similarity": 0.945,
+          "word_f1": 1.0
+        }
+      }
+    },
+    {
+      "name": "officeparser (JS)",
+      "similarity": 0.4666,
+      "word_f1": 0.6347,
+      "documents": {
+        "xlsx_01.xlsx": {
+          "similarity": 0.2713,
+          "word_f1": 0.6018
+        },
+        "xlsx_02_sample_sales_data.xlsm": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
+        "xlsx_03_chartsheet.xlsx": {
+          "similarity": 0.4269,
+          "word_f1": 0.6383
+        },
+        "xlsx_04_inflated.xlsx": {
+          "similarity": 0.2877,
+          "word_f1": 0.6018
+        },
+        "xlsx_05_table_with_title.xlsx": {
+          "similarity": 0.8296,
+          "word_f1": 0.913
+        },
+        "xlsx_06_edge_cases_.xlsx": {
+          "similarity": 0.7955,
+          "word_f1": 0.9881
+        },
+        "xlsx_07_gap_tolerance_.xlsx": {
+          "similarity": 0.2781,
+          "word_f1": 0.4407
+        },
+        "xlsx_08_one_cell_anchor.xlsx": {
+          "similarity": 0.78,
+          "word_f1": 0.9231
+        },
+        "xlsx_09_section_label_header.xlsx": {
+          "similarity": 0.3772,
+          "word_f1": 0.4512
+        },
+        "xlsx_10_place_in_cell.xlsx": {
+          "similarity": 0.5253,
+          "word_f1": 0.6667
+        },
+        "xlsx_comments.xlsx": {
+          "similarity": 0.3163,
+          "word_f1": 0.5217
+        },
+        "xlsx_emf.xlsx": {
+          "similarity": 0.711,
+          "word_f1": 0.8696
+        }
+      }
+    },
+    {
+      "name": "SheetJS (JS)",
+      "similarity": 0.5894,
+      "word_f1": 0.8604,
+      "documents": {
+        "xlsx_01.xlsx": {
+          "similarity": 0.3293,
+          "word_f1": 0.7701
+        },
+        "xlsx_02_sample_sales_data.xlsm": {
+          "similarity": 0.9062,
+          "word_f1": 1.0
+        },
+        "xlsx_03_chartsheet.xlsx": {
+          "similarity": 0.4507,
+          "word_f1": 0.6939
+        },
+        "xlsx_04_inflated.xlsx": {
+          "similarity": 0.0001,
+          "word_f1": 0.7701
+        },
+        "xlsx_05_table_with_title.xlsx": {
+          "similarity": 0.7857,
+          "word_f1": 1.0
+        },
+        "xlsx_06_edge_cases_.xlsx": {
+          "similarity": 0.9012,
+          "word_f1": 1.0
+        },
+        "xlsx_07_gap_tolerance_.xlsx": {
+          "similarity": 0.3062,
+          "word_f1": 0.8152
+        },
+        "xlsx_08_one_cell_anchor.xlsx": {
+          "similarity": 0.86,
+          "word_f1": 1.0
+        },
+        "xlsx_09_section_label_header.xlsx": {
+          "similarity": 0.8498,
+          "word_f1": 1.0
+        },
+        "xlsx_10_place_in_cell.xlsx": {
+          "similarity": 0.5455,
+          "word_f1": 0.7429
+        },
+        "xlsx_comments.xlsx": {
+          "similarity": 0.2211,
+          "word_f1": 0.5324
+        },
+        "xlsx_emf.xlsx": {
+          "similarity": 0.9174,
+          "word_f1": 1.0
+        }
+      }
+    },
+    {
+      "name": "Apache Tika (Java)",
+      "similarity": 0.6912,
+      "word_f1": 0.871,
+      "documents": {
+        "xlsx_01.xlsx": {
+          "similarity": 0.5483,
+          "word_f1": 0.9188
+        },
+        "xlsx_02_sample_sales_data.xlsm": {
+          "similarity": 0.9894,
+          "word_f1": 1.0
+        },
+        "xlsx_03_chartsheet.xlsx": {
+          "similarity": 0.6832,
+          "word_f1": 0.9185
+        },
+        "xlsx_04_inflated.xlsx": {
+          "similarity": 0.5483,
+          "word_f1": 0.9188
+        },
+        "xlsx_05_table_with_title.xlsx": {
+          "similarity": 0.9556,
+          "word_f1": 1.0
+        },
+        "xlsx_06_edge_cases_.xlsx": {
+          "similarity": 0.8708,
+          "word_f1": 0.948
+        },
+        "xlsx_07_gap_tolerance_.xlsx": {
+          "similarity": 0.4041,
+          "word_f1": 0.8035
+        },
+        "xlsx_08_one_cell_anchor.xlsx": {
+          "similarity": 0.7368,
+          "word_f1": 0.875
+        },
+        "xlsx_09_section_label_header.xlsx": {
+          "similarity": 0.9447,
+          "word_f1": 1.0
+        },
+        "xlsx_10_place_in_cell.xlsx": {
+          "similarity": 0.5364,
+          "word_f1": 0.6667
+        },
+        "xlsx_comments.xlsx": {
+          "similarity": 0.2655,
+          "word_f1": 0.4735
+        },
+        "xlsx_emf.xlsx": {
+          "similarity": 0.8117,
+          "word_f1": 0.9286
         }
       }
     }

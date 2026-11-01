@@ -3,7 +3,7 @@
   "documents": 8,
   "libraries": [
     {
-      "name": "foliq",
+      "name": "foliq (Rust)",
       "similarity": 0.756,
       "word_f1": 0.825,
       "documents": {
@@ -42,7 +42,7 @@
       }
     },
     {
-      "name": "python-pptx",
+      "name": "python-pptx (Python)",
       "similarity": 0.7909,
       "word_f1": 0.8516,
       "documents": {
@@ -81,7 +81,7 @@
       }
     },
     {
-      "name": "markitdown",
+      "name": "markitdown (Python)",
       "similarity": 0.7469,
       "word_f1": 0.7892,
       "documents": {
@@ -120,7 +120,7 @@
       }
     },
     {
-      "name": "kreuzberg",
+      "name": "kreuzberg (Rust)",
       "similarity": 0.5398,
       "word_f1": 0.6072,
       "documents": {
@@ -155,6 +155,123 @@
         "pptx_chart.pptx": {
           "similarity": 0.199,
           "word_f1": 0.2381
+        }
+      }
+    },
+    {
+      "name": "extractous (Rust)",
+      "similarity": 0.6527,
+      "word_f1": 0.71,
+      "documents": {
+        "powerpoint_bad_text.pptx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "powerpoint_comments.pptx": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        },
+        "powerpoint_issue_2663.pptx": {
+          "similarity": 0.9777,
+          "word_f1": 1.0
+        },
+        "powerpoint_malformed_pictures.pptx": {
+          "similarity": 0.8804,
+          "word_f1": 0.9286
+        },
+        "powerpoint_sample.pptx": {
+          "similarity": 0.5502,
+          "word_f1": 0.8421
+        },
+        "powerpoint_unrecognized_shape.pptx": {
+          "similarity": 0.963,
+          "word_f1": 1.0
+        },
+        "powerpoint_with_image.pptx": {
+          "similarity": 0.8503,
+          "word_f1": 0.9091
+        },
+        "pptx_chart.pptx": {
+          "similarity": 0.0,
+          "word_f1": 0.0
+        }
+      }
+    },
+    {
+      "name": "officeparser (JS)",
+      "similarity": 0.6485,
+      "word_f1": 0.7282,
+      "documents": {
+        "powerpoint_bad_text.pptx": {
+          "similarity": 0.472,
+          "word_f1": 0.6275
+        },
+        "powerpoint_comments.pptx": {
+          "similarity": 0.6048,
+          "word_f1": 0.7149
+        },
+        "powerpoint_issue_2663.pptx": {
+          "similarity": 0.8876,
+          "word_f1": 0.9503
+        },
+        "powerpoint_malformed_pictures.pptx": {
+          "similarity": 1.0,
+          "word_f1": 1.0
+        },
+        "powerpoint_sample.pptx": {
+          "similarity": 0.2689,
+          "word_f1": 0.3925
+        },
+        "powerpoint_unrecognized_shape.pptx": {
+          "similarity": 0.8775,
+          "word_f1": 0.955
+        },
+        "powerpoint_with_image.pptx": {
+          "similarity": 0.7862,
+          "word_f1": 0.9302
+        },
+        "pptx_chart.pptx": {
+          "similarity": 0.2908,
+          "word_f1": 0.2553
+        }
+      }
+    },
+    {
+      "name": "Apache Tika (Java)",
+      "similarity": 0.7063,
+      "word_f1": 0.8191,
+      "documents": {
+        "powerpoint_bad_text.pptx": {
+          "similarity": 0.8872,
+          "word_f1": 0.8889
+        },
+        "powerpoint_comments.pptx": {
+          "similarity": 0.8166,
+          "word_f1": 0.8881
+        },
+        "powerpoint_issue_2663.pptx": {
+          "similarity": 0.9777,
+          "word_f1": 1.0
+        },
+        "powerpoint_malformed_pictures.pptx": {
+          "similarity": 0.4765,
+          "word_f1": 0.65
+        },
+        "powerpoint_sample.pptx": {
+          "similarity": 0.5502,
+          "word_f1": 0.8421
+        },
+        "powerpoint_unrecognized_shape.pptx": {
+          "similarity": 0.963,
+          "word_f1": 1.0
+        },
+        "powerpoint_with_image.pptx": {
+          "similarity": 0.5144,
+          "word_f1": 0.6667
+        },
+        "pptx_chart.pptx": {
+          "similarity": 0.4644,
+          "word_f1": 0.6168
         }
       }
     }

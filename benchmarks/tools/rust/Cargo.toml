@@ -1,0 +1,13 @@
+# Rust PDF extractors for the foliq benchmarks (see ../../bench/tools.py).
+# Its own workspace, so it is not built with foliq.
+[workspace]
+
+[package]
+name = "foliq-bench-rust"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+pdf-extract = "0.12.1"
+lopdf = "0.46.0"
