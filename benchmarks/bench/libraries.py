@@ -1,8 +1,8 @@
 """One `extract(path) -> text` function per library, with the formats it reads.
 
 Each library is used the way its README shows, with default options, asking for
-Markdown when it can produce it. Competitors from other languages (command-line
-tools, Go, Rust, Java and JavaScript libraries) are run through `tools.py`.
+Markdown when it can produce it. Competitors that are not Python packages
+(pdftotext, pandoc, Apache Tika) are run through `tools.py`.
 foliq is not here: it indexes whole folders, so `parsing.py` runs it
 separately (see `run_foliq`).
 """
@@ -51,12 +51,6 @@ def pymupdf(path: Path) -> str:
         return "\n".join(page.get_text() for page in document)
 
 
-def pymupdf4llm(path: Path) -> str:
-    import pymupdf4llm
-
-    return pymupdf4llm.to_markdown(str(path), show_progress=False)
-
-
 def pypdfium2(path: Path) -> str:
     import pypdfium2
 
@@ -79,12 +73,6 @@ def pdfplumber(path: Path) -> str:
 
     with pdfplumber.open(path) as document:
         return "\n".join(page.extract_text() or "" for page in document.pages)
-
-
-def pdfminer(path: Path) -> str:
-    from pdfminer.high_level import extract_text
-
-    return extract_text(path)
 
 
 def markitdown(path: Path) -> str:
@@ -172,18 +160,6 @@ def beautifulsoup(path: Path) -> str:
     return BeautifulSoup(path.read_text(errors="replace"), "html.parser").get_text("\n")
 
 
-def extractous(path: Path) -> str:
-    from extractous import Extractor
-
-    text, _metadata = Extractor().extract_file_to_string(str(path))
-    return text
-
-
-def mutool(path: Path) -> str:
-    # MuPDF's own command line, the engine behind PyMuPDF.
-    return tools.run(["mutool", "draw", "-q", "-F", "txt", "-o", "-", str(path)])
-
-
 def pdftotext(path: Path) -> str:
     # Poppler, the PDF engine of most Linux desktops.
     return tools.run(["pdftotext", "-q", "-enc", "UTF-8", str(path), "-"])
@@ -194,53 +170,33 @@ def pandoc(path: Path) -> str:
     return tools.run(["pandoc", "--to", "gfm-raw_html", "--wrap", "none", str(path)])
 
 
-def go_tool(name: str) -> Callable[[Path], str]:
-    return lambda path: tools.run([str(tools.GO_BINARY), name, str(path)])
-
-
-def rust_tool(name: str) -> Callable[[Path], str]:
-    return lambda path: tools.run([str(tools.RUST_BINARY), name, str(path)])
-
-
-def node_tool(name: str) -> Callable[[Path], str]:
-    return lambda path: tools.node(name, path)
-
-
-PYTHON_LIBRARIES = [
+# Per format: the libraries everyone knows, and the fastest ones (for a fair
+# speed comparison). Others were tried and left out to keep the charts readable:
+# pymupdf4llm, pdfminer.six (pdfplumber is built on it), mutool (same engine as
+# PyMuPDF), pdf.js, pdf-extract, lopdf, mammoth, SheetJS, excelize,
+# officeparser and extractous.
+LIBRARIES = [
+    # PDF
     Library("pymupdf", ["pdf"], pymupdf, language="C"),
-    Library("pymupdf4llm", ["pdf"], pymupdf4llm, language="C"),
     Library("pypdfium2", ["pdf"], pypdfium2, language="C++"),
     Library("pypdf", ["pdf"], pypdf),
     Library("pdfplumber", ["pdf"], pdfplumber),
-    Library("pdfminer.six", ["pdf"], pdfminer),
+    Library("pdftotext", ["pdf"], pdftotext, language="C++", requires="pdftotext"),
+    # Office
     Library("python-docx", ["docx"], python_docx),
     Library("python-pptx", ["pptx"], python_pptx),
     Library("openpyxl", ["xlsx"], openpyxl),
     Library("python-calamine", ["xlsx"], python_calamine, language="Rust"),
+    # HTML
+    Library("beautifulsoup4", ["html"], beautifulsoup),
     Library("html2text", ["html"], html2text),
     Library("trafilatura", ["html"], trafilatura),
-    Library("beautifulsoup4", ["html"], beautifulsoup),
+    Library("pandoc", ["docx", "html"], pandoc, language="Haskell", requires="pandoc"),
+    # Many formats
     Library("markitdown", ["pdf", "docx", "pptx", "xlsx", "html"], markitdown),
     Library("kreuzberg", ["pdf", "docx", "pptx", "xlsx", "html"], kreuzberg, language="Rust"),
-    Library("extractous", ["pdf", "docx", "pptx", "xlsx", "html"], extractous, language="Rust"),
+    Library("Apache Tika", ["pdf", "docx", "pptx", "xlsx"], tools.tika, language="Java", requires="tika"),
 ]
-
-OTHER_LANGUAGES = [
-    Library("mutool", ["pdf"], mutool, language="C", requires="mutool"),
-    Library("pdftotext", ["pdf"], pdftotext, language="C++", requires="pdftotext"),
-    Library("pandoc", ["docx", "html"], pandoc, language="Haskell", requires="pandoc"),
-    Library("pdf-extract", ["pdf"], rust_tool("pdf-extract"), language="Rust", requires=str(tools.RUST_BINARY)),
-    Library("lopdf", ["pdf"], rust_tool("lopdf"), language="Rust", requires=str(tools.RUST_BINARY)),
-    Library("ledongthuc/pdf", ["pdf"], go_tool("ledongthuc-pdf"), language="Go", requires=str(tools.GO_BINARY)),
-    Library("excelize", ["xlsx"], go_tool("excelize"), language="Go", requires=str(tools.GO_BINARY)),
-    Library("pdf.js", ["pdf"], node_tool("pdfjs"), language="JS", requires="node"),
-    Library("officeparser", ["pdf", "docx", "pptx", "xlsx"], node_tool("officeparser"), language="JS", requires="node"),
-    Library("mammoth", ["docx"], node_tool("mammoth"), language="JS", requires="node"),
-    Library("SheetJS", ["xlsx"], node_tool("sheetjs"), language="JS", requires="node"),
-    Library("Apache Tika", ["pdf", "docx", "pptx", "xlsx", "html"], tools.tika, language="Java", requires="tika"),
-]
-
-LIBRARIES = PYTHON_LIBRARIES + OTHER_LANGUAGES
 
 BY_NAME = {library.name: library for library in LIBRARIES}
 
