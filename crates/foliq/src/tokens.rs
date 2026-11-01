@@ -10,9 +10,37 @@ pub fn tokenizer() -> &'static CoreBPE {
     tiktoken_rs::o200k_base_singleton()
 }
 
+/// Words longer than this (in bytes) are counted in pieces. The tokenizer
+/// takes time that grows with the square of a word's length, so one 30,000-
+/// character "word" (a hash, base64, a broken file) would take a fifth of a
+/// second. Real words are far shorter, so their counts don't change.
+const LONGEST_WORD: usize = 200;
+
 /// The number of tokens in `text`.
 pub fn count_tokens(text: &str) -> usize {
-    tokenizer().count_ordinary(text)
+    let mut total = 0;
+    // Where the uncounted text starts, and where the current word started.
+    let mut piece_start = 0;
+    let mut word_start = 0;
+    for (index, character) in text.char_indices() {
+        if character.is_whitespace() {
+            word_start = index + character.len_utf8();
+        } else if index - word_start >= LONGEST_WORD {
+            total += tokenizer().count_ordinary(&text[piece_start..index]);
+            piece_start = index;
+            word_start = index;
+        }
+    }
+    total + tokenizer().count_ordinary(&text[piece_start..])
+}
+
+/// Counts tokens for the `text-splitter` crate, with [`count_tokens`].
+pub struct TokenCounter;
+
+impl text_splitter::ChunkSizer for TokenCounter {
+    fn size(&self, chunk: &str) -> usize {
+        count_tokens(chunk)
+    }
 }
 
 /// The longest start of `text` that fits in `budget` tokens, cut at a line end

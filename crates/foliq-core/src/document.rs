@@ -70,6 +70,31 @@ pub enum ElementKind {
     FrontMatter,
 }
 
+/// Where each line and page of a document starts, built once with
+/// [`Document::positions`]. Each lookup is a binary search (like Python's
+/// `bisect`), so finding the lines of every chunk stays fast in a big document.
+#[derive(Debug, Clone)]
+pub struct Positions {
+    /// The byte position where each line starts. Line 1 starts at 0.
+    line_starts: Vec<usize>,
+    /// `(byte position, page number)` of each page break, in text order.
+    page_starts: Vec<(usize, u32)>,
+}
+
+impl Positions {
+    /// The line number (counting from 1) at the byte position `offset`.
+    pub fn line_at(&self, offset: usize) -> usize {
+        // The number of lines that start at or before `offset`.
+        self.line_starts.partition_point(|&start| start <= offset)
+    }
+
+    /// The page at the byte position `offset`: the last page break at or before it.
+    pub fn page_at(&self, offset: usize) -> Option<u32> {
+        let count = self.page_starts.partition_point(|&(start, _)| start <= offset);
+        count.checked_sub(1).map(|index| self.page_starts[index].1)
+    }
+}
+
 /// A heading and everything under it, computed from the heading elements.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Section {
@@ -172,25 +197,39 @@ impl Document {
     }
 
     /// The page (or slide) at the byte position `offset`, for formats with pages.
+    ///
+    /// For many lookups, build [`Document::positions`] once instead.
     pub fn page_at(&self, offset: usize) -> Option<u32> {
-        self.elements
-            .iter()
-            .take_while(|element| element.start <= offset)
-            .filter_map(|element| match element.kind {
-                ElementKind::PageBreak { page } => Some(page),
-                _ => None,
-            })
-            .last()
+        self.positions().page_at(offset)
     }
 
     /// The line number (counting from 1) at the byte position `offset`.
+    ///
+    /// For many lookups, build [`Document::positions`] once instead.
     pub fn line_at(&self, offset: usize) -> usize {
-        let offset = offset.min(self.text.len());
-        self.text.as_bytes()[..offset]
+        self.positions().line_at(offset)
+    }
+
+    /// An index of where lines and pages start, to look up many positions fast.
+    pub fn positions(&self) -> Positions {
+        let mut line_starts = vec![0];
+        for (offset, byte) in self.text.bytes().enumerate() {
+            if byte == b'\n' {
+                line_starts.push(offset + 1);
+            }
+        }
+        let page_starts = self
+            .elements
             .iter()
-            .filter(|&&byte| byte == b'\n')
-            .count()
-            + 1
+            .filter_map(|element| match element.kind {
+                ElementKind::PageBreak { page } => Some((element.start, page)),
+                _ => None,
+            })
+            .collect();
+        Positions {
+            line_starts,
+            page_starts,
+        }
     }
 
     /// Whether someone with these principals may see the document.

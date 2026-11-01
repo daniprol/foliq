@@ -59,7 +59,7 @@ BM25 on BEIR SciFact: 5,183 abstracts, 300 queries. One thread for everyone.
 
 - ✅ **Search quality is on par with the best BM25s** (nDCG@10 0.688, the
   published BM25 baseline is 0.665).
-- ✅ **Office files are fast**: DOCX and PPTX at 60–200 files/s, 2x
+- ✅ **Office files are fast**: DOCX and PPTX at 130–210 files/s, 2x
   python-docx and python-pptx, 10–30x MarkItDown. Kreuzberg is faster still.
 - ✅ **Fewest failures on broken PDFs** (11 of 1,077, PyMuPDF 14, pypdf 34).
 - ⚠️ **PDF text order**: 86% on 14 PDFs (13 arXiv papers, one book) vs 95% for
@@ -70,9 +70,12 @@ BM25 on BEIR SciFact: 5,183 abstracts, 300 queries. One thread for everyone.
   PyMuPDF's rate on one thread even though foliq's time includes indexing.
   foliq makes up for it on many cores (160 files/s on 4). It is faster than
   pdftotext and Tika, which pay a per-file cost.
-- ⚠️ **Large spreadsheets are slow**: one 5,000-row sheet takes most of the
-  XLSX time, in the splitter; foliq is the slowest XLSX reader here except
-  MarkItDown. Next to fix.
+- ✅ **Best XLSX text** (76%, openpyxl 72%, Kreuzberg 71%): dates as dates,
+  one table per block of cells, pictures in cells, comments and charts.
+- ⚠️ **XLSX speed** (27 files/s on one thread, 42 on 4) is behind
+  python-calamine and Kreuzberg, which only extract text. Two files take most
+  of foliq's time: a 5,000 × 126 sheet that becomes 6 million tokens to index,
+  and a test file that repeats a 32,000-character text in every cell.
 - ⚠️ **Queries take ~14 ms** vs ~1 ms for in-memory engines: each answer is a
   cited chunk read from SQLite, not just an id.
 

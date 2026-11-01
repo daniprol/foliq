@@ -109,7 +109,7 @@ plugins work through the Python API.
 | HTML               | html, htm, xhtml         | main content, headings, lists, tables        |
 | Word               | docx                     | headings from styles, lists, tables          |
 | PowerPoint         | pptx                     | one section per slide, with speaker notes    |
-| Excel, OpenDocument| xlsx, xlsm, xls, ods     | one table per sheet                          |
+| Excel, OpenDocument| xlsx, xlsm, xlsb, xls, ods | tables, formulas, comments, per sheet      |
 | PDF                | pdf                      | text per page ([pdf_oxide](https://crates.io/crates/pdf_oxide), pure Rust) |
 
 Scanned PDFs need OCR, which is not built in yet.

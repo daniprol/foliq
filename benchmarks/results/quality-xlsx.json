@@ -4,36 +4,36 @@
   "libraries": [
     {
       "name": "foliq (Rust)",
-      "similarity": 0.6837,
-      "word_f1": 0.8297,
+      "similarity": 0.7583,
+      "word_f1": 0.8705,
       "documents": {
         "xlsx_01.xlsx": {
-          "similarity": 0.5166,
-          "word_f1": 0.7701
+          "similarity": 0.5019,
+          "word_f1": 0.7735
         },
         "xlsx_02_sample_sales_data.xlsm": {
-          "similarity": 0.5641,
-          "word_f1": 0.5484
+          "similarity": 0.7517,
+          "word_f1": 0.8215
         },
         "xlsx_03_chartsheet.xlsx": {
-          "similarity": 0.5134,
-          "word_f1": 0.6939
+          "similarity": 0.5858,
+          "word_f1": 0.6875
         },
         "xlsx_04_inflated.xlsx": {
-          "similarity": 0.5166,
-          "word_f1": 0.7701
+          "similarity": 0.5019,
+          "word_f1": 0.7735
         },
         "xlsx_05_table_with_title.xlsx": {
           "similarity": 0.9556,
           "word_f1": 1.0
         },
         "xlsx_06_edge_cases_.xlsx": {
-          "similarity": 0.9712,
-          "word_f1": 1.0
+          "similarity": 0.937,
+          "word_f1": 0.9751
         },
         "xlsx_07_gap_tolerance_.xlsx": {
-          "similarity": 0.4131,
-          "word_f1": 0.8991
+          "similarity": 0.6639,
+          "word_f1": 0.7553
         },
         "xlsx_08_one_cell_anchor.xlsx": {
           "similarity": 0.92,
@@ -45,11 +45,11 @@
         },
         "xlsx_10_place_in_cell.xlsx": {
           "similarity": 0.6162,
-          "word_f1": 0.7429
+          "word_f1": 0.8125
         },
         "xlsx_comments.xlsx": {
-          "similarity": 0.3282,
-          "word_f1": 0.5324
+          "similarity": 0.7755,
+          "word_f1": 0.8466
         },
         "xlsx_emf.xlsx": {
           "similarity": 0.945,

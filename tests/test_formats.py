@@ -24,7 +24,14 @@ def test_pptx_has_one_section_per_slide_with_notes(index: foliq.Index) -> None:
 
 
 def test_xlsx_sheets_become_tables(index: foliq.Index) -> None:
-    assert "| Pro plan | 25.5 |" in index.read("prices.xlsx")["text"]
+    text = index.read("prices.xlsx")["text"]
+    assert "| Pro plan | 25.5 |" in text
+    # Separate blocks of cells are separate tables, and dates read as dates.
+    assert "## A1:B4" in text
+    assert "## D1:D2" in text
+    assert "| 2024-03-15 |" in text
+    assert "B4 (Price) = SUM(B2:B3)" in text
+    assert "A3 (Ana): Most customers pick this one." in text
 
 
 def test_pdf_pages_are_tracked(index: foliq.Index) -> None:

@@ -5,17 +5,17 @@
   "libraries": [
     {
       "name": "foliq (Rust)",
-      "seconds": 0.705,
+      "seconds": 0.642,
       "failed": 11,
-      "files_per_second": 134.74,
-      "megabytes_per_second": 32.77
+      "files_per_second": 148.0,
+      "megabytes_per_second": 36.0
     },
     {
       "name": "foliq (Rust, 4 threads)",
-      "seconds": 0.618,
+      "seconds": 0.449,
       "failed": 11,
-      "files_per_second": 153.8,
-      "megabytes_per_second": 37.41
+      "files_per_second": 211.78,
+      "megabytes_per_second": 51.51
     },
     {
       "name": "python-pptx (Python)",

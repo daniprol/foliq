@@ -7,7 +7,7 @@
 //! | `html`     | html, htm, xhtml        | main content converted with `scraper`       |
 //! | `docx`     | docx                    | Word XML read with `zip` + `quick-xml`      |
 //! | `pptx`     | pptx                    | one section per slide, with speaker notes   |
-//! | `xlsx`     | xlsx, xlsm, xls, ods    | one section per sheet, read with `calamine` |
+//! | `xlsx`     | xlsx, xlsm, xlsb, xls, ods | one section per sheet; see `xlsx/mod.rs` |
 //! | `pdf`      | pdf                     | text per page with `pdf_oxide`              |
 
 mod docx;

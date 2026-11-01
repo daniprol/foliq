@@ -6,11 +6,13 @@
 //! Markdown boundaries (paragraphs, list items, table rows, sentences) and
 //! never splits inside a code block when it can avoid it.
 
-use foliq_core::{Chunk, Document, ElementKind, Result, Section, Splitter};
+use std::collections::HashMap;
+
+use foliq_core::{Chunk, Document, Element, ElementKind, Positions, Result, Section, Splitter};
 use text_splitter::{ChunkConfig, MarkdownSplitter};
 
 use crate::markdown::page_marker_number;
-use crate::tokens::{count_tokens, tokenizer};
+use crate::tokens::{TokenCounter, count_tokens};
 
 /// Splits documents along their headings.
 pub struct StructureSplitter {
@@ -30,36 +32,68 @@ impl Splitter for StructureSplitter {
     }
 
     fn fingerprint(&self) -> String {
-        format!("structure@1:max_tokens={}", self.max_tokens)
+        format!("structure@2:max_tokens={}", self.max_tokens)
     }
 
     fn split(&self, document: &Document) -> Result<Vec<Chunk>> {
+        // Built once: looking these up per section would be quadratic in big documents.
+        let heading_ends: HashMap<usize, usize> = document
+            .elements
+            .iter()
+            .filter(|element| matches!(element.kind, ElementKind::Heading { .. }))
+            .map(|heading| (heading.start, heading.end))
+            .collect();
+        let front_matter: Vec<&Element> = document
+            .elements
+            .iter()
+            .filter(|element| element.kind == ElementKind::FrontMatter)
+            .collect();
+
         let mut pieces = Vec::new();
         for section in document.sections() {
-            let start = skip_front_matter(document, section.start);
+            let start = skip_front_matter(&front_matter, section.start);
             let end = section.own_end;
-            if start >= end || !has_body(document, start, end) {
+            if start >= end || !has_body(document, &heading_ends, start, end) {
                 continue;
             }
+            // Each piece keeps its token count when it is already known, so
+            // the text is not tokenized twice.
+            let (start, end) = trim_range(&document.text, start, end);
             let section_text = &document.text[start..end];
-            if count_tokens(section_text) <= self.max_tokens {
-                pieces.push((start, end, section.clone()));
+            let tokens = count_tokens(section_text);
+            if tokens <= self.max_tokens {
+                pieces.push((start, end, section.clone(), Some(tokens)));
+            } else if is_mostly_rows(section_text) {
+                // Big tables and long lists (spreadsheets, long HTML tables) are
+                // cut between rows, in one pass.
+                for (offset, length, tokens) in pack_lines(section_text, self.max_tokens) {
+                    pieces.push((start + offset, start + offset + length, section.clone(), tokens));
+                }
             } else {
-                let config = ChunkConfig::new(self.max_tokens).with_sizer(tokenizer());
+                let config = ChunkConfig::new(self.max_tokens).with_sizer(TokenCounter);
                 for (offset, piece) in MarkdownSplitter::new(config).chunk_indices(section_text) {
-                    pieces.push((start + offset, start + offset + piece.len(), section.clone()));
+                    pieces.push((start + offset, start + offset + piece.len(), section.clone(), None));
                 }
             }
         }
 
+        let positions = document.positions();
         let mut chunks = Vec::new();
-        for (start, end, section) in pieces {
+        for (start, end, section, tokens) in pieces {
             let (start, end) = trim_range(&document.text, start, end);
             let text = &document.text[start..end];
             if is_only_markup(text) {
                 continue;
             }
-            chunks.push(make_chunk(document, chunks.len(), start, end, &section));
+            chunks.push(make_chunk(
+                document,
+                &positions,
+                chunks.len(),
+                start,
+                end,
+                &section,
+                tokens,
+            ));
         }
         Ok(chunks)
     }
@@ -69,7 +103,18 @@ impl Splitter for StructureSplitter {
 ///
 /// Every splitter can use it, so all chunks carry the same positions:
 /// lines, pages, section number and heading path.
-pub fn make_chunk(document: &Document, ordinal: usize, start: usize, end: usize, section: &Section) -> Chunk {
+/// `positions` is `document.positions()`, built once for all the chunks of the
+/// document. `token_count` is the chunk's size if the splitter already
+/// measured it, or `None` to count it here.
+pub fn make_chunk(
+    document: &Document,
+    positions: &Positions,
+    ordinal: usize,
+    start: usize,
+    end: usize,
+    section: &Section,
+    token_count: Option<usize>,
+) -> Chunk {
     let text = &document.text[start..end];
     let last = end.saturating_sub(1).max(start);
     Chunk {
@@ -78,34 +123,90 @@ pub fn make_chunk(document: &Document, ordinal: usize, start: usize, end: usize,
         ordinal,
         start,
         end,
-        line_start: document.line_at(start),
-        line_end: document.line_at(last),
-        page_start: document.page_at(start),
-        page_end: document.page_at(last),
+        line_start: positions.line_at(start),
+        line_end: positions.line_at(last),
+        page_start: positions.page_at(start),
+        page_end: positions.page_at(last),
         section: section.number.clone(),
         heading_path: section.heading_path.clone(),
-        token_count: count_tokens(text),
+        token_count: token_count.unwrap_or_else(|| count_tokens(text)),
         text: text.to_string(),
         content_key: blake3::hash(text.as_bytes()).to_hex()[..32].to_string(),
     }
 }
 
+/// Whether most lines of the text are table rows (`| a | b |`) or list items (`- a`).
+fn is_mostly_rows(text: &str) -> bool {
+    let mut lines = 0;
+    let mut rows = 0;
+    // Headings don't count: a block of rows starts with one.
+    for line in text
+        .lines()
+        .filter(|line| !line.trim().is_empty() && !line.starts_with('#'))
+    {
+        lines += 1;
+        let line = line.trim_start();
+        if line.starts_with('|') || line.starts_with("- ") {
+            rows += 1;
+        }
+    }
+    rows * 5 >= lines * 4
+}
+
+/// Packs whole lines into pieces of at most `max_tokens`, counting each line
+/// once. A line that is too long on its own is cut into equal parts.
+/// Returns `(offset, length, tokens)` for each piece, in bytes; `tokens` is
+/// `None` for the parts of a cut line, which are counted later.
+fn pack_lines(text: &str, max_tokens: usize) -> Vec<(usize, usize, Option<usize>)> {
+    let mut pieces = Vec::new();
+    let mut piece_start = 0;
+    let mut piece_tokens = 0;
+    let mut offset = 0;
+    for line in text.split_inclusive('\n') {
+        let line_tokens = count_tokens(line);
+        if piece_tokens + line_tokens > max_tokens && offset > piece_start {
+            pieces.push((piece_start, offset - piece_start, Some(piece_tokens)));
+            piece_start = offset;
+            piece_tokens = 0;
+        }
+        if line_tokens > max_tokens {
+            // One line bigger than a chunk: cut it into equal parts, at character boundaries.
+            let parts = line_tokens.div_ceil(max_tokens);
+            let mut part_start = offset;
+            for part in 1..=parts {
+                let mut part_end = offset + line.len() * part / parts;
+                while !text.is_char_boundary(part_end) {
+                    part_end += 1;
+                }
+                if part_end > part_start {
+                    pieces.push((part_start, part_end - part_start, None));
+                }
+                part_start = part_end;
+            }
+            piece_start = offset + line.len();
+        } else {
+            piece_tokens += line_tokens;
+        }
+        offset += line.len();
+    }
+    if offset > piece_start {
+        pieces.push((piece_start, offset - piece_start, Some(piece_tokens)));
+    }
+    pieces
+}
+
 /// Moves `start` past front matter that begins there.
-fn skip_front_matter(document: &Document, start: usize) -> usize {
-    document
-        .elements
+fn skip_front_matter(front_matter: &[&Element], start: usize) -> usize {
+    front_matter
         .iter()
-        .find(|element| element.kind == ElementKind::FrontMatter && element.start <= start && start < element.end)
-        .map_or(start, |front_matter| front_matter.end)
+        .find(|element| element.start <= start && start < element.end)
+        .map_or(start, |element| element.end)
 }
 
 /// Whether the range has text besides its own heading line.
-fn has_body(document: &Document, start: usize, end: usize) -> bool {
-    let heading_end = document
-        .elements
-        .iter()
-        .find(|element| matches!(element.kind, ElementKind::Heading { .. }) && element.start == start)
-        .map_or(start, |heading| heading.end);
+/// `heading_ends` maps where each heading starts to where it ends.
+fn has_body(document: &Document, heading_ends: &HashMap<usize, usize>, start: usize, end: usize) -> bool {
+    let heading_end = heading_ends.get(&start).copied().unwrap_or(start);
     !is_only_markup(&document.text[heading_end.min(end)..end])
 }
 
@@ -186,5 +287,28 @@ mod tests {
         assert!(chunks.iter().all(|chunk| chunk.heading_path == ["Long"]));
         assert_eq!(chunks.first().unwrap().page_start, Some(1));
         assert_eq!(chunks.last().unwrap().page_end, Some(2));
+    }
+
+    #[test]
+    fn big_tables_are_cut_between_rows() {
+        let mut text = String::from("# Prices\n\n| Product | Price |\n| --- | --- |\n");
+        for number in 0..300 {
+            text.push_str(&format!("| Product number {number} | {number}.50 |\n"));
+        }
+        let chunks = StructureSplitter { max_tokens: 100 }.split(&document(&text)).unwrap();
+        assert!(chunks.len() > 10);
+        for chunk in &chunks {
+            assert!(chunk.token_count <= 100);
+            let rows = chunk.text.trim_start_matches("# Prices").trim();
+            assert!(rows.starts_with('|') && rows.ends_with('|'), "{}", chunk.text);
+        }
+    }
+
+    #[test]
+    fn a_line_longer_than_a_chunk_is_cut() {
+        let text = format!("# Hash\n\n| {} |\n", "f".repeat(20_000));
+        let chunks = StructureSplitter { max_tokens: 100 }.split(&document(&text)).unwrap();
+        assert!(chunks.len() > 5);
+        assert!(chunks.iter().all(|chunk| chunk.token_count <= 120));
     }
 }

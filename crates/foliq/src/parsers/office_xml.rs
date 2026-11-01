@@ -1,4 +1,4 @@
-//! Shared helpers for Office files (DOCX, PPTX), which are zip files full of XML.
+//! Shared helpers for Office files (DOCX, PPTX, XLSX), which are zip files full of XML.
 //!
 //! The XML is read into a small tree of [`XmlNode`]s, much like Python's
 //! `xml.etree.ElementTree`, so the parsers can walk it with plain loops.
@@ -76,7 +76,7 @@ impl XmlNode {
         for child in &self.children {
             if let XmlChild::Node(node) = child {
                 match node.name.as_str() {
-                    "t" => text.push_str(&node.plain_text()),
+                    "t" => text.push_str(&node.all_text()),
                     "tab" => text.push('\t'),
                     "br" | "cr" => text.push('\n'),
                     _ => node.collect_office_text(text),
@@ -86,12 +86,12 @@ impl XmlNode {
     }
 
     /// All text directly or indirectly inside this element.
-    fn plain_text(&self) -> String {
+    pub fn all_text(&self) -> String {
         self.children
             .iter()
             .map(|child| match child {
                 XmlChild::Text(text) => text.clone(),
-                XmlChild::Node(node) => node.plain_text(),
+                XmlChild::Node(node) => node.all_text(),
             })
             .collect()
     }
@@ -128,17 +128,12 @@ pub fn parse_xml(xml: &str) -> Result<XmlNode, String> {
                 let parent = open.last_mut().ok_or("unbalanced XML")?;
                 parent.children.push(XmlChild::Node(node));
             }
-            Event::Text(text) => push_text(&mut open, text.xml10_content().into_owned()),
-            Event::CData(data) => push_text(&mut open, data.xml10_content().into_owned()),
-            Event::GeneralRef(reference) => {
-                let character = match reference.resolve_char_ref().map_err(|error| error.to_string())? {
-                    Some(character) => character.to_string(),
-                    None => named_entity(&reference).to_string(),
-                };
-                push_text(&mut open, character);
-            }
             Event::Eof => break,
-            _ => {}
+            other => {
+                if let Some(text) = event_text(&other)? {
+                    push_text(&mut open, text);
+                }
+            }
         }
     }
     let placeholder = open.into_iter().next().ok_or("unbalanced XML")?;
@@ -152,7 +147,23 @@ pub fn parse_xml(xml: &str) -> Result<XmlNode, String> {
         .ok_or_else(|| "empty XML document".to_string())
 }
 
-fn node_from_tag(tag: &quick_xml::events::BytesStart) -> Result<XmlNode, String> {
+/// The text an event carries: plain text, CDATA, or an entity like `&amp;`
+/// (which quick-xml hands over as its own event). `None` for tags.
+pub fn event_text(event: &Event) -> Result<Option<String>, String> {
+    let text = match event {
+        Event::Text(text) => text.xml10_content().into_owned(),
+        Event::CData(data) => data.xml10_content().into_owned(),
+        Event::GeneralRef(reference) => match reference.resolve_char_ref().map_err(|error| error.to_string())? {
+            Some(character) => character.to_string(),
+            None => named_entity(reference).to_string(),
+        },
+        _ => return Ok(None),
+    };
+    Ok(Some(text))
+}
+
+/// The name and attributes of an opening tag, as an [`XmlNode`] without children.
+pub fn node_from_tag(tag: &quick_xml::events::BytesStart) -> Result<XmlNode, String> {
     let name = tag.local_name().as_ref().to_string();
     let mut attributes = Vec::new();
     for attribute in tag.attributes().with_checks(false) {
@@ -202,14 +213,23 @@ impl<'bytes> OfficeFile<'bytes> {
 
     /// The XML part at `path` (like `word/document.xml`), or `None` if it doesn't exist.
     pub fn xml(&mut self, path: &str) -> Result<Option<XmlNode>, String> {
+        match self.text(path)? {
+            Some(xml) => parse_xml(&xml).map(Some).map_err(|error| format!("{path}: {error}")),
+            None => Ok(None),
+        }
+    }
+
+    /// The part at `path` as text, or `None` if it doesn't exist. For big
+    /// parts (a sheet with 100,000 rows) that are read as a stream instead of a tree.
+    pub fn text(&mut self, path: &str) -> Result<Option<String>, String> {
         let mut file = match self.archive.by_name(path) {
             Ok(file) => file,
             Err(_) => return Ok(None),
         };
-        let mut xml = String::new();
-        file.read_to_string(&mut xml)
+        let mut text = String::new();
+        file.read_to_string(&mut text)
             .map_err(|error| format!("{path}: {error}"))?;
-        parse_xml(&xml).map(Some).map_err(|error| format!("{path}: {error}"))
+        Ok(Some(text))
     }
 
     /// The relationships of a part: relationship id -> (target path, type).
@@ -230,7 +250,13 @@ impl<'bytes> OfficeFile<'bytes> {
                     continue;
                 };
                 let kind = relationship.attribute("Type").unwrap_or("").to_string();
-                relationships.insert(id.to_string(), (join_part_path(folder, target), kind));
+                // A link to a web page or another file is kept as written.
+                let target = if relationship.attribute("TargetMode") == Some("External") {
+                    target.to_string()
+                } else {
+                    join_part_path(folder, target)
+                };
+                relationships.insert(id.to_string(), (target, kind));
             }
         }
         Ok(relationships)
@@ -239,14 +265,14 @@ impl<'bytes> OfficeFile<'bytes> {
     /// The title stored in the file's properties (`docProps/core.xml`), if any.
     pub fn title(&mut self) -> Option<String> {
         let core = self.xml("docProps/core.xml").ok()??;
-        let title = core.child("title")?.plain_text();
+        let title = core.child("title")?.all_text();
         let title = title.trim();
         (!title.is_empty()).then(|| title.to_string())
     }
 }
 
 /// Resolves a relationship target (`../notesSlides/notesSlide1.xml`) against a folder (`ppt/slides`).
-fn join_part_path(folder: &str, target: &str) -> String {
+pub fn join_part_path(folder: &str, target: &str) -> String {
     if let Some(absolute) = target.strip_prefix('/') {
         return absolute.to_string();
     }
