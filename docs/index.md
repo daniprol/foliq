@@ -108,8 +108,9 @@ are never stale.
 === "foliq"
 
     ```console
-    foliq skill --install            # this project
-    foliq skill --install --global   # all projects
+    foliq skill --install            # .agents/skills/foliq, in this project
+    foliq skill --install --claude   # also linked from .claude/skills/foliq
+    foliq skill --install --global   # in your home folder, for all projects
     ```
 
 The [skill](https://github.com/daniprol/foliq/blob/main/skills/foliq/SKILL.md)

@@ -36,10 +36,12 @@ def test_skill_is_printed(tmp_path: Path) -> None:
 
 
 def test_skill_is_installed(tmp_path: Path) -> None:
-    installed = foliq("skill", "--install", cwd=tmp_path)
+    installed = foliq("skill", "--install", "--claude", cwd=tmp_path)
     assert installed.returncode == 0, installed.stderr
-    skill_file = tmp_path / ".claude" / "skills" / "foliq" / "SKILL.md"
-    assert skill_file.read_text(encoding="utf-8") == foliq("skill", cwd=tmp_path).stdout
+    printed = foliq("skill", cwd=tmp_path).stdout
+    for folder in (".agents", ".claude"):
+        skill_file = tmp_path / folder / "skills" / "foliq" / "SKILL.md"
+        assert skill_file.read_text(encoding="utf-8") == printed
 
 
 def test_published_skill_matches_the_command(tmp_path: Path) -> None:

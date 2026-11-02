@@ -89,7 +89,7 @@ them too. Add `--json` to any command for machine-readable output.
 
 ```console
 $ npx skills add daniprol/foliq   # any agent; or pnpm dlx / bunx
-$ foliq skill --install           # Claude Code, this project; --global for all
+$ foliq skill --install --claude  # .agents/skills, linked from .claude/skills; --global for all
 ```
 
 The [skill](https://github.com/daniprol/foliq/blob/main/skills/foliq/SKILL.md) teaches the agent to
