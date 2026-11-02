@@ -33,3 +33,19 @@ def test_errors_exit_with_one(tmp_path: Path) -> None:
 
 def test_skill_is_printed(tmp_path: Path) -> None:
     assert foliq("skill", cwd=tmp_path).stdout.startswith("---\nname: foliq")
+
+
+def test_skill_is_installed(tmp_path: Path) -> None:
+    installed = foliq("skill", "--install", "--claude", cwd=tmp_path)
+    assert installed.returncode == 0, installed.stderr
+    printed = foliq("skill", cwd=tmp_path).stdout
+    for folder in (".agents", ".claude"):
+        skill_file = tmp_path / folder / "skills" / "foliq" / "SKILL.md"
+        assert skill_file.read_text(encoding="utf-8") == printed
+
+
+def test_published_skill_matches_the_command(tmp_path: Path) -> None:
+    # `npx skills add daniprol/foliq` reads skills/foliq/SKILL.md from the repository,
+    # and `foliq skill` prints the copy built into the binary. Keep them the same.
+    published = Path(__file__).parent.parent / "skills" / "foliq" / "SKILL.md"
+    assert foliq("skill", cwd=tmp_path).stdout == published.read_text(encoding="utf-8")

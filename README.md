@@ -88,12 +88,12 @@ them too. Add `--json` to any command for machine-readable output.
 ## Give it to your agent
 
 ```console
-$ foliq skill > .claude/skills/foliq/SKILL.md
+$ npx skills add daniprol/foliq   # any agent; or pnpm dlx / bunx
+$ foliq skill --install --claude  # .agents/skills, linked from .claude/skills; --global for all
 ```
 
-The [skill file](https://github.com/daniprol/foliq/blob/main/crates/foliq-cli/SKILL.md) teaches
-Claude Code, Codex and any agent that reads `SKILL.md` the search, outline, read and cite loop.
-No MCP server to run: the agent calls the `foliq` command it already has.
+The [skill](https://github.com/daniprol/foliq/blob/main/skills/foliq/SKILL.md) teaches the agent to
+search, outline, read and cite. No MCP server: the agent runs the `foliq` command.
 
 ## Python
 

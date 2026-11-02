@@ -13,7 +13,7 @@
 //! | `foliq read REF`          | prints a document, a section (`#2.3`) or pages (`#p4`) |
 //! | `foliq search QUERY`      | ranked chunks with citations                         |
 //! | `foliq context QUERY`     | the best passages, packed into a token budget        |
-//! | `foliq skill`             | prints the agent skill file (`SKILL.md`)             |
+//! | `foliq skill [--install]` | prints the agent skill file, or installs it          |
 //!
 //! Commands that read the index sync it first (it is cheap when nothing
 //! changed), so answers are never stale. `--no-refresh` skips that.
@@ -26,6 +26,8 @@ use clap::{Parser, Subcommand};
 use foliq::{Error, Filter, Index, SearchOptions};
 
 /// The agent skill file, built into the binary.
+// `skills/foliq/SKILL.md` at the repository root is a copy for `npx skills add`;
+// `tests/test_cli.py` checks that both stay the same.
 pub const SKILL: &str = include_str!("../SKILL.md");
 
 /// The index folder's default name.
@@ -118,8 +120,18 @@ enum Command {
         #[arg(long)]
         path: Option<String>,
     },
-    /// Print the agent skill file. Save it as `.claude/skills/foliq/SKILL.md` (or similar).
-    Skill,
+    /// Print the agent skill file, or install it with `--install`.
+    Skill {
+        /// Write it to `.agents/skills/foliq/SKILL.md` in this folder.
+        #[arg(long)]
+        install: bool,
+        /// With `--install`: install in your home folder, for every project.
+        #[arg(long, requires = "install")]
+        global: bool,
+        /// With `--install`: also link it from `.claude/skills/foliq`, for Claude Code.
+        #[arg(long, requires = "install")]
+        claude: bool,
+    },
 }
 
 /// Runs the command line and returns the exit code (0 means success).
@@ -142,8 +154,20 @@ pub fn run(args: Vec<String>) -> i32 {
 }
 
 fn execute(cli: Cli) -> foliq::Result<()> {
-    if let Command::Skill = cli.command {
-        print!("{SKILL}");
+    // `if let` is a one-case `match`: run this block only for the `skill` command.
+    if let Command::Skill {
+        install,
+        global,
+        claude,
+    } = cli.command
+    {
+        if !install {
+            print!("{SKILL}");
+            return Ok(());
+        }
+        for path in install_skill(global, claude)? {
+            println!("installed {}", path.display());
+        }
         return Ok(());
     }
     let index = Index::open(cli.index.clone().unwrap_or_else(find_index_folder))?;
@@ -157,7 +181,7 @@ fn execute(cli: Cli) -> foliq::Result<()> {
     let out = output::Printer { json: cli.json };
 
     match cli.command {
-        Command::Skill => unreachable!("handled above"),
+        Command::Skill { .. } => unreachable!("handled above"),
         Command::Index { folders, name, access } => {
             if name.is_some() && folders.len() != 1 {
                 return Err(Error::Invalid("--name needs exactly one folder".into()));
@@ -233,6 +257,68 @@ fn execute(cli: Cli) -> foliq::Result<()> {
 }
 
 /// The nearest `.foliq` folder in the current folder or a parent, else `./.foliq`.
+/// Writes the skill to `.agents/skills/foliq/`, the folder most agents read, and
+/// returns the paths it wrote. With `claude`, `.claude/skills/foliq` (where Claude
+/// Code looks) becomes a link to it, so there is one copy to update.
+fn install_skill(global: bool, claude: bool) -> foliq::Result<Vec<PathBuf>> {
+    let base = if global {
+        // HOME on Linux and macOS, USERPROFILE on Windows.
+        match std::env::var_os("HOME").or_else(|| std::env::var_os("USERPROFILE")) {
+            Some(home) => PathBuf::from(home),
+            None => return Err(Error::Invalid("can't find your home folder".to_string())),
+        }
+    } else {
+        PathBuf::from(".")
+    };
+    let skill_folder = base.join(".agents").join("skills").join("foliq");
+    std::fs::create_dir_all(&skill_folder)?;
+    std::fs::write(skill_folder.join("SKILL.md"), SKILL)?;
+    let mut written = vec![skill_folder.join("SKILL.md")];
+
+    if claude {
+        let skills_folder = base.join(".claude").join("skills");
+        std::fs::create_dir_all(&skills_folder)?;
+        let link = skills_folder.join("foliq");
+        link_or_copy(&link)?;
+        written.push(link);
+    }
+    Ok(written)
+}
+
+/// Makes `.claude/skills/foliq` point to `../../.agents/skills/foliq`. A relative
+/// link keeps working if the project folder moves. Where links aren't available
+/// (Windows without developer mode) or a real folder is already there, the file
+/// is copied instead.
+fn link_or_copy(link: &Path) -> foliq::Result<()> {
+    // Replace a link from an earlier install. `symlink_metadata` looks at the
+    // link itself, not at what it points to.
+    let is_link = match std::fs::symlink_metadata(link) {
+        Ok(metadata) => metadata.file_type().is_symlink(),
+        Err(_) => false, // nothing there yet
+    };
+    if is_link {
+        // Windows removes a folder link with `remove_dir`, other systems with `remove_file`.
+        std::fs::remove_file(link).or_else(|_| std::fs::remove_dir(link))?;
+    }
+    let target = Path::new("..").join("..").join(".agents").join("skills").join("foliq");
+    if link.exists() || make_folder_link(&target, link).is_err() {
+        std::fs::create_dir_all(link)?;
+        std::fs::write(link.join("SKILL.md"), SKILL)?;
+    }
+    Ok(())
+}
+
+/// A folder symlink. `#[cfg(...)]` picks the version for the system being built for.
+#[cfg(unix)]
+fn make_folder_link(target: &Path, link: &Path) -> std::io::Result<()> {
+    std::os::unix::fs::symlink(target, link)
+}
+
+#[cfg(windows)]
+fn make_folder_link(target: &Path, link: &Path) -> std::io::Result<()> {
+    std::os::windows::fs::symlink_dir(target, link)
+}
+
 fn find_index_folder() -> PathBuf {
     let current = std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
     current

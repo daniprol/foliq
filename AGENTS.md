@@ -54,6 +54,7 @@ the core does little, does it fast, and every part can be replaced.
 | `crates/foliq-core`   | Types (`Document`, `Chunk`...) and plugin traits. Small, stable |
 | `crates/foliq`        | The engine: parsers, folder source, splitter, SQLite store, sinks, `Index` |
 | `crates/foliq-cli`    | The `foliq` command (`run(args)`), and `SKILL.md` for agents    |
+| `skills/foliq`        | A copy of that `SKILL.md`, for `npx skills add daniprol/foliq` (a test keeps them equal) |
 | `src/*.rs`            | The Python extension `foliq._core` (PyO3)                       |
 | `src/foliq`           | The Python package: tools for agents, plugin protocols, CLI entry |
 | `tests`               | Python tests, with generated DOCX/PPTX/XLSX/PDF fixtures         |
