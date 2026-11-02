@@ -1,17 +1,35 @@
-# foliq
+---
+title: Get started
+---
 
-**Search, read and cite your documents from AI agents.**
+<p align="center">
+  <img alt="foliq" src="assets/logo-wordmark-light.svg#only-light" height="64">
+  <img alt="foliq" src="assets/logo-wordmark-dark.svg#only-dark" height="64">
+</p>
 
-PDF, Word, PowerPoint, Excel, HTML and Markdown in one local index. A Rust
-engine with a command line and a Python API. No server, no API key.
+<p align="center"><strong>ripgrep for documents, made for AI agents.</strong></p>
+
+Search, read and cite PDF, Word, PowerPoint, Excel, HTML and Markdown files.
+One local index, a Rust engine, a command line and a Python API. No server, no
+API key.
+
+Every search hit is a citation, like `docs/billing.pdf#2.3 (p4, L120-141)`,
+and every citation is a reference that `read` accepts. So an agent finds a
+passage, reads exactly the section around it, and quotes its source, all within
+the token budget you give it.
 
 ## Install
+
+foliq is on [PyPI](https://pypi.org/project/foliq/). The package has the
+`foliq` command and the Python API, with prebuilt wheels for Linux, macOS and
+Windows, and no Python dependencies.
 
 === "Command line"
 
     ```console
     uvx foliq --help        # run without installing
     uv tool install foliq   # or install the `foliq` command
+    pipx install foliq      # or with pipx
     ```
 
 === "Python"
@@ -75,3 +93,11 @@ foliq skill > .claude/skills/foliq/SKILL.md
 
 The skill file teaches an agent the workflow above. For Python agents, see
 [Agent tools](agent-tools.md).
+
+## How fast
+
+On public test corpora, foliq indexes Word files at 129 per second and
+PowerPoint files at 148 per second on one thread (python-docx: 35, python-pptx:
+50), fails on fewer broken PDFs than PyMuPDF and pypdf, and ranks as well as the
+best BM25 libraries. See [Benchmarks](benchmarks.md).
+

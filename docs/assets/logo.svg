@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="foliq"><g>
+  <circle cx="28" cy="27" r="16" fill="none" stroke="#0D9488" stroke-width="6"/>
+  <path d="M44 27 V52 a5 5 0 0 0 5 5 H53" fill="none" stroke="#0D9488" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M21 23 H34 M21 31 H30" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round"/>
+</g>
+</svg>
