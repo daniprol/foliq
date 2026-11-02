@@ -87,11 +87,32 @@ are never stale.
 
 ## Give it to your agent
 
-```console
-foliq skill > .claude/skills/foliq/SKILL.md
-```
+=== "npx"
 
-The skill file teaches an agent the workflow above. For Python agents, see
+    ```console
+    npx skills add daniprol/foliq
+    ```
+
+=== "pnpm"
+
+    ```console
+    pnpm dlx skills add daniprol/foliq
+    ```
+
+=== "bun"
+
+    ```console
+    bunx skills add daniprol/foliq
+    ```
+
+=== "foliq"
+
+    ```console
+    foliq skill > .claude/skills/foliq/SKILL.md
+    ```
+
+The [skill file](https://github.com/daniprol/foliq/blob/main/skills/foliq/SKILL.md)
+is an [Agent Skill](https://agentskills.io): it teaches an agent the workflow above. For Python agents, see
 [Agent tools](agent-tools.md).
 
 ## How fast

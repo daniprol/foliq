@@ -26,6 +26,8 @@ use clap::{Parser, Subcommand};
 use foliq::{Error, Filter, Index, SearchOptions};
 
 /// The agent skill file, built into the binary.
+// `skills/foliq/SKILL.md` at the repository root is a copy for `npx skills add`;
+// `tests/test_cli.py` checks that both stay the same.
 pub const SKILL: &str = include_str!("../SKILL.md");
 
 /// The index folder's default name.
