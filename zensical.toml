@@ -4,7 +4,7 @@
 
 [project]
 site_name = "foliq"
-site_description = "Search, read and cite your documents from AI agents"
+site_description = "ripgrep for documents, made for AI agents: search, read and cite PDF, Word, PowerPoint, Excel, HTML and Markdown"
 site_url = "https://daniprol.github.io/foliq/"
 repo_url = "https://github.com/daniprol/foliq"
 repo_name = "daniprol/foliq"
@@ -18,9 +18,12 @@ nav = [
   { "How it works" = "how-it-works.md" },
   { "Access rules" = "access.md" },
   { "Plugins" = "plugins.md" },
+  { "Benchmarks" = "benchmarks.md" },
 ]
 
 [project.theme]
+logo = "assets/logo.svg"
+favicon = "assets/logo.svg"
 language = "en"  # also the language of the built-in search
 features = [
   "content.action.edit",    # "edit this page" button
