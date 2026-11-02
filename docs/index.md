@@ -100,4 +100,3 @@ On public test corpora, foliq indexes Word files at 129 per second and
 PowerPoint files at 148 per second on one thread (python-docx: 35, python-pptx:
 50), fails on fewer broken PDFs than PyMuPDF and pypdf, and ranks as well as the
 best BM25 libraries. See [Benchmarks](benchmarks.md).
-
