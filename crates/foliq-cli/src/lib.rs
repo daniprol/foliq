@@ -13,7 +13,7 @@
 //! | `foliq read REF`          | prints a document, a section (`#2.3`) or pages (`#p4`) |
 //! | `foliq search QUERY`      | ranked chunks with citations                         |
 //! | `foliq context QUERY`     | the best passages, packed into a token budget        |
-//! | `foliq skill`             | prints the agent skill file (`SKILL.md`)             |
+//! | `foliq skill [--install]` | prints the agent skill file, or installs it          |
 //!
 //! Commands that read the index sync it first (it is cheap when nothing
 //! changed), so answers are never stale. `--no-refresh` skips that.
@@ -120,8 +120,15 @@ enum Command {
         #[arg(long)]
         path: Option<String>,
     },
-    /// Print the agent skill file. Save it as `.claude/skills/foliq/SKILL.md` (or similar).
-    Skill,
+    /// Print the agent skill file, or install it for Claude Code with `--install`.
+    Skill {
+        /// Write it to `.claude/skills/foliq/SKILL.md` in this folder.
+        #[arg(long)]
+        install: bool,
+        /// With `--install`: write it to your home folder, for every project.
+        #[arg(long, requires = "install")]
+        global: bool,
+    },
 }
 
 /// Runs the command line and returns the exit code (0 means success).
@@ -144,8 +151,14 @@ pub fn run(args: Vec<String>) -> i32 {
 }
 
 fn execute(cli: Cli) -> foliq::Result<()> {
-    if let Command::Skill = cli.command {
-        print!("{SKILL}");
+    // `if let` is a one-case `match`: run this block only for the `skill` command.
+    if let Command::Skill { install, global } = cli.command {
+        if !install {
+            print!("{SKILL}");
+            return Ok(());
+        }
+        let path = install_skill(global)?;
+        println!("installed {}", path.display());
         return Ok(());
     }
     let index = Index::open(cli.index.clone().unwrap_or_else(find_index_folder))?;
@@ -159,7 +172,7 @@ fn execute(cli: Cli) -> foliq::Result<()> {
     let out = output::Printer { json: cli.json };
 
     match cli.command {
-        Command::Skill => unreachable!("handled above"),
+        Command::Skill { .. } => unreachable!("handled above"),
         Command::Index { folders, name, access } => {
             if name.is_some() && folders.len() != 1 {
                 return Err(Error::Invalid("--name needs exactly one folder".into()));
@@ -235,6 +248,25 @@ fn execute(cli: Cli) -> foliq::Result<()> {
 }
 
 /// The nearest `.foliq` folder in the current folder or a parent, else `./.foliq`.
+/// Writes the skill file where Claude Code looks for skills, and returns its path.
+/// Other agents read `.agents/skills/`, which `npx skills add` covers.
+fn install_skill(global: bool) -> foliq::Result<PathBuf> {
+    let base = if global {
+        // HOME on Linux and macOS, USERPROFILE on Windows.
+        match std::env::var_os("HOME").or_else(|| std::env::var_os("USERPROFILE")) {
+            Some(home) => PathBuf::from(home),
+            None => return Err(Error::Invalid("can't find your home folder".to_string())),
+        }
+    } else {
+        PathBuf::from(".")
+    };
+    let folder = base.join(".claude").join("skills").join("foliq");
+    std::fs::create_dir_all(&folder)?;
+    let path = folder.join("SKILL.md");
+    std::fs::write(&path, SKILL)?;
+    Ok(path)
+}
+
 fn find_index_folder() -> PathBuf {
     let current = std::env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
     current

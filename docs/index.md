@@ -108,11 +108,12 @@ are never stale.
 === "foliq"
 
     ```console
-    foliq skill > .claude/skills/foliq/SKILL.md
+    foliq skill --install            # this project
+    foliq skill --install --global   # all projects
     ```
 
-The [skill file](https://github.com/daniprol/foliq/blob/main/skills/foliq/SKILL.md)
-is an [Agent Skill](https://agentskills.io): it teaches an agent the workflow above. For Python agents, see
+The [skill](https://github.com/daniprol/foliq/blob/main/skills/foliq/SKILL.md)
+teaches an agent the workflow above. For Python agents, see
 [Agent tools](agent-tools.md).
 
 ## How fast

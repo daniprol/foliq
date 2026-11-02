@@ -15,7 +15,7 @@ The `foliq` command is written in Rust. It is the same whether you run it with
 | `foliq read REF`           | prints a document, a section or pages                   |
 | `foliq search QUERY`       | ranked chunks with citations                            |
 | `foliq context QUERY`      | the best passages, packed into a token budget           |
-| `foliq skill`              | prints the skill file for agents                        |
+| `foliq skill [--install]`  | prints the agent skill, or installs it for Claude Code  |
 
 ## References
 

@@ -35,6 +35,13 @@ def test_skill_is_printed(tmp_path: Path) -> None:
     assert foliq("skill", cwd=tmp_path).stdout.startswith("---\nname: foliq")
 
 
+def test_skill_is_installed(tmp_path: Path) -> None:
+    installed = foliq("skill", "--install", cwd=tmp_path)
+    assert installed.returncode == 0, installed.stderr
+    skill_file = tmp_path / ".claude" / "skills" / "foliq" / "SKILL.md"
+    assert skill_file.read_text(encoding="utf-8") == foliq("skill", cwd=tmp_path).stdout
+
+
 def test_published_skill_matches_the_command(tmp_path: Path) -> None:
     # `npx skills add daniprol/foliq` reads skills/foliq/SKILL.md from the repository,
     # and `foliq skill` prints the copy built into the binary. Keep them the same.
