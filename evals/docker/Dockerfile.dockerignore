@@ -1,0 +1,10 @@
+# Keep the build context small: only what `cargo build` needs.
+**/target
+**/.venv
+**/data
+**/logs
+.git
+benchmarks
+docs
+evals
+tests
