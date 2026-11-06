@@ -53,6 +53,34 @@ stay comparable. Smaller downloads: `download 100` and `prepare 100` skip the
 Task options go after `-T`: `-T split=heldout` runs the held-out questions,
 `-T groups=needle,tables` runs some groups only.
 
+## Models on Azure AI Foundry
+
+Foundry's v1 API speaks the OpenAI chat completions protocol, so Inspect's
+generic `openai-api` provider works with any deployment on it (OpenAI models
+and others). Name the service `foundry` and give it two settings:
+
+| Setting            | Value                                                    |
+|--------------------|----------------------------------------------------------|
+| `FOUNDRY_BASE_URL` | the v1 endpoint: `https://<resource>.openai.azure.com/openai/v1` |
+| `FOUNDRY_API_KEY`  | the resource's API key                                   |
+
+The model is then `openai-api/foundry/<deployment name>`.
+
+**On GitHub** (no keys on your computer): add both as repository secrets
+(Settings > Secrets and variables > Actions), then start *Actions > Agent
+eval > Run workflow* with the deployment names. It downloads the documents
+(cached after the first run), builds the images and indexes, runs the three
+setups, shows the results tables on the run's page, and uploads the logs as
+an artifact (open them with `uv run inspect view --log-dir <folder>`).
+
+**On your computer**: put the two settings in `evals/.env` (Inspect reads it;
+git ignores it), then:
+
+```console
+$ uv run inspect eval-set foliq_eval/tasks.py --log-dir logs/foundry \
+    --model openai-api/foundry/<deployment> --model-role grader=openai-api/foundry/<grader deployment>
+```
+
 ## What is asked
 
 50 questions, each checked by hand in the original file

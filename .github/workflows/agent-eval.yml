@@ -1,0 +1,118 @@
+# Runs the agent eval (evals/) on a model deployed in Azure AI Foundry.
+# Start it by hand: Actions > Agent eval > Run workflow.
+#
+# Needs two repository secrets (Settings > Secrets and variables > Actions):
+#   FOUNDRY_BASE_URL  the v1 endpoint, like https://<resource>.openai.azure.com/openai/v1
+#   FOUNDRY_API_KEY   the resource's API key
+#
+# The logs and the results tables are uploaded as an artifact, and the tables
+# are shown on the run's summary page.
+
+name: Agent eval
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "Deployment name of the model to test"
+        required: true
+      grader:
+        description: "Deployment name of the grader model (empty: the tested model)"
+        required: false
+        default: ""
+      max_papers:
+        description: "Biggest corpus for the needle questions"
+        type: choice
+        options: ["1000", "100", "10"]
+        default: "1000"
+      split:
+        description: "Questions to run (dev while tuning, heldout for a final report)"
+        type: choice
+        options: ["dev", "heldout"]
+        default: "dev"
+      epochs:
+        description: "Runs per question"
+        default: "3"
+      limit:
+        description: "Only the first N samples of each setup (empty: all)"
+        required: false
+        default: ""
+      max_connections:
+        description: "Parallel model requests (lower it if the deployment rate-limits)"
+        default: "10"
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    defaults:
+      run:
+        working-directory: evals
+    env:
+      FOUNDRY_BASE_URL: ${{ secrets.FOUNDRY_BASE_URL }}
+      FOUNDRY_API_KEY: ${{ secrets.FOUNDRY_API_KEY }}
+      # Inputs go through the environment, never straight into the scripts.
+      MODEL: ${{ inputs.model }}
+      GRADER: ${{ inputs.grader || inputs.model }}
+      MAX_PAPERS: ${{ inputs.max_papers }}
+      SPLIT: ${{ inputs.split }}
+      EPOCHS: ${{ inputs.epochs }}
+      LIMIT: ${{ inputs.limit }}
+      MAX_CONNECTIONS: ${{ inputs.max_connections }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          cache-dependency-glob: evals/uv.lock
+
+      - name: Check the secrets
+        run: |
+          if [ -z "$FOUNDRY_BASE_URL" ] || [ -z "$FOUNDRY_API_KEY" ]; then
+            echo "::error::Add the FOUNDRY_BASE_URL and FOUNDRY_API_KEY repository secrets first."
+            exit 1
+          fi
+
+      # The documents are pinned, so they are downloaded once and cached.
+      - uses: actions/cache@v4
+        with:
+          path: |
+            evals/data/arxiv
+            evals/data/spreadsheets
+          key: agent-eval-documents-${{ inputs.max_papers }}-v1
+          restore-keys: agent-eval-documents-
+      - name: Download the documents
+        run: uv run --frozen python -m foliq_eval download "$MAX_PAPERS"
+
+      - name: Build the corpora, the Docker images and the foliq indexes
+        run: uv run --frozen python -m foliq_eval prepare "$MAX_PAPERS"
+
+      - name: Run the three setups
+        run: |
+          limit=()
+          if [ -n "$LIMIT" ]; then limit=(--limit "$LIMIT"); fi
+          uv run --frozen inspect eval-set foliq_eval/tasks.py \
+            --log-dir logs/run \
+            --model "openai-api/foundry/$MODEL" \
+            --model-role "grader=openai-api/foundry/$GRADER" \
+            --epochs "$EPOCHS" \
+            --max-connections "$MAX_CONNECTIONS" \
+            -T "max_papers=$MAX_PAPERS" -T "split=$SPLIT" \
+            "${limit[@]}" \
+            --display plain
+
+      - name: Results tables
+        if: always()
+        run: |
+          uv run --frozen python -m foliq_eval report logs/run results/run
+          cat results/run.md >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: agent-eval-${{ inputs.model }}-${{ github.run_number }}
+          path: |
+            evals/logs/run
+            evals/results/run.md
+            evals/results/run.json
+          if-no-files-found: warn
