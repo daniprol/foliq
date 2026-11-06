@@ -1,0 +1,558 @@
+# The questions of the agent eval.
+#
+# Every answer was checked by hand in the original file. `sources` lists where
+# the answer is: a path inside the corpus folder, plus the PDF pages or the
+# spreadsheet sheet. Unanswerable questions have no sources: the right reply
+# is NOT FOUND. `evidence` holds short pieces of the original text (as
+# pdftotext or openpyxl read it) that a passage with the answer contains; the
+# retrieval check looks for them in what foliq returns.
+#
+# `split: heldout` questions are never used while tuning foliq or its skill.
+# Run them only for a final report (`-T split=heldout`).
+#
+# Groups:
+#   single_fact   one answer, in one place of one named document
+#   tables        a number from a PDF table or a spreadsheet cell
+#   multi_hop     needs two passages, from two pages or two documents
+#   needle        names no document; asked over 10, 100 and 1,000 papers
+#   unanswerable  the corpus does not have the answer
+
+# ---------------------------------------------------------------- single_fact
+
+- id: fact-01
+  group: single_fact
+  split: dev
+  question: >-
+    In the paper "Knowledge intensive state design for traffic signal control",
+    how long is the yellow time that follows each green signal in the
+    simulator experiments?
+  answer: Three seconds (followed by two seconds of all red).
+  evidence: ["three-second yellow"]
+  sources:
+    - {file: papers/2201.00006.pdf, pages: [5]}
+
+- id: fact-02
+  group: single_fact
+  split: dev
+  question: >-
+    In the paper on confidence-aware multi-teacher knowledge distillation
+    (CA-MKD), what value is the hyper-parameter beta set to?
+  answer: 50 (beta = 50 throughout the experiments).
+  evidence: ["CA-MKD to 50"]
+  sources:
+    - {file: papers/2201.00007.pdf, pages: [3]}
+
+- id: fact-03
+  group: single_fact
+  split: dev
+  question: >-
+    Which GPU was ST-TIS ("A Lightweight and Accurate Spatial-Temporal
+    Transformer for Traffic Forecasting") trained on?
+  answer: An NVIDIA RTX 2080 Ti.
+  evidence: ["RTX2080 Ti"]
+  sources:
+    - {file: papers/2201.00008.pdf, pages: [8]}
+
+- id: fact-04
+  group: single_fact
+  split: heldout
+  question: >-
+    In the paper "Augmentative eXplanation and the Distributional Gap of
+    Confidence Optimization Score", what is the value of the similarity loss
+    factor l_s?
+  answer: 100.
+  evidence: ["100 is the similarity loss factor"]
+  sources:
+    - {file: papers/2201.00009.pdf, pages: [5]}
+
+- id: fact-05
+  group: single_fact
+  split: dev
+  question: >-
+    In "Modeling Advection on Directed Graphs using Matérn Gaussian Processes
+    for Traffic Flow", how is the data split into training and test data?
+  answer: 70% of the data for training and 30% for testing (hold-out cross validation).
+  evidence: ["training (70% of the data)"]
+  sources:
+    - {file: papers/2201.00001.pdf, pages: [4]}
+
+- id: fact-06
+  group: single_fact
+  split: dev
+  question: >-
+    In the literature review on length of stay prediction for stroke patients,
+    how many records of hospital claims does the Heritage Health Prize dataset
+    contain?
+  answer: 1,048,576 records.
+  evidence: ["1,048,576 records"]
+  sources:
+    - {file: papers/2201.00005.pdf, pages: [4]}
+
+- id: fact-07
+  group: single_fact
+  split: heldout
+  question: >-
+    Which two benchmark problems are used in "Robust reliability-based topology
+    optimization under random-field material model"?
+  answer: The cantilever beam and the L-shaped beam.
+  evidence: ["the cantilever and the"]
+  sources:
+    - {file: papers/2201.00004.pdf, pages: [7]}
+
+- id: fact-08
+  group: single_fact
+  split: dev
+  question: >-
+    In the paper on simulating local fields in carbon nanotube reinforced
+    composites for an infinite strip with voids, which MATLAB function is used
+    to solve the boundary integral equation with the generalized Neumann
+    kernel?
+  answer: The MATLAB function fbie.
+  evidence: ["MATLAB function fbie"]
+  sources:
+    - {file: papers/2201.00003.pdf, pages: [8]}
+
+- id: fact-09
+  group: single_fact
+  split: dev
+  question: >-
+    In the paper on the time-dependent Duhamel renormalization (TDSR) method
+    with multiple conservation and dissipation laws, which fourth-order
+    time-stepping scheme are the TDSR results compared with?
+  answer: The exponential time differencing fourth order Runge-Kutta scheme (ETDRK4).
+  evidence: ["ETDRK4"]
+  sources:
+    - {file: papers/2201.00002.pdf, pages: [6, 10, 11, 14]}
+
+- id: fact-10
+  group: single_fact
+  split: dev
+  question: >-
+    According to the TTB statistical report on beer for December 2019, what
+    tax rate per barrel applied in 2018-2019?
+  answer: $3.50 / $16.00 per barrel (it was $7.00 / $18.00 in 2017 and before).
+  evidence: ["$3.50/$16.00"]
+  sources:
+    - {file: spreadsheets/ttb_monthly_stats_2019-12.xlsx, sheet: Consolidated}
+
+# --------------------------------------------------------------------- tables
+
+- id: table-01
+  group: tables
+  split: dev
+  question: >-
+    In the traffic signal control paper that proposes MaxQueue and QL-XLight,
+    what average travel time does QL-FRAP reach on the HangZhou 2 dataset?
+  answer: 315.03 (seconds), 9.73% better than MaxPressure.
+  evidence: ["315.03"]
+  sources:
+    - {file: papers/2201.00006.pdf, pages: [6]}
+
+- id: table-02
+  group: tables
+  split: dev
+  question: >-
+    In the CA-MKD ablation study with VGG13 and MobileNetV2, what top-1
+    accuracy does the variant without the intermediate-layer loss
+    (w/o L_inter) reach?
+  answer: 68.11 (±0.02) %.
+  evidence: ["68.11"]
+  sources:
+    - {file: papers/2201.00007.pdf, pages: [4]}
+
+- id: table-03
+  group: tables
+  split: dev
+  question: How many learnable parameters does the ST-TIS traffic forecasting model have?
+  answer: 139,506 parameters.
+  evidence: ["139,506"]
+  sources:
+    - {file: papers/2201.00008.pdf, pages: [9]}
+
+- id: table-04
+  group: tables
+  split: heldout
+  question: >-
+    In the Confidence Optimization score paper, what precision does
+    "Alexnet sub" reach on the Chest X-Ray Pneumonia test dataset?
+  answer: 0.726.
+  evidence: ["0.726"]
+  sources:
+    - {file: papers/2201.00009.pdf, pages: [5]}
+
+- id: table-05
+  group: tables
+  split: dev
+  question: >-
+    In the DGAMGP traffic flow paper, what l2 test error does the Advection
+    model have on the Central graph with n = 280 nodes?
+  answer: 1.31 (the Consensus baseline has 0.97).
+  evidence: ["1.31"]
+  sources:
+    - {file: papers/2201.00001.pdf, pages: [4]}
+
+- id: table-06
+  group: tables
+  split: dev
+  question: How many barrels of beer were produced in the United States in December 2019, according to TTB?
+  answer: 14,341,816 barrels.
+  evidence: ["14341816"]
+  sources:
+    - {file: spreadsheets/ttb_monthly_stats_2019-12.xlsx, sheet: Consolidated}
+
+- id: table-07
+  group: tables
+  split: dev
+  question: >-
+    What was the taxable volume of beer in bottles and cans removed in
+    Wisconsin in 2019, in barrels?
+  answer: 8,353,029.28 barrels.
+  evidence: ["8353029.28"]
+  sources:
+    - {file: spreadsheets/ttb_brewery_state_2008-2019.xlsx, sheet: Taxable Bottles and Cans}
+
+- id: table-08
+  group: tables
+  split: heldout
+  question: What was the per capita consumption of mozzarella cheese in the United States in 2017?
+  answer: About 11.57 pounds per person.
+  evidence: ["11.5699"]
+  sources:
+    - {file: spreadsheets/cheese_per_cap.xlsx, sheet: "Cheese per cap since '95"}
+
+- id: table-09
+  group: tables
+  split: dev
+  question: >-
+    What percentage of workers in Adrian city, Michigan commuted by bicycle
+    in 2008-2012?
+  answer: 1.5% (121 workers, margin of error ±1.0).
+  evidence: ["Adrian city, Michigan"]
+  sources:
+    - {file: spreadsheets/supplemental-table1.xlsx, sheet: Supplemental Table 1}
+
+- id: table-10
+  group: tables
+  split: dev
+  question: >-
+    In the quarterly PCA collection statistics for 4/1/2016 - 6/30/2016, what
+    were ConServe's total recoveries?
+  answer: $294,781,440.18.
+  evidence: ["294781440.18"]
+  sources:
+    - {file: spreadsheets/PCA_Report_FY16Q3.xlsx, sheet: Data}
+
+# ------------------------------------------------------------------ multi_hop
+
+- id: hop-01
+  group: multi_hop
+  split: dev
+  question: >-
+    In the traffic signal control paper with MaxQueue and QL-XLight, on which
+    dataset does QL-FRAP improve the most over MaxPressure, and what is the
+    average arrival rate of that dataset?
+  answer: HangZhou 2 (-9.73%), whose average arrival rate is 1.94 vehicles per second.
+  evidence: ["9.73", "1.94"]
+  sources:
+    - {file: papers/2201.00006.pdf, pages: [5, 6]}
+
+- id: hop-02
+  group: multi_hop
+  split: dev
+  question: >-
+    Which GPUs were used by the ST-TIS traffic forecasting paper and by the
+    Confidence Optimization score (GAX) paper?
+  answer: ST-TIS used an NVIDIA RTX 2080 Ti; the GAX paper used an NVIDIA GeForce GTX 1050 (4 GB).
+  evidence: ["RTX2080 Ti", "GTX 1050"]
+  sources:
+    - {file: papers/2201.00008.pdf, pages: [8]}
+    - {file: papers/2201.00009.pdf, pages: [5, 10]}
+
+- id: hop-03
+  group: multi_hop
+  split: dev
+  question: What initial learning rates do CA-MKD and ST-TIS use?
+  answer: >-
+    CA-MKD uses 0.1 (0.05 for MobileNetV2, ShuffleNetV1 and ShuffleNetV2);
+    ST-TIS uses 0.001.
+  evidence: ["initial learning rate is set to 0.1", "learning rate is set as 0.001"]
+  sources:
+    - {file: papers/2201.00007.pdf, pages: [3]}
+    - {file: papers/2201.00008.pdf, pages: [8]}
+
+- id: hop-04
+  group: multi_hop
+  split: heldout
+  question: >-
+    Which cities do the traffic datasets come from in the traffic signal
+    control paper (MaxQueue) and in the ST-TIS traffic forecasting paper?
+  answer: Jinan and Hangzhou for traffic signal control; New York City (NYC-Taxi and NYC-Bike) for ST-TIS.
+  evidence: ["Jinan", "New York City"]
+  sources:
+    - {file: papers/2201.00006.pdf, pages: [5]}
+    - {file: papers/2201.00008.pdf, pages: [7]}
+
+- id: hop-05
+  group: multi_hop
+  split: dev
+  question: >-
+    Does the 2019 national total of taxable beer in bottles and cans in the
+    TTB state-by-state workbook match the 2019 cumulative figure in the TTB
+    December 2019 monthly report? Give both numbers.
+  answer: >-
+    Yes. The state workbook total is 148,590,625.56 barrels and the December
+    2019 report shows 148,590,626 barrels cumulative to date.
+  evidence: ["148590625.56", "148590626"]
+  sources:
+    - {file: spreadsheets/ttb_brewery_state_2008-2019.xlsx, sheet: Taxable Bottles and Cans}
+    - {file: spreadsheets/ttb_monthly_stats_2019-12.xlsx, sheet: Consolidated}
+
+- id: hop-06
+  group: multi_hop
+  split: dev
+  question: >-
+    In the ST-TIS paper, which baseline has the shortest total training time
+    on NYC-Taxi, and how many parameters does it have?
+  answer: ST-ResNet (3077.51 s in total), with 4,917,041 parameters.
+  evidence: ["3077.51", "4,917,041"]
+  sources:
+    - {file: papers/2201.00008.pdf, pages: [9]}
+
+- id: hop-07
+  group: multi_hop
+  split: dev
+  question: >-
+    How many times was each experiment run in the ST-TIS paper, and how many
+    independent results are averaged in the MaxQueue traffic signal control
+    paper?
+  answer: ST-TIS ran each approach 10 times; the traffic signal control paper averages three independent results.
+  evidence: ["run 10 times", "three independent results"]
+  sources:
+    - {file: papers/2201.00008.pdf, pages: [8]}
+    - {file: papers/2201.00006.pdf, pages: [5]}
+
+- id: hop-08
+  group: multi_hop
+  split: heldout
+  question: >-
+    In the carbon nanotube composites paper, how many CNTs and voids are in the
+    largest example, and which MATLAB toolbox provides the fast multipole
+    method used in gmres?
+  answer: 2000 CNTs and/or circular voids; the FMMLIB2D toolbox (function zfmm2dpart).
+  evidence: ["2000 CNTs", "FMMLIB2D"]
+  sources:
+    - {file: papers/2201.00003.pdf, pages: [8, 16]}
+
+- id: hop-09
+  group: multi_hop
+  split: dev
+  question: >-
+    Where can the code of the DGAMGP traffic flow paper and of the ST-TIS
+    paper be found?
+  answer: >-
+    DGAMGP: https://github.com/advectionmatern/Modeling-Advection-on-Directed-Graphs-using-Mat-e-rn-Gaussian-Processes;
+    ST-TIS: https://github.com/GuanyaoLI/ST-TIS.
+  evidence: ["github.com/advectionmatern", "github.com/GuanyaoLI/ST-TIS"]
+  sources:
+    - {file: papers/2201.00001.pdf, pages: [4]}
+    - {file: papers/2201.00008.pdf, pages: [8]}
+
+- id: hop-10
+  group: multi_hop
+  split: dev
+  question: >-
+    In the stroke length-of-stay study at King Fahad Bin Abdul-Aziz Hospital
+    described in the literature review, how many attributes did the original
+    dataset have, and how many were finally selected?
+  answer: 105 attributes originally; 16 attributes (including LOS) were selected.
+  evidence: ["105 attributes", "16 remaining attributes"]
+  sources:
+    - {file: papers/2201.00005.pdf, pages: [5, 6]}
+
+# --------------------------------------------------------------------- needle
+
+- id: needle-01
+  group: needle
+  split: dev
+  question: >-
+    What was the accuracy of the most accurate model in the length of stay
+    study of 866 stroke patients at King Fahad Bin Abdul-Aziz Hospital?
+  answer: 81.28%, with the Bnet (Bayesian network) model.
+  evidence: ["81.28%"]
+  sources:
+    - {file: papers/2201.00005.pdf, pages: [6]}
+
+- id: needle-02
+  group: needle
+  split: dev
+  question: >-
+    Which MATLAB toolbox computes the matrix-vector multiplication in gmres
+    when simulating local fields in carbon nanotube composites with voids?
+  answer: FMMLIB2D (function zfmm2dpart).
+  evidence: ["FMMLIB2D"]
+  sources:
+    - {file: papers/2201.00003.pdf, pages: [8]}
+
+- id: needle-03
+  group: needle
+  split: heldout
+  question: >-
+    How many Monte Carlo simulations were used to validate the optimized
+    designs in the robust reliability-based topology optimization study
+    with a random-field Young's modulus?
+  answer: 50,000 Monte Carlo simulations.
+  evidence: ["50000 Monte Carlo"]
+  sources:
+    - {file: papers/2201.00004.pdf, pages: [8]}
+
+- id: needle-04
+  group: needle
+  split: dev
+  question: What is the average arrival rate of the DHangZhou1 traffic dataset?
+  answer: 0.83 vehicles per second.
+  evidence: ["0.83"]
+  sources:
+    - {file: papers/2201.00006.pdf, pages: [5]}
+
+- id: needle-05
+  group: needle
+  split: dev
+  question: >-
+    What Poisson's ratio is used for the material in the cantilever and
+    L-shaped beam topology optimization benchmarks under a random-field
+    material model?
+  answer: 0.3.
+  evidence: ["ν = 0.3"]
+  sources:
+    - {file: papers/2201.00004.pdf, pages: [7]}
+
+- id: needle-06
+  group: needle
+  split: dev
+  question: >-
+    What small GPU is said to be enough to run the whole Generative
+    Augmentative eXplanation (GAX) experiment?
+  answer: An NVIDIA GeForce GTX 1050 with 4 GB of dedicated memory.
+  evidence: ["GTX 1050"]
+  sources:
+    - {file: papers/2201.00009.pdf, pages: [5, 10]}
+
+- id: needle-07
+  group: needle
+  split: dev
+  question: >-
+    How many taxi trip records does the NYC-Taxi dataset used by the ST-TIS
+    traffic forecasting model contain?
+  answer: 22,349,490 taxi trip records (NYC, 01/01/2015 to 03/01/2015).
+  evidence: ["22, 349, 490"]
+  sources:
+    - {file: papers/2201.00008.pdf, pages: [7]}
+
+- id: needle-08
+  group: needle
+  split: heldout
+  question: >-
+    On which cloud platform were the experiments of the Directed Graph
+    Advection Matérn Gaussian Process (DGAMGP) run?
+  answer: Amazon SageMaker.
+  evidence: ["Sagemaker"]
+  sources:
+    - {file: papers/2201.00001.pdf, pages: [4]}
+
+- id: needle-09
+  group: needle
+  split: dev
+  question: >-
+    What distillation temperature is used for all methods in the experiments
+    on confidence-aware multi-teacher knowledge distillation?
+  answer: The temperature tau is set to 4 (and alpha to 1).
+  evidence: ["temperature τ is set to 4"]
+  sources:
+    - {file: papers/2201.00007.pdf, pages: [3]}
+
+- id: needle-10
+  group: needle
+  split: dev
+  question: How many workers in Aberdeen city, South Dakota commuted by bicycle in 2008-2012?
+  answer: 110 workers (0.8%, margin of error ±0.5).
+  evidence: ["Aberdeen city, South Dakota"]
+  sources:
+    - {file: spreadsheets/supplemental-table1.xlsx, sheet: Supplemental Table 1}
+
+# --------------------------------------------------------------- unanswerable
+
+- id: none-01
+  group: unanswerable
+  split: dev
+  question: What top-1 accuracy does CA-MKD reach on ImageNet?
+  answer: NOT FOUND. The CA-MKD paper only reports results on CIFAR-100.
+  sources: []
+
+- id: none-02
+  group: unanswerable
+  split: dev
+  question: >-
+    Which Shanghai traffic dataset is used in the MaxQueue traffic signal
+    control experiments, and what is its arrival rate?
+  answer: NOT FOUND. The paper only uses three Jinan and two Hangzhou datasets.
+  sources: []
+
+- id: none-03
+  group: unanswerable
+  split: heldout
+  question: >-
+    What results does the literature review on stroke length of stay report
+    on the MIMIC-III dataset?
+  answer: NOT FOUND. The review does not mention MIMIC-III.
+  sources: []
+
+- id: none-04
+  group: unanswerable
+  split: dev
+  question: Which GPU was used to train the DGAMGP traffic flow model?
+  answer: NOT FOUND. The paper only says the experiments ran on Amazon SageMaker.
+  sources: []
+
+- id: none-05
+  group: unanswerable
+  split: dev
+  question: What learning rate was used to train QL-FRAP in the traffic signal control paper?
+  answer: NOT FOUND. The paper says all RL methods share the same hyper-parameters but does not give the learning rate.
+  sources: []
+
+- id: none-06
+  group: unanswerable
+  split: dev
+  question: How many barrels of beer were produced in the United States in December 2020, according to TTB?
+  answer: NOT FOUND. The folder only has the December 2019 report and yearly state data up to 2019.
+  sources: []
+
+- id: none-07
+  group: unanswerable
+  split: heldout
+  question: What percentage of workers in Portland city, Oregon commuted by bicycle in 2008-2012?
+  answer: NOT FOUND. The table covers small cities only; it has Portland city, Maine, but not Portland, Oregon.
+  sources: []
+
+- id: none-08
+  group: unanswerable
+  split: dev
+  question: >-
+    What were ConServe's total recoveries in the quarterly PCA collection
+    statistics for 7/1/2016 - 9/30/2016?
+  answer: NOT FOUND. The folder only has the report for 4/1/2016 - 6/30/2016.
+  sources: []
+
+- id: none-09
+  group: unanswerable
+  split: dev
+  question: What CO score does the GAX method reach on CIFAR-10?
+  answer: NOT FOUND. The paper uses ImageNet and the Chest X-Ray Pneumonia dataset, not CIFAR-10.
+  sources: []
+
+- id: none-10
+  group: unanswerable
+  split: dev
+  question: What was the per capita consumption of cottage cheese in the United States in 2017?
+  answer: NOT FOUND. The cheese workbook does not include cottage cheese (total natural cheese excludes it).
+  sources: []

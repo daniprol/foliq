@@ -1,7 +1,8 @@
 # foliq benchmarks
 
 How foliq compares with popular libraries on **public, real-world documents**.
-Every number below comes from the commands in the quickstart.
+Every number below comes from the commands in the quickstart. Whether foliq
+helps AI agents answer questions is measured separately, in [`evals`](../evals).
 
 ## Quickstart
 

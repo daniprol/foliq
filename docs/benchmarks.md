@@ -49,3 +49,15 @@ BM25 on BEIR SciFact: 5,183 abstracts and 300 queries, one thread for everyone.
   Kreuzberg, which only extract text.
 - **Query time**: about 14 ms, against about 1 ms for in-memory engines, since
   each answer is a cited chunk read from SQLite, not just an id.
+- **Decimal points in some PDFs**: in 6 of the first 100 arXiv papers of
+  January 2022, most decimal points are lost (`0.001` becomes `0 001`). Found
+  by the agent eval below.
+
+## With agents
+
+The [evals folder](https://github.com/daniprol/foliq/tree/main/evals) has an
+agent eval built on [Inspect](https://inspect.aisi.org.uk): the same model
+answers 50 questions about arXiv papers and government spreadsheets with a
+plain shell, with foliq and its skill, and with foliq but no skill. It
+reports answer accuracy, citation accuracy, NOT FOUND on unanswerable
+questions, tokens and time, and how this changes from 10 to 1,000 papers.
